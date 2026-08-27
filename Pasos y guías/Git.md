@@ -151,7 +151,18 @@ git pull
 ```
 Con eso ya tienes en tu compu lo último que se integró, y puedes crear tu próxima rama desde ahí.
 
-## 7. Si alguna vez te pierdes, corre estos 4 y ya sabes dónde estás parado
+## 7. Borrar la rama una vez que ya se mezcló
+
+Después de que tu Pull Request ya se integró a `main` en GitHub, esa rama cumplió su función — dejarla ahí solo genera desorden y hace más difícil saber qué sigue activo y qué ya es historia vieja. Borra la copia local:
+
+```bash
+git checkout main
+git branch -d feature/nombre-del-cambio
+```
+
+El `-d` (minúscula) es la versión segura: Git se niega a borrar la rama si detecta cambios que todavía no se mezclaron a ningún lado, así que no hay riesgo de perder trabajo por accidente. La copia remota (la que quedó en GitHub) se borra desde la propia página del Pull Request, justo después de mezclarlo — eso lo ves con más detalle en el documento de GitHub.
+
+## 8. Si alguna vez te pierdes, corre estos 4 y ya sabes dónde estás parado
 
 | Comando | Qué te dice |
 |---|---|
@@ -160,10 +171,11 @@ Con eso ya tienes en tu compu lo último que se integró, y puedes crear tu pró
 | `git log --oneline -5` | tus últimos 5 commits, resumidos |
 | `git remote -v` | a qué repo de GitHub estás conectado |
 
-## 8. Para no sufrir con esto
+## 9. Para no sufrir con esto
 
 - Antes de tocar cualquier cosa: `git status`.
 - Antes de empezar una tarea nueva: párate en `main` y haz `pull`.
 - Una tarea = una rama. No mezcles tres cosas distintas en una sola rama.
 - No uses `git reset --hard` ni `push --force` si no tienes clarísimo qué van a borrar — pueden perder trabajo sin aviso.
 - Nunca subas contraseñas, tokens ni el archivo `.env`. Si algo así se llega a subir por accidente, avísale al equipo — borrarlo del repo después no basta, hay que cambiar esa contraseña/token igual.
+- Una vez que tu rama ya se mezcló, bórrala (local y remota) — no dejes ramas viejas acumulándose.
