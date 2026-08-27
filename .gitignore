@@ -1,3 +1,9 @@
 target/
 node_modules/
 .env
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
