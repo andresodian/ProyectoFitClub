@@ -42,7 +42,7 @@ Este es el paso que completa lo que ya hiciste en Git Bash:
 3. Click en "Create pull request".
 4. Ahora cualquiera del equipo puede entrar a esa página, ver línea por línea qué cambiaste (pestaña "Files changed"), y dejar comentarios si algo no cuadra.
 5. Cuando esté aprobado (o si tú mismo revisaste que está bien y nadie más lo bloquea), das click en el botón verde "Merge pull request". Con eso tu rama ya se integró a `main`.
-6. Opcional pero recomendado: click en "Delete branch" después del merge, para no dejar ramas viejas acumulándose.
+6. **Buena práctica, no lo saltes:** justo en esa misma pantalla, después del merge, aparece el botón "Delete branch" — dale click. Esa rama ya cumplió su función y dejarla ahí solo acumula desorden. (Del lado de tu compu, la copia local se borra por separado con `git branch -d nombre-rama` — está en el documento de Git.)
 
 ## 5. Cómo te enteras si hay algo nuevo
 
@@ -57,3 +57,4 @@ Pero ojo: enterarte de que hay algo nuevo en GitHub no significa que ya lo tiene
 - Una cuenta de GitHub por persona, nunca compartida.
 - Todo cambio importante entra por Pull Request, no subiendo directo a `main`.
 - Antes de abrir un PR, revisa tú mismo la pestaña "Files changed" — es más fácil corregir algo ahí que después de que ya se mezcló.
+- Después de mezclar un PR, borra la rama — tanto en GitHub (botón "Delete branch") como en tu compu (`git branch -d nombre-rama`).
