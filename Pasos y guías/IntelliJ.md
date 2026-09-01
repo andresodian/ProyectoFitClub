@@ -73,11 +73,23 @@ eso es solo la dirección de esa clase dentro del proyecto. La relación real co
 fitclub/
 └── src/main/java/com/fitclub/
     ├── Main.java
-    ├── socio/domain/model/     (Socio, Notificacion)
-    ├── plan/domain/model/      (Plan, Membresia, HistorialMembresia)
-    └── clase/domain/model/     (Clase, Instructor, HorarioClase, ReservaClase, Asistencia)
+    ├── socio/
+    │   ├── domain/
+    │   │   ├── model/           (Socio, Notificacion, TipoNotificacion, PrioridadNotificacion, CanalNotificacion)
+    │   │   ├── exception/       (SocioNoEncontradoException, DocumentoDuplicadoException)
+    │   │   └── port/            (SocioRepository — el contrato)
+    │   ├── application/         (SocioService)
+    │   └── infrastructure/
+    │       └── memory/          (SocioRepositoryEnMemoria)
+    ├── plan/
+    │   ├── domain/model/        (Plan, Membresia, HistorialMembresia, EstadoMembresia, TipoEventoMembresia)
+    │   └── application/
+    │       └── command/         (RegistrarMembresiaCommand)
+    └── clase/domain/model/      (Clase, Instructor, HorarioClase, ReservaClase, Asistencia, Intensidad, EstadoHorarioClase, EstadoReservaClase, EstadoAsistencia)
 ```
 Fíjense que no usamos nombres de ParkFlow (`com.parkflow`, `customer`, `vehicle`) — el profesor deja clarísimo que esos son solo el ejemplo, y que cada equipo debe traducir el patrón a sus propias entidades. Nosotros lo hicimos bien: `com.fitclub`, organizado por los módulos reales del gimnasio.
+
+Las carpetas `domain/exception`, `domain/port`, `application` e `infrastructure/memory` se agregaron después, en el Capítulo 02 — si todavía no llegas a esa parte, tu estructura solo va a tener `domain/model` por ahora, y está bien así. El detalle completo de esas piezas está en `Interfaz.md`.
 
 ## 8. Qué NO se debe crear todavía
 
