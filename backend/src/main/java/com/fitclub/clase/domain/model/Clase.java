@@ -5,14 +5,14 @@ public class Clase {
     private String nombre;
     private String descripcion;
     private Integer duracionMinutos;
-    private String intensidad;
+    private Intensidad intensidad;
     private Boolean activa;
 
     public Clase() {
     }
 
     public Clase(Long claseId, String nombre, String descripcion, Integer duracionMinutos,
-                 String intensidad, Boolean activa) {
+                 Intensidad intensidad, Boolean activa) {
         this.claseId = claseId;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -45,8 +45,6 @@ public class Clase {
         this.descripcion = descripcion;
     }
 
-    // Reemplaza al antiguo "capacidad", que no existe como columna en la tabla `clase`.
-    // duracion_minutos sí existe y es NOT NULL.
     public Integer getDuracionMinutos() {
         return duracionMinutos;
     }
@@ -55,17 +53,16 @@ public class Clase {
         this.duracionMinutos = duracionMinutos;
     }
 
-    // Valores válidos según ck_clase_intensidad: null, "BAJA", "MEDIA" o "ALTA".
-    public String getIntensidad() {
+    // Antes era String; ahora es Intensidad (enum). Sigue siendo nullable (ck_clase_intensidad
+    // permite NULL), así que puede quedar sin asignar igual que antes.
+    public Intensidad getIntensidad() {
         return intensidad;
     }
 
-    public void setIntensidad(String intensidad) {
+    public void setIntensidad(Intensidad intensidad) {
         this.intensidad = intensidad;
     }
 
-    // El campo se llama "activa" (no "activo") porque así se llama la columna real
-    // de la tabla `clase`; así Spring Data JPA lo mapeará solo más adelante.
     public Boolean getActiva() {
         return activa;
     }

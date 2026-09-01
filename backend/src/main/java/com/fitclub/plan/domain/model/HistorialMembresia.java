@@ -7,17 +7,17 @@ public class HistorialMembresia {
     private Long membresiaId;
     private String registradoPor;
     private OffsetDateTime fechaEvento;
-    private String tipoEvento;
-    private String estadoAnterior;
-    private String estadoNuevo;
+    private TipoEventoMembresia tipoEvento;
+    private EstadoMembresia estadoAnterior;
+    private EstadoMembresia estadoNuevo;
     private String motivo;
 
     public HistorialMembresia() {
     }
 
     public HistorialMembresia(Long historialId, Long membresiaId, String registradoPor,
-                              OffsetDateTime fechaEvento, String tipoEvento,
-                              String estadoAnterior, String estadoNuevo, String motivo) {
+                              OffsetDateTime fechaEvento, TipoEventoMembresia tipoEvento,
+                              EstadoMembresia estadoAnterior, EstadoMembresia estadoNuevo, String motivo) {
         this.historialId = historialId;
         this.membresiaId = membresiaId;
         this.registradoPor = registradoPor;
@@ -60,27 +60,33 @@ public class HistorialMembresia {
         this.fechaEvento = fechaEvento;
     }
 
-    public String getTipoEvento() {
+    // Antes era String; ahora es TipoEventoMembresia (enum) según ck_historial_membresia_tipo:
+    // RENOVACION, SUSPENSION, CAMBIO_PLAN o CANCELACION.
+    public TipoEventoMembresia getTipoEvento() {
         return tipoEvento;
     }
 
-    public void setTipoEvento(String tipoEvento) {
+    public void setTipoEvento(TipoEventoMembresia tipoEvento) {
         this.tipoEvento = tipoEvento;
     }
 
-    public String getEstadoAnterior() {
+    // No tiene un CHECK propio en la base, pero representa el mismo concepto que
+    // membresia.estado (el estado ANTES del evento), así que reutiliza EstadoMembresia
+    // en vez de quedar como texto libre.
+    public EstadoMembresia getEstadoAnterior() {
         return estadoAnterior;
     }
 
-    public void setEstadoAnterior(String estadoAnterior) {
+    public void setEstadoAnterior(EstadoMembresia estadoAnterior) {
         this.estadoAnterior = estadoAnterior;
     }
 
-    public String getEstadoNuevo() {
+    // Mismo caso que estadoAnterior, pero para el estado DESPUÉS del evento.
+    public EstadoMembresia getEstadoNuevo() {
         return estadoNuevo;
     }
 
-    public void setEstadoNuevo(String estadoNuevo) {
+    public void setEstadoNuevo(EstadoMembresia estadoNuevo) {
         this.estadoNuevo = estadoNuevo;
     }
 
