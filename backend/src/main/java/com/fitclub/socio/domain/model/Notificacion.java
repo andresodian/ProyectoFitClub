@@ -7,9 +7,9 @@ public class Notificacion {
     private Long socioId;
     private String titulo;
     private String mensaje;
-    private String tipo;
-    private String prioridad;
-    private String canal;
+    private TipoNotificacion tipo;
+    private PrioridadNotificacion prioridad;
+    private CanalNotificacion canal;
     private OffsetDateTime fechaEnvio;
     private Boolean leido;
     private OffsetDateTime fechaLectura;
@@ -17,8 +17,8 @@ public class Notificacion {
     public Notificacion() {
     }
 
-    public Notificacion(Long notificacionId, Long socioId, String titulo, String mensaje, String tipo,
-                         String prioridad, String canal, OffsetDateTime fechaEnvio, Boolean leido,
+    public Notificacion(Long notificacionId, Long socioId, String titulo, String mensaje, TipoNotificacion tipo,
+                         PrioridadNotificacion prioridad, CanalNotificacion canal, OffsetDateTime fechaEnvio, Boolean leido,
                          OffsetDateTime fechaLectura) {
         this.notificacionId = notificacionId;
         this.socioId = socioId;
@@ -48,7 +48,6 @@ public class Notificacion {
         this.socioId = socioId;
     }
 
-    // Columna NOT NULL en `notificacion`; faltaba por completo en esta clase.
     public String getTitulo() {
         return titulo;
     }
@@ -65,30 +64,33 @@ public class Notificacion {
         this.mensaje = mensaje;
     }
 
-    // Valores válidos según ck_notificacion_tipo: "VENCIMIENTO", "RECORDATORIO_CLASE" o "AVISO_GENERAL".
-    public String getTipo() {
+    // Antes era String; ahora es TipoNotificacion (enum) según ck_notificacion_tipo:
+    // VENCIMIENTO, RECORDATORIO_CLASE o AVISO_GENERAL.
+    public TipoNotificacion getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoNotificacion tipo) {
         this.tipo = tipo;
     }
 
-    // Valores válidos según ck_notificacion_prioridad: "BAJA", "MEDIA" o "ALTA".
-    public String getPrioridad() {
+    // Antes era String; ahora es PrioridadNotificacion (enum) según ck_notificacion_prioridad:
+    // BAJA, MEDIA o ALTA.
+    public PrioridadNotificacion getPrioridad() {
         return prioridad;
     }
 
-    public void setPrioridad(String prioridad) {
+    public void setPrioridad(PrioridadNotificacion prioridad) {
         this.prioridad = prioridad;
     }
 
-    // Valores válidos según ck_notificacion_canal: null, "EMAIL", "PUSH", "SMS" o "IN_APP".
-    public String getCanal() {
+    // Antes era String; ahora es CanalNotificacion (enum), nullable igual que antes,
+    // según ck_notificacion_canal: null, EMAIL, PUSH, SMS o IN_APP.
+    public CanalNotificacion getCanal() {
         return canal;
     }
 
-    public void setCanal(String canal) {
+    public void setCanal(CanalNotificacion canal) {
         this.canal = canal;
     }
 
@@ -108,7 +110,6 @@ public class Notificacion {
         this.leido = leido;
     }
 
-    // Nullable: solo se llena cuando el socio efectivamente abre/lee la notificación.
     public OffsetDateTime getFechaLectura() {
         return fechaLectura;
     }

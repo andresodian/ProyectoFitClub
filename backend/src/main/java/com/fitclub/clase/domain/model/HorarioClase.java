@@ -10,13 +10,13 @@ public class HorarioClase {
     private OffsetDateTime fechaHoraFin;
     private Integer cupoMaximo;
     private String salon;
-    private String estado;
+    private EstadoHorarioClase estado;
 
     public HorarioClase() {
     }
 
     public HorarioClase(Long horarioClaseId, Long claseId, Long instructorId, OffsetDateTime fechaHoraInicio,
-                         OffsetDateTime fechaHoraFin, Integer cupoMaximo, String salon, String estado) {
+                         OffsetDateTime fechaHoraFin, Integer cupoMaximo, String salon, EstadoHorarioClase estado) {
         this.horarioClaseId = horarioClaseId;
         this.claseId = claseId;
         this.instructorId = instructorId;
@@ -75,7 +75,6 @@ public class HorarioClase {
         this.cupoMaximo = cupoMaximo;
     }
 
-    // Salón/sala física donde ocurre la sesión. Columna nullable; faltaba aquí.
     public String getSalon() {
         return salon;
     }
@@ -84,13 +83,13 @@ public class HorarioClase {
         this.salon = salon;
     }
 
-    // Valores válidos según ck_horario_clase_estado: "PROGRAMADA", "CANCELADA" o "FINALIZADA".
-    // Columna NOT NULL; faltaba por completo en esta clase.
-    public String getEstado() {
+    // Antes era String; ahora es EstadoHorarioClase (enum) para que solo acepte
+    // PROGRAMADA, CANCELADA o FINALIZADA — los únicos valores válidos según ck_horario_clase_estado.
+    public EstadoHorarioClase getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoHorarioClase estado) {
         this.estado = estado;
     }
 }
