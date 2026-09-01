@@ -42,8 +42,8 @@ git remote -v
 ```
 `cd` es simplemente entrar a la carpeta que se acaba de crear. `git remote -v` es para comprobar que quedaste conectado bien — debería mostrarte algo como:
 ```
-origin  https://github.com/andres-odian/ProyectoFitClub.git (fetch)
-origin  https://github.com/andres-odian/ProyectoFitClub.git (push)
+origin  https://github.com/andresodian/ProyectoFitClub.git (fetch)
+origin  https://github.com/andresodian/ProyectoFitClub.git (push)
 ```
 Si ves dos líneas con la URL del repo del equipo, estás conectado correctamente.
 
