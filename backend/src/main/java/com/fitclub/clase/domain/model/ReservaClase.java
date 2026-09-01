@@ -8,13 +8,13 @@ public class ReservaClase {
     private Long horarioClaseId;
     private OffsetDateTime fechaReserva;
     private OffsetDateTime fechaCancelacion;
-    private String estado;
+    private EstadoReservaClase estado;
 
     public ReservaClase() {
     }
 
     public ReservaClase(Long reservaClaseId, Long membresiaId, Long horarioClaseId,
-                        OffsetDateTime fechaReserva, OffsetDateTime fechaCancelacion, String estado) {
+                        OffsetDateTime fechaReserva, OffsetDateTime fechaCancelacion, EstadoReservaClase estado) {
         this.reservaClaseId = reservaClaseId;
         this.membresiaId = membresiaId;
         this.horarioClaseId = horarioClaseId;
@@ -63,11 +63,13 @@ public class ReservaClase {
         this.fechaCancelacion = fechaCancelacion;
     }
 
-    public String getEstado() {
+    // Antes era String; ahora es EstadoReservaClase (enum) para que solo acepte
+    // CONFIRMADA, CANCELADA o COMPLETADA — los únicos valores válidos según ck_reserva_clase_estado.
+    public EstadoReservaClase getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoReservaClase estado) {
         this.estado = estado;
     }
 }

@@ -9,14 +9,14 @@ public class Membresia {
     private Long planId;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private String estado;
+    private EstadoMembresia estado;
     private OffsetDateTime createdAt;
 
     public Membresia() {
     }
 
     public Membresia(Long membresiaId, Long socioId, Long planId, LocalDate fechaInicio,
-                     LocalDate fechaFin, String estado, OffsetDateTime createdAt) {
+                     LocalDate fechaFin, EstadoMembresia estado, OffsetDateTime createdAt) {
         this.membresiaId = membresiaId;
         this.socioId = socioId;
         this.planId = planId;
@@ -66,11 +66,13 @@ public class Membresia {
         this.fechaFin = fechaFin;
     }
 
-    public String getEstado() {
+    // Antes era String; ahora es EstadoMembresia (enum) para que solo acepte
+    // ACTIVA, INACTIVA, SUSPENDIDA, VENCIDA o CANCELADA — según ck_membresia_estado.
+    public EstadoMembresia getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoMembresia estado) {
         this.estado = estado;
     }
 
