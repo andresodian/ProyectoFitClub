@@ -1,0 +1,1164 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Defensa FitClub C04–C08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#F6F7F6; --surface:#FFFFFF; --surface-2:#EFF2F2; --line:#D8DEDE; --line-soft:#E7ECEC;
+  --ink:#14191A; --muted:#5B686A; --accent:#0F6E77; --accent-soft:#E2F0F1; --accent-ink:#0A4F56;
+  --ok:#1E7A4B; --ok-soft:#E1F1E8; --warn:#9A5A00; --warn-soft:#F7EBD9; --bad:#A32F2C; --bad-soft:#F6E3E2;
+  --shadow:0 1px 2px rgba(20,25,26,.05),0 8px 24px -16px rgba(20,25,26,.25);
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12161A; --surface:#191E23; --surface-2:#202730; --line:#2C343C; --line-soft:#232A31;
+    --ink:#E4E8E9; --muted:#94A1A4; --accent:#5CC2CB; --accent-soft:#15343A; --accent-ink:#9BDDE3;
+    --ok:#5FBE86; --ok-soft:#16301F; --warn:#E0A445; --warn-soft:#332612; --bad:#EB8079; --bad-soft:#331A1A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12161A; --surface:#191E23; --surface-2:#202730; --line:#2C343C; --line-soft:#232A31;
+  --ink:#E4E8E9; --muted:#94A1A4; --accent:#5CC2CB; --accent-soft:#15343A; --accent-ink:#9BDDE3;
+  --ok:#5FBE86; --ok-soft:#16301F; --warn:#E0A445; --warn-soft:#332612; --bad:#EB8079; --bad-soft:#331A1A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -18px rgba(0,0,0,.9);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:0}
+code,kbd,.mono{font-family:var(--mono);font-size:.88em}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;text-wrap:balance;margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+/* ---------- masthead ---------- */
+header.mast{border-bottom:1px solid var(--line);background:var(--surface)}
+.mast-in{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:22px 18px;
+  display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.mast h1{font-size:clamp(1.5rem,1.1rem + 1.6vw,2.1rem);letter-spacing:-.015em}
+.mast .sub{color:var(--muted);font-size:.95rem;margin-top:4px;max-width:62ch}
+.mast .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px}
+.tglbtn{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--surface-2);color:var(--muted);border:1px solid var(--line);border-radius:999px;
+  padding:7px 14px;cursor:pointer}
+.tglbtn:hover{color:var(--ink);border-color:var(--accent)}
+
+/* ---------- nav ---------- */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.tabs-in{max-width:1180px;margin:0 auto;padding-inline:20px;display:flex;gap:2px;overflow-x:auto}
+.tab{font-family:var(--body);font-size:.92rem;font-weight:600;color:var(--muted);background:none;border:0;
+  border-bottom:2px solid transparent;padding:13px 14px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+
+main{padding-block:32px 72px}
+section[hidden]{display:none!important}
+.lead{font-size:1.05rem;color:var(--muted);max-width:68ch}
+h2.sec{font-size:1.35rem;margin-bottom:6px;letter-spacing:-.01em}
+h3.sub{font-size:1.08rem;margin:30px 0 10px}
+.stack{display:flex;flex-direction:column;gap:26px}
+
+/* ---------- panels ---------- */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:var(--shadow)}
+.panel.flat{box-shadow:none;background:var(--surface-2);border-color:var(--line-soft)}
+
+/* ---------- tables ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:460px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  background:var(--surface-2);font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- weight bars ---------- */
+.wrow{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:baseline;padding:12px 0;
+  border-bottom:1px solid var(--line-soft)}
+.wrow:last-child{border-bottom:0}
+.wrow .nm{font-weight:600}
+.wrow .pct{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.95rem;color:var(--accent)}
+.wrow .dsc{grid-column:1/-1;color:var(--muted);font-size:.9rem}
+.bar{grid-column:1/-1;height:5px;border-radius:3px;background:var(--surface-2);overflow:hidden;margin-top:6px}
+.bar > i{display:block;height:100%;background:var(--accent);border-radius:3px}
+
+/* ---------- flow ---------- */
+ol.flow{list-style:none;counter-reset:f;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+ol.flow li{counter-increment:f;position:relative;padding:10px 0 10px 34px;
+  border-bottom:1px solid var(--line-soft)}
+ol.flow li:last-child{border-bottom:0}
+ol.flow li::before{content:counter(f,decimal-leading-zero);position:absolute;left:0;top:13px;
+  font-family:var(--mono);font-size:.74rem;color:var(--accent);font-variant-numeric:tabular-nums}
+ol.flow li b{font-weight:600}
+
+/* ---------- chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;padding:4px 9px;border-radius:5px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--muted);cursor:pointer;white-space:nowrap}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;padding:2px 7px;border-radius:4px;
+  background:var(--surface-2);color:var(--muted);border:1px solid var(--line-soft);white-space:nowrap}
+.tag.cap{background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
+.st{font-family:var(--mono);font-weight:600;font-size:.72rem;padding:2px 7px;border-radius:4px}
+.st.ok{background:var(--ok-soft);color:var(--ok)} .st.warn{background:var(--warn-soft);color:var(--warn)}
+.st.bad{background:var(--bad-soft);color:var(--bad)}
+
+/* ---------- questions ---------- */
+.qbar{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;position:sticky;top:47px;z-index:10;
+  background:var(--paper);padding-block:12px;border-bottom:1px solid var(--line-soft)}
+.qbar .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.counter{font-family:var(--mono);font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+input[type="search"]{font-family:var(--body);font-size:.92rem;padding:8px 12px;border-radius:7px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);min-width:200px;flex:1 1 200px}
+.qlist{display:flex;flex-direction:column;gap:9px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.q.done{border-color:var(--ok)}
+.qhead{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;width:100%;
+  padding:14px 16px;background:none;border:0;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.qhead:hover{background:var(--surface-2)}
+.qn{font-family:var(--mono);font-size:.74rem;color:var(--accent);padding-top:3px;font-variant-numeric:tabular-nums}
+.qt{font-weight:600;line-height:1.45}
+.qmeta{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:7px}
+.qbody{padding:0 16px 18px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:14px}
+.qbody > *:first-child{margin-top:14px}
+.ans-short{font-family:var(--display);font-size:1.02rem;font-weight:500;line-height:1.45}
+.ans-full p{margin:0 0 10px}
+.ans-full p:last-child{margin-bottom:0}
+.ans-full ul{margin:0 0 10px;padding-left:20px}
+.ans-full li{margin-bottom:5px}
+.incode{background:var(--accent-soft);border-radius:8px;padding:13px 15px}
+.incode .lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent-ink);margin-bottom:6px;font-weight:600}
+.incode .body{font-size:.93rem;color:var(--ink)}
+.incode code{background:rgba(127,127,127,.14);padding:1px 5px;border-radius:4px}
+.qbody code{background:var(--surface-2);padding:1px 5px;border-radius:4px;border:1px solid var(--line-soft)}
+.qfoot{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mark{font-family:var(--mono);font-size:.72rem;padding:6px 12px;border-radius:6px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--muted);cursor:pointer}
+.mark:hover{border-color:var(--accent);color:var(--ink)}
+.mark.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);font-weight:600}
+.empty{color:var(--muted);padding:36px 0;text-align:center}
+
+/* ---------- decision cards ---------- */
+.dec{border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden}
+.dechead{padding:14px 16px;font-family:var(--display);font-weight:700;font-size:1.02rem;
+  border-bottom:1px solid var(--line-soft);display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.decgrid{display:grid;grid-template-columns:110px 1fr;gap:0}
+.decgrid dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:11px 16px;border-bottom:1px solid var(--line-soft);background:var(--surface-2)}
+.decgrid dd{margin:0;padding:11px 16px;border-bottom:1px solid var(--line-soft);font-size:.94rem}
+.decgrid dt:last-of-type,.decgrid dd:last-of-type{border-bottom:0}
+@media (max-width:560px){ .decgrid{grid-template-columns:1fr} .decgrid dt{border-bottom:0;padding-bottom:2px} }
+
+/* ---------- diag ---------- */
+.diag{border-left:3px solid var(--accent);background:var(--surface);border-radius:0 9px 9px 0;
+  border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 18px;display:flex;flex-direction:column;gap:9px}
+.diag h4{font-size:1rem}
+.diag .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+pre{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:7px;padding:12px 14px;
+  overflow-x:auto;font-family:var(--mono);font-size:.82rem;line-height:1.55;margin:0}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.note{font-size:.9rem;color:var(--muted)}
+hr.rule{border:0;border-top:1px solid var(--line);margin:34px 0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="mast">
+  <div class="mast-in">
+    <div>
+      <div class="eyebrow">Programación Aplicada 2026-2 · Capítulos 04–08</div>
+      <h1>Defensa FitClub</h1>
+      <p class="sub">Las preguntas reales de los documentos del curso, cada una respondida y anclada al código de <span class="mono">PruebaFitclub</span>. Las respuestas están ocultas: intenta responder antes de abrirlas.</p>
+    </div>
+    <button class="tglbtn" id="theme-toggle" type="button">Tema</button>
+  </div>
+</header>
+
+<nav class="tabs"><div class="tabs-in" role="tablist">
+  <button class="tab" role="tab" id="tab-inicio" aria-selected="true" data-panel="inicio">Cómo te califican</button>
+  <button class="tab" role="tab" id="tab-preguntas" aria-selected="false" data-panel="preguntas">Preguntas</button>
+  <button class="tab" role="tab" id="tab-decisiones" aria-selected="false" data-panel="decisiones">Decisiones</button>
+  <button class="tab" role="tab" id="tab-diagnostico" aria-selected="false" data-panel="diagnostico">Diagnóstico</button>
+</div></nav>
+
+<main class="wrap">
+
+<section id="inicio" class="stack">
+  <div>
+    <h2 class="sec">El 80% de tu nota es la defensa individual</h2>
+    <p class="lead">La Guía Formal del Estudiante, sección 10: la nota de cada instancia es 20% producto y documentación del equipo, 80% defensa individual. El 20% puede ser idéntico para todo el equipo; el 80% depende solo de ti.</p>
+  </div>
+
+  <div class="panel">
+    <h3 class="sub" style="margin-top:0">Los cinco criterios de la defensa (80%)</h3>
+    <div id="rubrica"></div>
+    <p class="note" style="margin-top:14px">Léelo dos veces: <b>escribir código pesa 16%</b>; explicar pesa 40%; justificar y diagnosticar, 24%. Las últimas horas rinden más explicando en voz alta que tecleando.</p>
+  </div>
+
+  <div class="cols">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0">El 20% grupal</h3>
+      <div class="tblwrap" style="border:0">
+        <table><tbody>
+          <tr><td>Cumplimiento del alcance</td><td class="num">25%</td></tr>
+          <tr><td>Funcionamiento e integración</td><td class="num">20%</td></tr>
+          <tr><td>Calidad técnica</td><td class="num">20%</td></tr>
+          <tr><td>Documentación</td><td class="num">20%</td></tr>
+          <tr><td>Colaboración y trazabilidad</td><td class="num">15%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0">Cómo se responde bien</h3>
+      <p class="note">El criterio docente pide cuatro cosas en cada respuesta, no una definición suelta:</p>
+      <ol class="flow" style="margin-top:8px">
+        <li><b>Definir</b> el concepto con tus palabras.</li>
+        <li><b>Explicar</b> qué función cumple.</li>
+        <li><b>Relacionarlo</b> con otros elementos del sistema.</li>
+        <li><b>Vincularlo</b> a tu proyecto y al capítulo.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="sub" style="margin-top:0">Traductor ParkFlow → FitClub</h3>
+    <p class="note">Las 50 preguntas de la ruleta están escritas con el proyecto del profesor. Tu proyecto tiene la misma forma: traduce y responde señalando tu código.</p>
+    <div class="tblwrap" style="margin-top:12px">
+      <table><thead><tr><th>ParkFlow 360</th><th>FitClub</th></tr></thead><tbody id="traductor"></tbody></table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="sub" style="margin-top:0">Flujo de éxito · <span class="mono" style="font-size:.8em">POST /api/socios</span></h3>
+    <p class="note">La pregunta más cara del banco (aparece como la 40, la 50 y la 21). Practícala hasta decirla sin leer.</p>
+    <ol class="flow" id="flujo-ok" style="margin-top:12px"></ol>
+  </div>
+
+  <div class="panel">
+    <h3 class="sub" style="margin-top:0">Flujo de error · <span class="mono" style="font-size:.8em">POST /api/membresias</span> con <span class="mono" style="font-size:.8em">socioId 9999</span></h3>
+    <p class="note">Casi nadie prepara este. La guía dice literal: <i>no memorice únicamente el camino feliz</i>.</p>
+    <ol class="flow" id="flujo-err" style="margin-top:12px"></ol>
+  </div>
+
+  <div class="panel flat">
+    <h3 class="sub" style="margin-top:0">Los códigos, y quién los produce</h3>
+    <div class="tblwrap" style="margin-top:10px">
+      <table><thead><tr><th>Código</th><th>Significa</th><th>En FitClub</th><th>Lo produce</th></tr></thead>
+      <tbody id="codigos"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas" hidden>
+  <div class="qbar">
+    <div class="row">
+      <div class="chips" id="filtro-cap"></div>
+      <span class="counter" id="contador"></span>
+    </div>
+    <div class="row">
+      <input type="search" id="buscar" placeholder="Buscar en las preguntas…" aria-label="Buscar preguntas">
+      <div class="chips" id="filtro-fuente"></div>
+    </div>
+  </div>
+  <div class="qlist" id="qlist"></div>
+  <p class="empty" id="vacio" hidden>Ninguna pregunta coincide con ese filtro.</p>
+</section>
+
+<section id="decisiones" class="stack">
+  <div>
+    <h2 class="sec">Por qué se eligió cada cosa</h2>
+    <p class="lead">Justificar decisiones vale 12% de tu nota final, y la rúbrica no pide el motivo: pide el motivo <b>más la alternativa descartada y lo que se paga</b>. Una decisión sin alternativa es una receta.</p>
+  </div>
+  <div class="stack" id="declist"></div>
+</section>
+
+<section id="diagnostico" class="stack">
+  <div>
+    <h2 class="sec">Diagnosticar, no adivinar</h2>
+    <p class="lead">Vale 12% de tu nota final. El método importa más que el catálogo: en el examen te van a poner un fallo que no está en esta lista.</p>
+  </div>
+  <div class="panel">
+    <h3 class="sub" style="margin-top:0">El método, en cinco pasos</h3>
+    <ol class="flow" id="metodo" style="margin-top:10px"></ol>
+  </div>
+  <div class="stack" id="diaglist"></div>
+</section>
+
+</main>
+<script>
+const Q = [
+{n:1,cap:"C04",src:"Ruleta 50",t:"¿Qué es una API y en qué se diferencia de un endpoint?",
+corta:"La API es el contrato completo que el backend ofrece al exterior; un endpoint es una operación concreta dentro de ese contrato: un método HTTP más una ruta.",
+full:`<p>Una <b>API</b> es la interfaz completa que un sistema expone: qué operaciones existen, qué datos hay que enviar, qué se devuelve, qué errores pueden ocurrir y en qué formato viaja todo. Incluye validaciones, formatos y semántica de respuestas, no solo una lista de direcciones.</p>
+<p>Un <b>endpoint</b> es una unidad dentro de esa API: la combinación de un verbo HTTP y una ruta. La URL sola no identifica la operación — <code>/api/socios</code> con POST crea y con GET consulta, y son cosas distintas.</p>
+<p>La relación es de todo a parte: la API es el conjunto de endpoints más las reglas que los gobiernan.</p>`,
+cod:`Tu API son los seis endpoints de <code>SocioController</code> y <code>MembresiaController</code> más el contrato de error de <code>ApiError</code>. Un endpoint tuyo es <code>POST /api/membresias</code>. Swagger, en <code>/swagger-ui/index.html</code>, dibuja justamente esa distinción: la página entera es la API, cada fila desplegable es un endpoint.`},
+
+{n:2,cap:"C04",src:"Ruleta 50",t:"¿Qué es HTTP y qué función cumple cada componente de una petición?",
+corta:"HTTP es el protocolo de petición y respuesta entre cliente y servidor. El método dice la intención, la URL el recurso, los headers los metadatos, los parámetros afinan y el body lleva los datos.",
+full:`<p><b>HTTP</b> funciona por turnos: el cliente pide, el servidor responde. Cada petición tiene cinco piezas:</p>
+<ul>
+<li><b>Método</b> — la intención: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>.</li>
+<li><b>URL</b> — sobre qué recurso se actúa.</li>
+<li><b>Headers</b> — metadatos de la petición, no del negocio: <code>Content-Type</code> dice en qué formato va el cuerpo, <code>Accept</code> qué formato se espera de vuelta.</li>
+<li><b>Parámetros</b> — los de ruta identifican (<code>/api/socios/1</code>); los de consulta filtran (<code>?ciudad=LaPaz</code>).</li>
+<li><b>Body</b> — los datos, normalmente JSON. Los GET no llevan.</li>
+</ul>
+<p>La respuesta trae código de estado, headers y body.</p>`,
+cod:`En Postman se ven las cinco partes separadas. Si quitas el header <code>Content-Type: application/json</code> de tu POST a <code>/api/socios</code>, recibes <b>415</b>: es la prueba de que el header no es decorativo — sin él, Spring no sabe cómo interpretar el body y <code>@RequestBody</code> no puede construir el DTO.`},
+
+{n:3,cap:"C04",src:"Ruleta 50",t:"¿Qué es REST como estilo arquitectónico y por qué no es “usar JSON” ni CRUD?",
+corta:"REST es un estilo que modela el sistema como recursos identificados por URI, manipulados con la semántica de los verbos HTTP y representados en algún formato. JSON es solo uno de esos formatos, y CRUD son operaciones de datos, no un estilo.",
+full:`<p><b>REST</b> organiza el sistema en <b>recursos</b>: cosas del dominio con identidad propia, cada una con su URI. Sobre ellos se actúa con la semántica que ya define HTTP, en vez de inventar verbos propios.</p>
+<p>No es “usar JSON”: una API REST podría devolver XML y seguiría siendo REST; y una API que devuelve JSON por un único endpoint <code>/ejecutarAccion</code> no lo es.</p>
+<p>No es CRUD: CRUD son cuatro operaciones sobre datos. REST modela conceptos de negocio, y muchas operaciones legítimas no son crear, leer, actualizar ni borrar — “cancelar una membresía” es una transición de estado, no un UPDATE genérico.</p>`,
+cod:`Tus recursos son <code>/api/socios</code> y <code>/api/membresias</code>, nombrados por el concepto de negocio y en plural. No tienes endpoints tipo <code>/guardarSocio</code>: la intención la lleva el verbo. La ficha oficial del proyecto PA-08 lo prohíbe explícitamente ("no se aceptarán endpoints genéricos del tipo /saveEverything").`},
+
+{n:4,cap:"C04",src:"Ruleta 50",t:"¿Qué implica el principio stateless de REST?",
+corta:"Cada petición viaja con todo lo necesario para ser entendida por sí sola; el servidor no guarda estado de conversación entre una petición y la siguiente.",
+full:`<p><b>Stateless</b> significa que el servidor no recuerda peticiones anteriores de ese cliente. Si una operación necesita contexto (quién eres, qué pediste antes), ese contexto viaja en la propia petición — en un token, en la ruta, en el body.</p>
+<p>Para el <b>servidor</b>, la ventaja es que cualquier instancia puede atender cualquier petición: se puede escalar poniendo más servidores detrás de un balanceador sin preocuparse por dónde quedó "la sesión".</p>
+<p>Para el <b>cliente</b>, la consecuencia es que debe reenviar el contexto cada vez.</p>
+<p>Cuidado: stateless se refiere al estado de <b>conversación</b>, no a los datos. La base de datos es memoria del sistema, y eso no rompe el principio.</p>`,
+cod:`Tu backend no guarda nada entre peticiones: cada POST a <code>/api/socios</code> trae todos sus datos. Los socios persisten en <code>fitclub.socio</code>, que es estado del sistema, no de la conversación. La configuración <code>spring.jpa.open-in-view=false</code> refuerza esa frontera: la sesión de persistencia se cierra al terminar el caso de uso.`},
+
+{n:5,cap:"C04",src:"Ruleta 50",t:"Compare GET, POST, PUT y DELETE según intención e idempotencia. ¿Por qué POST no es idempotente?",
+corta:"GET consulta, POST crea, PUT reemplaza, DELETE elimina. GET, PUT y DELETE son idempotentes: repetirlos deja el mismo estado final. POST no, porque cada llamada crea un recurso nuevo.",
+full:`<p><b>Idempotente</b> quiere decir que ejecutar la operación una vez o varias deja el sistema en el mismo estado final.</p>
+<ul>
+<li><b>GET</b> — consulta; además es seguro: no modifica nada.</li>
+<li><b>POST</b> — crea un recurso subordinado. <b>No idempotente.</b></li>
+<li><b>PUT</b> — reemplaza el recurso completo en una URI conocida. Idempotente: mandarlo tres veces deja el mismo contenido.</li>
+<li><b>DELETE</b> — elimina. Idempotente en cuanto al estado final: tras el primero, el recurso ya no está.</li>
+</ul>
+<p>POST no lo es porque el servidor asigna una identidad nueva en cada llamada: tres POST iguales producen tres recursos distintos con tres ids.</p>`,
+cod:`Compruébalo: envía dos veces <code>Crear socio - OK</code> desde Postman con datos distintos y tendrás dos socios. Con el <b>mismo</b> email no se duplica, pero no por idempotencia sino porque el <code>UNIQUE</code> de <code>fitclub.socio.email</code> lo impide — y eso produce un 409, no un "no pasó nada".`},
+
+{n:6,cap:"C04",src:"Ruleta 50",t:"Diferencie 200, 201, 204, 400 y 404. ¿Cuándo corresponde cada uno?",
+corta:"200 consulta exitosa con cuerpo; 201 creación exitosa; 204 éxito sin nada que devolver; 400 entrada mal formada; 404 recurso inexistente.",
+full:`<ul>
+<li><b>200 OK</b> — la petición se procesó y hay cuerpo. Tus dos GET.</li>
+<li><b>201 Created</b> — se creó un recurso nuevo; el cuerpo trae su representación con el id asignado.</li>
+<li><b>204 No Content</b> — éxito, pero no hay nada que devolver. Típico de un DELETE.</li>
+<li><b>400 Bad Request</b> — el cliente mandó algo que no cumple el contrato. Reintentarlo igual vuelve a fallar.</li>
+<li><b>404 Not Found</b> — el recurso pedido no existe.</li>
+</ul>
+<p>La familia importa: <b>2xx</b> éxito, <b>4xx</b> error del cliente, <b>5xx</b> error del servidor. Devolver 200 para todo obliga al cliente a leer el cuerpo para saber si algo salió bien.</p>`,
+cod:`Tu colección de Postman tiene los cinco casos medidos: 201 en <code>Crear socio - OK</code>, 400 en <code>validación falla</code>, 404 en <code>por id - no existe</code>, 200 en los GET. El 204 no aparece porque tu API todavía no tiene DELETE.`},
+
+{n:7,cap:"C04",src:"Ruleta 50",t:"¿Qué función cumple Spring MVC y cuál es el recorrido de una petición hasta el Controller?",
+corta:"Spring MVC es el módulo web: recibe la petición HTTP, decide qué método la atiende, convierte los datos y serializa la respuesta.",
+full:`<p>El recorrido conceptual: Tomcat acepta la conexión y se la entrega al <b>DispatcherServlet</b>, el punto único de entrada de Spring MVC. Ese componente consulta el mapeo de rutas (construido al arrancar a partir de <code>@RequestMapping</code> y compañía) y localiza el método que corresponde al verbo y la ruta.</p>
+<p>Antes de invocarlo, prepara los argumentos: <code>@RequestBody</code> hace que Jackson deserialice el JSON, <code>@PathVariable</code> extrae un trozo de la ruta, <code>@RequestParam</code> un parámetro de consulta. Si hay <code>@Valid</code>, ejecuta la validación.</p>
+<p>Con el resultado, hace el camino inverso: serializa a JSON y aplica el código de estado.</p>`,
+cod:`No hay código tuyo de Spring MVC: eso es exactamente lo que aporta el framework. Lo que tú escribes son las anotaciones de <code>SocioController</code> que le dicen a Spring MVC cómo enrutar. Su trabajo se ve en el log de arranque: <code>Initializing Spring DispatcherServlet 'dispatcherServlet'</code>, justo antes de la primera petición.`},
+
+{n:8,cap:"C04",src:"Ruleta 50",t:"Diferencie @RestController, @RequestMapping, @GetMapping y @PostMapping.",
+corta:"@RestController marca la clase como adaptador web y hace que los retornos se serialicen a JSON; @RequestMapping fija la ruta base; @GetMapping y @PostMapping asocian cada método a un verbo.",
+full:`<ul>
+<li><b>@RestController</b> — dos cosas: registra la clase como bean de Spring y equivale a <code>@Controller</code> + <code>@ResponseBody</code>, es decir, lo que devuelvan los métodos va al cuerpo de la respuesta serializado, en vez de interpretarse como el nombre de una vista.</li>
+<li><b>@RequestMapping("/api/socios")</b> — a nivel de clase, la ruta base del recurso. Todos los métodos cuelgan de ella.</li>
+<li><b>@PostMapping</b> / <b>@GetMapping</b> — atajos de <code>@RequestMapping(method = ...)</code>. Expresan la intención del método.</li>
+</ul>
+<p>La división es deliberada: la clase declara <i>de qué recurso se habla</i>, cada método <i>qué operación</i>.</p>`,
+cod:`En <code>SocioController</code>: la clase lleva <code>@RestController</code> y <code>@RequestMapping("/api/socios")</code>; <code>crear()</code> lleva <code>@PostMapping</code>, <code>listar()</code> lleva <code>@GetMapping</code> y <code>buscarPorId()</code> lleva <code>@GetMapping("/{id}")</code>. Tres métodos, una sola ruta base.`},
+
+{n:9,cap:"C04",src:"Ruleta 50",t:"Compare @PathVariable, @RequestParam y @RequestBody.",
+corta:"@PathVariable toma un segmento de la ruta e identifica un recurso; @RequestParam toma un parámetro de consulta y filtra; @RequestBody toma el cuerpo completo y lo convierte en un objeto.",
+full:`<ul>
+<li><b>@PathVariable</b> — <code>/api/socios/7</code> → <code>id = 7</code>. Se usa cuando el dato <b>identifica</b> el recurso: sin él la URL no señala nada concreto.</li>
+<li><b>@RequestParam</b> — <code>/api/socios?ciudad=LaPaz</code> → <code>ciudad = "LaPaz"</code>. Se usa para <b>afinar</b> una consulta: filtrar, ordenar, paginar. Suele ser opcional.</li>
+<li><b>@RequestBody</b> — el <b>cuerpo</b> entero, normalmente JSON, deserializado a un objeto Java. Se usa cuando hay que enviar una estructura, típicamente en POST y PUT.</li>
+</ul>
+<p>La regla corta: <b>la ruta identifica, el query filtra, el body transporta</b>.</p>`,
+cod:`Usas <code>@PathVariable Long id</code> en <code>buscarPorId</code> y <code>@Valid @RequestBody SocioRequestDTO</code> en <code>crear</code>. <code>@RequestParam</code> todavía no: sería lo natural si agregaras <code>GET /api/membresias?socioId=1</code>, y ya tienes el <code>findBySocioId</code> del repositorio listo para sostenerlo.`},
+
+{n:10,cap:"C04",src:"Ruleta 50",t:"¿Por qué separar Request DTO, dominio y Response DTO? Incluya Jackson, @Valid, Jakarta Validation y Postman.",
+corta:"Porque son tres contratos distintos que cambian por razones distintas: lo que el cliente puede enviar, lo que el negocio significa y lo que la API decide exponer.",
+full:`<p>El <b>Request DTO</b> define lo que entra. Ahí viven las validaciones de formato, porque es la frontera. El <b>dominio</b> representa el concepto de negocio, sin saber que existe HTTP. El <b>Response DTO</b> define lo que sale, que no tiene por qué ser todo lo que hay dentro.</p>
+<p>Las piezas que intervienen:</p>
+<ul>
+<li><b>Jackson</b> deserializa el JSON hacia el Request DTO y serializa el Response DTO de vuelta.</li>
+<li><b>Jakarta Validation</b> aporta las anotaciones (<code>@NotBlank</code>, <code>@Email</code>, <code>@Pattern</code>).</li>
+<li><b>@Valid</b> es el disparador: sin él las anotaciones están escritas pero no se ejecutan.</li>
+<li><b>Postman</b> es el cliente que prueba ese contrato desde fuera.</li>
+</ul>
+<p>Si el dominio fuera el contrato externo, cualquier cambio interno rompería a todos los consumidores.</p>`,
+cod:`Tus tres clases son <code>SocioRequestDTO</code>, <code>Socio</code> y <code>SocioResponseDTO</code>. Las diferencias son reales: el Request no tiene <code>id</code> ni <code>fechaRegistro</code> (los pone el servidor), el Response no tiene validaciones (validar lo que tú generas no tiene sentido), y el dominio no tiene ninguna anotación.`},
+
+{n:11,cap:"C05",src:"Ruleta 50",t:"Explique la cadena JDBC → JPA → Hibernate → Spring Data JPA → PostgreSQL.",
+corta:"JDBC conecta y ejecuta SQL; JPA es la especificación de mapeo objeto-relacional; Hibernate la implementa y genera el SQL; Spring Data JPA simplifica los repositorios; PostgreSQL almacena y garantiza.",
+full:`<p>De adentro hacia afuera:</p>
+<ul>
+<li><b>JDBC</b> — API de bajo nivel de Java: abre conexión, manda SQL, lee un <code>ResultSet</code>. Todo lo demás termina pasando por aquí.</li>
+<li><b>JPA</b> — la <b>especificación</b>: define anotaciones y contratos. No ejecuta nada; es solo el estándar.</li>
+<li><b>Hibernate</b> — la <b>implementación</b> de JPA que usamos: genera el SQL real y lo manda por JDBC.</li>
+<li><b>Spring Data JPA</b> — capa de conveniencia: declaras una interfaz y te da la implementación, con métodos derivados del nombre.</li>
+<li><b>PostgreSQL</b> — ejecuta el SQL y hace cumplir las restricciones.</li>
+</ul>
+<p>No son sinónimos: uno es un estándar, otro un producto, otro una comodidad.</p>`,
+cod:`Los ves todos en el arranque: <code>HikariPool-1 - Start completed</code> (el pool JDBC), <code>Found 2 JPA repository interfaces</code> (Spring Data), y tras un POST el <code>insert into fitclub.socio ...</code> que generó Hibernate. En tu <code>pom.xml</code>, <code>spring-boot-starter-data-jpa</code> trae JPA, Hibernate y Spring Data; el driver <code>postgresql</code> va aparte con <code>scope runtime</code>.`},
+
+{n:12,cap:"C05",src:"Ruleta 50",t:"¿Qué es un ORM y por qué usarlo no elimina la necesidad de entender SQL?",
+corta:"Un ORM traduce entre objetos y filas. No elimina el SQL: lo genera por ti, y sigue ejecutándose contra una base relacional cuyo comportamiento tienes que entender.",
+full:`<p>Un <b>ORM</b> resuelve el desajuste entre dos modelos distintos: los objetos tienen referencias, herencia y ciclo de vida en memoria; las tablas tienen filas, claves y restricciones. El ORM traduce entre ambos.</p>
+<p>No elimina el SQL por tres motivos concretos:</p>
+<ul>
+<li>El SQL se sigue ejecutando, solo que no lo escribiste tú. Si no sabes leerlo, no puedes saber por qué una operación va lenta.</li>
+<li>Problemas como el <b>N+1</b> solo se detectan mirando las consultas generadas.</li>
+<li>El diseño relacional —claves, cardinalidades, normalización, índices, constraints— sigue siendo tuyo, y un ORM no lo arregla.</li>
+</ul>`,
+cod:`Por eso tienes <code>spring.jpa.show-sql=true</code> y <code>logging.level.org.hibernate.SQL=debug</code>: para ver el SQL que Hibernate genera. Y por eso las tablas se crearon a mano con DDL escrito, y no se dejó que Hibernate las inventara.`},
+
+{n:13,cap:"C05",src:"Ruleta 50",t:"¿Qué es JPA y qué es Hibernate? ¿Qué relación hay entre especificación e implementación?",
+corta:"JPA es el estándar que define las anotaciones y contratos; Hibernate es el producto que los cumple y hace el trabajo real.",
+full:`<p>Una <b>especificación</b> define qué debe cumplirse, no cómo. JPA dice que <code>@Entity</code> marca una clase persistente y que <code>EntityManager</code> debe ofrecer <code>persist</code>, <code>find</code> y <code>merge</code>, pero no trae ni una línea que lo haga.</p>
+<p>Una <b>implementación</b> cumple ese contrato. <b>Hibernate</b> es la más usada; existen otras como EclipseLink.</p>
+<p>La ventaja práctica: como tu código usa anotaciones <code>jakarta.persistence.*</code> y no APIs propias de Hibernate, cambiar de implementación sería en teoría posible sin reescribir las entidades.</p>`,
+cod:`Mira los imports de <code>SocioJpaEntity</code>: todos son <code>jakarta.persistence.*</code>, es decir, de la especificación. En ninguna parte importas <code>org.hibernate</code>. Sin embargo, en el log de arranque aparece <code>Hibernate ORM core version 7.4.5.Final</code>: la implementación que está trabajando por debajo.`},
+
+{n:14,cap:"C05",src:"Ruleta 50",t:"¿Qué aporta Spring Data JPA y por qué un JpaRepository no es el modelo de dominio?",
+corta:"Aporta repositorios sin implementación: declaras una interfaz y Spring genera la clase. Pero un JpaRepository es infraestructura técnica, no un concepto de negocio.",
+full:`<p>Spring Data JPA elimina el código repetitivo de acceso a datos. Al extender <code>JpaRepository&lt;T, ID&gt;</code> heredas <code>save</code>, <code>findById</code>, <code>findAll</code>, <code>deleteById</code>, y puedes declarar <b>métodos derivados</b> cuyo nombre se traduce a una consulta: <code>findByEmail</code> genera <code>WHERE email = ?</code>. Si escribes mal el nombre de la propiedad, falla al arrancar, no en producción.</p>
+<p>Y no es el dominio porque habla en <b>entidades JPA</b>, está atado a una tecnología de persistencia y su vocabulario es técnico. El dominio expresa el negocio; el repositorio expresa cómo guardarlo.</p>`,
+cod:`Tu <code>SpringDataSocioRepository</code> es una interfaz de cinco líneas sin implementación y funciona. Por eso mismo está escondida detrás de <code>SocioRepositoryPort</code>: el Service habla con el puerto, en lenguaje de dominio, y solo <code>SocioPersistenceAdapter</code> conoce Spring Data.`},
+
+{n:15,cap:"C05",src:"Ruleta 50",t:"¿Qué significa ddl-auto=validate y por qué create o update serían riesgosos aquí?",
+corta:"validate compara las entidades contra las tablas reales al arrancar y falla si no coinciden, sin modificar nada. create borra y recrea; update altera el esquema por su cuenta.",
+full:`<p>Con <code>validate</code>, Hibernate verifica que cada <code>@Entity</code> tenga su tabla y sus columnas con tipos compatibles. Si algo no calza, la aplicación <b>no arranca</b>. Eso es una característica, no un estorbo: el error aparece en tu máquina, al inicio, y no ante un usuario real.</p>
+<p><b>create</b> y <b>create-drop</b> recrean el esquema en cada arranque: pierdes los datos.</p>
+<p><b>update</b> es el más peligroso porque parece inofensivo: modifica el esquema por su cuenta, nunca borra nada y acumula columnas huérfanas. Además invierte la autoridad: el código pasa a mandar sobre un diseño que se hizo antes y con criterio.</p>`,
+cod:`En tu <code>application.properties</code>: <code>spring.jpa.hibernate.ddl-auto=validate</code>. Tus tablas se crearon con DDL escrito a mano en DataGrip. Cuando faltaba <code>hibernate.default_schema</code>, <code>validate</code> hizo su trabajo y detuvo el arranque con <code>missing table [fitclub.socio]</code>.`},
+
+{n:16,cap:"C05",src:"Ruleta 50",t:"¿Qué es un schema en PostgreSQL y por qué no basta con conectarse a la base correcta?",
+corta:"Un schema es un espacio de nombres dentro de una base. Una misma base puede tener varios, y la tabla socio de uno no es la de otro.",
+full:`<p>La jerarquía es <b>servidor → base de datos → schema → tabla</b>. Las bases están aisladas entre sí; los schemas dentro de una base no lo están, y sirven para agrupar objetos.</p>
+<p>Toda base trae un schema <code>public</code>, y si no dices nada todo se crea ahí.</p>
+<p>Por eso conectarse a la base correcta no basta: <code>pruebafitclub.public.socio</code> y <code>pruebafitclub.fitclub.socio</code> son dos tablas distintas. Hibernate solo encuentra la que le indiques, y su valor por defecto es <code>public</code>.</p>`,
+cod:`Tus tablas están en el schema <code>fitclub</code>, no en <code>public</code>. Dos configuraciones lo sostienen: <code>@Table(name = "socio", schema = "fitclub")</code> en la entidad y <code>spring.jpa.properties.hibernate.default_schema=fitclub</code> en las propiedades. Cuando faltó lo segundo, el log mostró <code>Default catalog/schema: pruebafitclub/public</code> y el arranque falló.`},
+
+{n:17,cap:"C05",src:"Ruleta 50",t:"¿Qué representan @Entity, @Table, @Id, @GeneratedValue y @Column?",
+corta:"Marcan qué clase es persistente, a qué tabla y schema corresponde, cuál atributo es la PK, quién genera su valor y cómo se llama cada columna.",
+full:`<ul>
+<li><b>@Entity</b> — esta clase se corresponde con una tabla. Sin ella, Hibernate la ignora.</li>
+<li><b>@Table(name, schema)</b> — el nombre físico y el schema. Necesaria cuando no coinciden con el nombre de la clase.</li>
+<li><b>@Id</b> — el atributo que es clave primaria.</li>
+<li><b>@GeneratedValue(strategy = IDENTITY)</b> — el valor lo genera la base con su columna <code>IDENTITY</code>; Hibernate lo lee después del INSERT.</li>
+<li><b>@Column(name, nullable, unique)</b> — el nombre de la columna y una descripción de sus restricciones. Imprescindible cuando el atributo Java y la columna difieren.</li>
+</ul>`,
+cod:`En <code>SocioJpaEntity</code>, <code>@Column(name = "fecha_registro")</code> sobre <code>fechaRegistro</code> es el ejemplo claro: Java usa camelCase y la columna guiones bajos. Si la quitas, <code>validate</code> detiene el arranque.`},
+
+{n:18,cap:"C05",src:"Ruleta 50",t:"¿Por qué la entidad JPA y la de dominio deben ser clases distintas?",
+corta:"Porque representan cosas distintas y cambian por razones distintas: una expresa el negocio, la otra una tabla.",
+full:`<p>Si fueran la misma clase, cualquier cambio de la tabla obligaría a tocar el negocio, y al revés. Además JPA impone condiciones —constructor sin argumentos, nada <code>final</code>, proxies de carga diferida— que contaminarían un modelo que debería ser Java puro y probable sin levantar nada.</p>
+<p>Qué absorbe cada una sin molestar a la otra:</p>
+<ul>
+<li>La <b>entidad JPA</b> absorbe cambios físicos: renombrar una columna, cambiar una estrategia de generación, partir la tabla en dos.</li>
+<li>El <b>dominio</b> absorbe cambios de negocio: una regla nueva, un cálculo, un concepto que se refina.</li>
+</ul>
+<p>El costo real es el mapper y el código repetitivo. En un CRUD pequeño se nota; conviene reconocerlo.</p>`,
+cod:`<code>Socio</code> no tiene ni una anotación; <code>SocioJpaEntity</code> tiene cinco. <code>SocioPersistenceMapper</code> traduce entre ambas y es el único que conoce las dos. Además <code>SocioJpaEntity</code> no tiene setters y su constructor vacío es <code>protected</code>: detalles que JPA exige y que el dominio no debería cargar.`},
+
+{n:19,cap:"C05",src:"Ruleta 50",t:"Compare unique=true en @Column con una restricción UNIQUE real. ¿Cuál es la última barrera?",
+corta:"La restricción de PostgreSQL. La anotación, con ddl-auto=validate, solo documenta y sirve para verificar el esquema; no impide nada por sí sola.",
+full:`<p>Con <code>validate</code>, Hibernate no crea ni modifica restricciones: la anotación describe lo que espera encontrar. Quien realmente rechaza el duplicado es PostgreSQL.</p>
+<p>La base es la <b>última barrera</b> porque protege frente a todos los caminos: tu aplicación, otra aplicación, un script, un INSERT manual en DataGrip, o un bug tuyo. La validación en la aplicación protege solo el camino que pasa por ella.</p>
+<p>Eso no hace inútil validar antes: la aplicación da mejores mensajes y evita el viaje a la base. Es <b>defensa en profundidad</b>, no duplicación.</p>`,
+cod:`Tienes las dos: <code>@Column(name="email", nullable=false, unique=true)</code> en la entidad y <code>email VARCHAR(150) NOT NULL UNIQUE</code> en el DDL. Cuando se repite un email, el log muestra <code>duplicate key value violates unique constraint "socio_email_key"</code> — el nombre lo puso PostgreSQL, no Java.`},
+
+{n:20,cap:"C05",src:"Ruleta 50",t:"¿Cómo comprobar que un POST realmente persistió? Relacione respuesta HTTP, logs, DataGrip y la fila física.",
+corta:"Con cuatro evidencias encadenadas: el 201 con id, el INSERT en el log de Hibernate, la fila visible en DataGrip y sus valores correctos.",
+full:`<ol>
+<li>La <b>respuesta HTTP</b>: <code>201 Created</code> con un <code>id</code> que antes no existía. Necesaria pero no suficiente: un servidor podría inventar el id sin guardar.</li>
+<li>El <b>log SQL de Hibernate</b>: demuestra que la sentencia se generó y se ejecutó.</li>
+<li><b>DataGrip</b>: un <code>SELECT</code> desde fuera de la aplicación, contra la base real.</li>
+<li>La <b>fila física</b> con sus valores correctos columna por columna.</li>
+</ol>
+<p>La cadena importa: cada eslabón descarta una forma distinta de engañarse. Si hay 201 pero no hay fila, hubo rollback.</p>`,
+cod:`<pre>-- 2. consola de IntelliJ
+insert into fitclub.socio (email, fecha_registro, nombre, telefono)
+values (?, ?, ?, ?)
+
+-- 3. DataGrip
+SELECT * FROM fitclub.socio ORDER BY id DESC;</pre>`},
+];
+</script>
+<script>
+Q.push(
+{n:21,cap:"C06",src:"Ruleta 50",t:"¿Cuál es el objetivo de la arquitectura hexagonal y qué significa que las dependencias apunten al núcleo?",
+corta:"Proteger la lógica de negocio de los detalles externos. Las capas de afuera conocen a las de adentro; el núcleo no conoce nada de afuera.",
+full:`<p>El objetivo es que el negocio no dependa de decisiones que pueden cambiar por razones ajenas a él: el framework web, el motor de base de datos, el formato de intercambio.</p>
+<p>"Las dependencias apuntan hacia el núcleo" significa que en las sentencias <code>import</code> la flecha va siempre hacia adentro. La infraestructura importa del dominio; el dominio no importa nada de infraestructura.</p>
+<p>El truco que lo hace posible es que el núcleo <b>define las interfaces que necesita</b> (los puertos) y la infraestructura las implementa. Así, aunque el flujo de ejecución vaya hacia afuera, la dependencia de código va hacia adentro.</p>`,
+cod:`La prueba está en los imports de <code>SocioService</code>: <code>Socio</code>, <code>SocioUseCase</code>, <code>SocioRepositoryPort</code> y <code>@Service</code>. Ni DTOs, ni <code>SocioJpaEntity</code>, ni Spring Data. En cambio <code>SocioPersistenceAdapter</code> (infraestructura) sí importa <code>SocioRepositoryPort</code> (dominio).`},
+
+{n:22,cap:"C06",src:"Ruleta 50",t:"Diferencie dominio, aplicación e infraestructura.",
+corta:"El dominio dice qué significa el negocio; la aplicación qué hace el sistema; la infraestructura cómo entra y sale la información.",
+full:`<ul>
+<li><b>Dominio</b> — conceptos y reglas del negocio, más los puertos. Java puro. Si al leerlo aparece HTTP, SQL o un framework, algo se filtró.</li>
+<li><b>Aplicación</b> — casos de uso: orquesta el flujo, aplica reglas que involucran a varios elementos, marca la frontera transaccional.</li>
+<li><b>Infraestructura</b> — todo lo técnico: Controllers, DTOs, entidades JPA, repositorios, adaptadores, configuración.</li>
+</ul>
+<p>Una prueba rápida: si un archivo se rompería al cambiar de framework web o de base de datos, es infraestructura.</p>`,
+cod:`Tus paquetes lo dicen: <code>socio/domain/model</code> y <code>socio/domain/port</code>; <code>socio/application</code>; <code>socio/infrastructure/adapter/in/web</code> y <code>.../out/persistence</code>. El Controller está en infraestructura porque HTTP es un detalle de entrada.`},
+
+{n:23,cap:"C06",src:"Ruleta 50",t:"¿Qué es un Port IN y por qué no debe mencionar HTTP, JSON ni Spring Data?",
+corta:"Es el contrato de capacidades que el sistema ofrece. Si mencionara HTTP, el negocio quedaría atado a una forma concreta de invocarlo.",
+full:`<p>El <b>Port IN</b> responde a "¿qué se puede hacer con este módulo?": registrar un socio, listarlos, buscar uno. Es la puerta de entrada al núcleo, expresada como interfaz.</p>
+<p>No debe mencionar HTTP, JSON, Controller ni Spring Data porque el contrato es <b>del negocio</b>, no de un canal. Si recibiera un DTO de la web, invocarlo desde una tarea programada obligaría a construir un objeto web sin sentido en ese contexto.</p>
+<p>La prueba: si mañana agregas una interfaz de línea de comandos, el Port IN debería servir sin cambios.</p>`,
+cod:`<code>SocioUseCase</code> declara <code>registrar(Socio)</code>, <code>listar()</code> y <code>buscarPorId(Long)</code>. Recibe y devuelve dominio, nunca DTOs. La traducción desde el JSON la hace <code>SocioWebMapper</code>, del lado web.`},
+
+{n:24,cap:"C06",src:"Ruleta 50",t:"¿Qué es un Port OUT y por qué no debe extender JpaRepository?",
+corta:"Es el contrato de lo que el núcleo necesita del exterior. Si extendiera JpaRepository, el núcleo volvería a depender de Spring Data, que es justo lo que se quiere evitar.",
+full:`<p>El <b>Port OUT</b> dice "para funcionar necesito poder guardar y recuperar socios de algún lado" — sin decir de dónde.</p>
+<p>Si extendiera <code>JpaRepository</code> pasarían tres cosas: el dominio importaría Spring Data; heredaría veinte métodos que nadie pidió; y hablaría en entidades JPA en vez de en dominio. La abstracción dejaría de abstraer.</p>
+<p>La ventaja de definirlo desde el núcleo es que <b>el contrato lo dicta quien lo necesita</b>, con el vocabulario del negocio.</p>`,
+cod:`<code>SocioRepositoryPort</code> declara <code>guardar</code>, <code>listar</code> y <code>buscarPorId</code>, habla de <code>Socio</code> y no importa nada de Spring. <code>SpringDataSocioRepository</code> sí extiende <code>JpaRepository</code>, pero vive en <code>infrastructure/.../repository</code> y solo lo conoce el adaptador.`},
+
+{n:25,cap:"C06",src:"Ruleta 50",t:"Diferencie un Controller de un Port IN.",
+corta:"El Port IN es la capacidad abstracta; el Controller es una forma concreta de invocarla, la de HTTP.",
+full:`<p>El <b>Controller</b> es un <b>adaptador de entrada</b>: traduce una petición HTTP en una llamada Java. Lee el body, activa la validación, mapea DTO a dominio y elige el código de estado. Todo eso es vocabulario web.</p>
+<p>El <b>Port IN</b> es la capacidad, sin canal. No sabe si lo invocaron por HTTP o desde una prueba.</p>
+<p>La relación correcta es que el Controller <b>depende del</b> Port IN: puedes tener varios adaptadores de entrada sobre el mismo puerto.</p>`,
+cod:`<code>SocioController</code> declara <code>private final SocioUseCase socioUseCase</code> — el tipo es la interfaz, no <code>SocioService</code>. El Controller sabe de <code>ResponseEntity</code>, 201 y DTOs; el puerto, de ninguna de las tres.`},
+
+{n:26,cap:"C06",src:"Ruleta 50",t:"¿Qué función cumple un Application Service y por qué debe depender de abstracciones?",
+corta:"Orquesta el caso de uso: aplica reglas, coordina y marca la frontera transaccional. Depende de abstracciones para no quedar atado a una tecnología concreta.",
+full:`<p>El <b>Application Service</b> es el "qué hace el sistema": recibe datos ya traducidos, valida las reglas que involucran a varios elementos, invoca los puertos de salida y devuelve el resultado.</p>
+<p>Depende de abstracciones por tres razones: se puede probar pasándole una implementación falsa del puerto, sin base de datos; cambiar de tecnología de persistencia no lo toca; y el contrato lo define él mismo según lo que necesita.</p>`,
+cod:`<code>MembresiaService</code> es el mejor ejemplo: valida que el socio exista (regla de negocio), delega el guardado en <code>MembresiaRepositoryPort</code> y lleva <code>@Transactional</code>. Depende de dos abstracciones: su Port OUT y <code>SocioUseCase</code>.`},
+
+{n:27,cap:"C06",src:"Ruleta 50",t:"¿Qué es un Adapter IN y qué es un Adapter OUT?",
+corta:"El Adapter IN traduce un canal externo en una llamada al Port IN; el Adapter OUT traduce una necesidad del núcleo a una tecnología concreta.",
+full:`<p>Un <b>adaptador</b> conecta dos mundos que hablan idiomas distintos, y siempre es infraestructura.</p>
+<p><b>Adapter IN</b> — el Controller. Recibe HTTP+JSON, lo convierte en dominio, llama al Port IN y traduce el resultado a una respuesta con su código.</p>
+<p><b>Adapter OUT</b> — el Persistence Adapter. Implementa el Port OUT: recibe dominio, lo convierte en entidad JPA, usa el repositorio y devuelve dominio.</p>
+<p>La diferencia de dirección: el Adapter IN <b>invoca</b> al núcleo; el Adapter OUT <b>es invocado por</b> el núcleo a través de una interfaz que el núcleo definió.</p>`,
+cod:`<code>SocioController</code> es tu Adapter IN; <code>SocioPersistenceAdapter</code>, tu Adapter OUT. Los dos bajo <code>infrastructure/adapter/</code>, uno en <code>in/web</code> y otro en <code>out/persistence</code>.`},
+
+{n:28,cap:"C06",src:"Ruleta 50",t:"Explique la inversión de dependencias y cómo se relacionan IoC, DI y la inyección por constructor.",
+corta:"DIP es el principio: ambos módulos dependen de una abstracción. IoC es el mecanismo: el contenedor controla la creación. DI es la técnica con que se entregan las dependencias.",
+full:`<p><b>DIP</b> — principio: los módulos de alto nivel no deben depender de los de bajo nivel; ambos deben depender de abstracciones. Aquí, <code>SocioService</code> y <code>SocioPersistenceAdapter</code> dependen de <code>SocioRepositoryPort</code>.</p>
+<p><b>IoC</b> — mecanismo: quien controla la creación y el ciclo de vida de los objetos es el contenedor, no tu código.</p>
+<p><b>DI</b> — la técnica concreta de entrega.</p>
+<p>La <b>inyección por constructor</b> se prefiere porque el campo puede ser <code>final</code>, el objeto nunca existe a medio construir, y en una prueba puedes pasar un doble sin levantar Spring.</p>
+<p>Corto: <b>DIP es el principio, IoC el mecanismo, DI la técnica.</b></p>`,
+cod:`Ninguna de tus clases usa <code>new</code> para sus colaboradores: todas los reciben por constructor, con el campo <code>final</code>. Spring resuelve qué inyectar buscando el único bean que implementa cada interfaz.`},
+
+{n:29,cap:"C06",src:"Ruleta 50",t:"¿Qué papel cumplen los mappers y por qué hacen falta dos traducciones distintas?",
+corta:"Cada mapper traduce en una frontera. Son dos porque hay dos fronteras —la web y la persistencia— que cambian por razones distintas.",
+full:`<p>La cadena es <b>JSON ↔ Web Mapper ↔ Dominio ↔ Persistence Mapper ↔ Tabla</b>. Cada mapper aísla una frontera:</p>
+<ul>
+<li>Si la API tiene que exponer el nombre partido en dos campos, cambia solo el Web Mapper.</li>
+<li>Si se renombra una columna, cambia solo el Persistence Mapper.</li>
+</ul>
+<p>El dominio, en el medio, no se entera de ninguno de los dos cambios. Con un solo mapper, la API volvería a quedar pegada a la tabla.</p>`,
+cod:`<code>SocioWebMapper</code> convierte <code>SocioRequestDTO</code> → <code>Socio</code> y <code>Socio</code> → <code>SocioResponseDTO</code>. <code>SocioPersistenceMapper</code> convierte <code>Socio</code> ↔ <code>SocioJpaEntity</code>. Ninguno vive en el dominio.`},
+
+{n:30,cap:"C06",src:"Ruleta 50",t:"“Si el Controller inyecta directamente el repositorio Spring Data, funciona pero el diseño es incorrecto”. Analice.",
+corta:"Funciona porque Spring puede inyectarlo y JPA responde. Es incorrecto porque colapsa tres capas en una y ata la puerta HTTP a la tecnología de persistencia.",
+full:`<ul>
+<li><b>Se saltea la capa de aplicación.</b> Las reglas de negocio terminan en el Controller o desaparecen.</li>
+<li><b>La entidad JPA llega a la capa web</b> y casi siempre acaba devolviéndose, con lo que la tabla queda expuesta como contrato público.</li>
+<li><b>Se invierte la dirección de dependencias.</b> Un adaptador de entrada pasa a depender de un detalle de salida.</li>
+<li><b>Se pierde la posibilidad de probar</b> el caso de uso sin levantar la web ni la base.</li>
+<li><b>Se destruye la sustituibilidad.</b> Cambiar de persistencia obliga a tocar los Controllers.</li>
+</ul>
+<p>Que algo funcione dice que el comportamiento es correcto hoy; el diseño trata de cuánto cuesta el cambio mañana.</p>`,
+cod:`Tus Controllers dependen de <code>SocioUseCase</code> y <code>MembresiaUseCase</code>. El único lugar donde aparece <code>SpringDataSocioRepository</code> es dentro de los adaptadores: compruébalo con <code>Ctrl+Shift+F</code>.`},
+
+{n:31,cap:"C07",src:"Ruleta 50",t:"¿Qué significa la relación 1:N y dónde se ubica físicamente la clave foránea?",
+corta:"Un socio tiene muchas membresías; cada membresía pertenece a un solo socio. La FK va en la tabla del lado muchos: membresia.socio_id.",
+full:`<p><b>Socio</b> es la entidad padre; <b>Membresia</b> la dependiente. La FK va del lado "muchos" porque cada fila de <code>membresia</code> apunta a <b>un solo</b> socio, y una columna guarda un valor.</p>
+<p>Al revés no funcionaría: para guardar las membresías en la fila del socio harían falta muchos valores en una columna, lo que rompe la primera forma normal.</p>
+<p>La dependencia también es de existencia: una membresía sin socio no significa nada, y por eso <code>socio_id</code> es <code>NOT NULL</code>.</p>`,
+cod:`<pre>CREATE TABLE fitclub.membresia (
+  ...
+  socio_id BIGINT NOT NULL REFERENCES fitclub.socio(id)
+);</pre>`},
+
+{n:32,cap:"C07",src:"Ruleta 50",t:"Diferencie PK y FK. ¿Qué problema de integridad resuelve una FOREIGN KEY?",
+corta:"La PK identifica de forma única una fila dentro de su tabla; la FK apunta a la PK de otra. La FK impide filas huérfanas.",
+full:`<p>La <b>clave primaria</b> identifica inequívocamente cada fila: única, no nula y estable en el tiempo.</p>
+<p>La <b>clave foránea</b> es una columna cuyos valores deben existir en la PK de otra tabla. Es la que materializa la relación en el modelo relacional.</p>
+<p>El problema que resuelve es la <b>integridad referencial</b>: impide que exista una membresía apuntando a un socio que nunca existió. Además gobierna qué pasa al borrar el padre: por defecto PostgreSQL rechaza la operación mientras haya hijos.</p>`,
+cod:`Pruébalo en DataGrip: un INSERT en <code>fitclub.membresia</code> con <code>socio_id = 999999</code> es rechazado con <code>violates foreign key constraint</code>, aunque la aplicación no esté corriendo.`},
+
+{n:33,cap:"C07",src:"Ruleta 50",t:"¿Por qué la misma relación 1:N se representa distinto en dominio, JPA y PostgreSQL?",
+corta:"Porque cada nivel tiene una necesidad distinta: el dominio solo necesita saber a cuál pertenece, JPA necesita navegar entre objetos y PostgreSQL necesita garantizar integridad.",
+full:`<ul>
+<li><b>Dominio</b> — <code>private Long socioId;</code> Solo el identificador: no necesita los datos del socio para existir ni para validar sus reglas, y guardar el objeto acoplaría los módulos.</li>
+<li><b>Persistencia JPA</b> — <code>@ManyToOne ... private SocioJpaEntity socio;</code> JPA necesita el objeto porque así expresa una asociación navegable.</li>
+<li><b>PostgreSQL</b> — <code>socio_id BIGINT NOT NULL REFERENCES ...</code> La base no tiene objetos: tiene columnas y restricciones.</li>
+</ul>
+<p>No son equivalentes, y confundirlos es justo el error que el capítulo busca evitar.</p>`,
+cod:`En <code>Membresia</code> el campo es <code>Long socioId</code>; en <code>MembresiaJpaEntity</code> es <code>SocioJpaEntity socio</code>. <code>MembresiaPersistenceMapper.toDomain()</code> baja de uno al otro con <code>entity.getSocio().getId()</code>.`},
+
+{n:34,cap:"C07",src:"Ruleta 50",t:"¿Por qué el dominio puede guardar solo el id del padre y no la entidad JPA?",
+corta:"Porque el dominio solo necesita saber a cuál pertenece. Guardar la entidad JPA lo ataría a la persistencia y a otro módulo a la vez.",
+full:`<p>El primer principio es la <b>regla de dependencia</b>: si <code>Membresia</code> tuviera un <code>SocioJpaEntity</code>, el dominio importaría infraestructura y el núcleo quedaría atado a JPA.</p>
+<p>El segundo es la <b>frontera entre módulos</b>: cada módulo conoce del otro lo mínimo indispensable, y el identificador es ese mínimo.</p>
+<p>La consecuencia práctica también cuenta: con el objeto completo, cargar una membresía obligaría a cargar un socio aunque nadie lo necesite.</p>`,
+cod:`Los imports de <code>Membresia</code> son <code>BigDecimal</code> y <code>LocalDate</code>, nada más. Si apareciera <code>SocioJpaEntity</code>, la regla estaría rota.`},
+
+{n:35,cap:"C07",src:"Ruleta 50",t:"¿Qué representan @ManyToOne y @JoinColumn, y por qué no son la FK física?",
+corta:"Son instrucciones de mapeo para Hibernate: le dicen que la asociación es muchos-a-uno y con qué columna se materializa. La FK es una restricción de PostgreSQL que existe sin Java.",
+full:`<p><b>@ManyToOne</b> declara la cardinalidad desde la clase donde está escrita: muchas membresías hacia un socio. <code>optional = false</code> expresa que la asociación es obligatoria.</p>
+<p><b>@JoinColumn(name = "socio_id")</b> indica qué columna guarda el identificador del otro lado.</p>
+<p>No son la FK porque son <b>metadatos de tu programa</b>: viven en el código Java y desaparecen si borras la aplicación. La FK es una restricción del esquema, y PostgreSQL la hace cumplir venga el INSERT de donde venga. Con <code>ddl-auto=validate</code> Hibernate ni siquiera la crea: solo verifica que exista.</p>`,
+cod:`En <code>MembresiaJpaEntity</code>: <code>@ManyToOne(fetch = LAZY, optional = false)</code> y <code>@JoinColumn(name = "socio_id", nullable = false)</code>. En el DDL: <code>REFERENCES fitclub.socio(id)</code>.`},
+
+{n:36,cap:"C07",src:"Ruleta 50",t:"¿Qué es FetchType.LAZY y por qué conviene en la relación muchos-a-uno?",
+corta:"LAZY carga el objeto asociado solo cuando alguien lo usa. Conviene porque casi ninguna operación sobre membresías necesita los datos del socio.",
+full:`<p>Con <b>EAGER</b>, cada vez que se carga una membresía se carga también su socio. Con <b>LAZY</b>, Hibernate deja un proxy y solo consulta si alguien llama a un método distinto de <code>getId()</code>.</p>
+<p>La razón de fondo es el <b>problema N+1</b>: listar 100 membresías con EAGER dispara 1 consulta más 100. Con LAZY se hace una sola.</p>
+<p>El precio es la <code>LazyInitializationException</code> si accedes al socio fuera de la sesión de persistencia. Por eso el mapeo se resuelve dentro del adaptador, mientras la sesión sigue abierta.</p>`,
+cod:`Tu entidad usa <code>fetch = FetchType.LAZY</code>, y <code>spring.jpa.open-in-view=false</code> hace que ese error aparezca temprano en vez de esconderse tras una sesión abierta hasta el final de la petición.`},
+
+{n:37,cap:"C07",src:"Ruleta 50",t:"¿Por qué validar que el socio exista si PostgreSQL ya tiene la FK?",
+corta:"Porque son barreras de distinto nivel: la aplicación da un error claro y a tiempo, la base garantiza que ningún camino pueda corromper los datos.",
+full:`<p>Tres razones para validar antes: la <b>calidad del error</b> (un 404 legible en vez de una excepción de driver), el <b>momento</b> (antes de intentar escribir) y la <b>responsabilidad</b> (es una regla de negocio, y las reglas viven en el caso de uso).</p>
+<p>Y tres para conservar la FK: protege frente a otras aplicaciones, frente a scripts manuales y frente a bugs futuros de la propia aplicación.</p>
+<p>Es <b>defensa en profundidad</b>: la aplicación valida primero, la base es la última barrera.</p>`,
+cod:`En <code>MembresiaService.registrar()</code>: <code>socioUseCase.buscarPorId(...).orElseThrow(() -> new SocioNoEncontradoException(...))</code>. El resultado visible es que <code>socioId: 9999</code> devuelve <b>404</b> con <code>ApiError</code> en vez de un 500 con traza.`},
+
+{n:38,cap:"C07",src:"Ruleta 50",t:"¿Por qué un módulo debe consultar a otro por su caso de uso y no por su repositorio?",
+corta:"Para evitar el acoplamiento a la implementación. El caso de uso es la interfaz pública del módulo; el repositorio es su detalle interno.",
+full:`<p>Un módulo ofrece <b>capacidades</b> a través de su Port IN; cómo las cumple es asunto suyo. Si otro módulo entra por el repositorio, se acopla a una decisión interna que debería poder cambiar libremente.</p>
+<ul>
+<li><b>Acoplamiento tecnológico</b>: la aplicación de Membresia pasaría a depender de Spring Data JPA.</li>
+<li><b>Acoplamiento a la implementación</b>: si mañana los socios se consultaran por una API externa, todo lo que use su repositorio se rompería.</li>
+<li><b>Salto de reglas</b>: el repositorio devuelve datos crudos, sin las reglas que el caso de uso pudiera aplicar.</li>
+</ul>`,
+cod:`<code>MembresiaService</code> recibe <code>SocioUseCase</code>, no <code>SocioRepositoryPort</code> ni <code>SpringDataSocioRepository</code>. La excepción legítima está en <code>MembresiaPersistenceAdapter</code>, que sí usa <code>getReferenceById()</code>: ahí es infraestructura hablando con infraestructura.`},
+
+{n:39,cap:"C07",src:"Ruleta 50",t:"Diferencie una validación de negocio (“email duplicado”) de una restricción UNIQUE. ¿Por qué mantener ambas?",
+corta:"La validación de negocio vive en el caso de uso, se puede matizar y da buenos mensajes. El UNIQUE es una garantía absoluta del almacenamiento.",
+full:`<p>La <b>validación de negocio</b> puede tener excepciones ("salvo socios dados de baja"), consultar otros datos y producir un mensaje explicativo. Solo protege el camino que pasa por ella.</p>
+<p>La <b>restricción UNIQUE</b> no razona: rechaza cualquier duplicado, venga de donde venga. No puede matizarse, pero tampoco saltarse.</p>
+<p>Hay un caso que solo la base resuelve: dos peticiones simultáneas que comprueban a la vez y ninguna ve a la otra. La validación previa dejaría pasar las dos; el <code>UNIQUE</code> no.</p>`,
+cod:`Hoy tienes el <code>UNIQUE</code> en <code>fitclub.socio.email</code> y no una comprobación previa en el Service; el duplicado se convierte en <b>409</b> por el <code>@ExceptionHandler(DataIntegrityViolationException.class)</code>. Ya tienes <code>findByEmail</code>: es lo que usarías para agregar la validación previa.`},
+
+{n:40,cap:"C07",src:"Ruleta 50",t:"Explique el recorrido completo para registrar una membresía, señalando dónde interviene cada capa.",
+corta:"DTO en la entrada, Port IN hacia el caso de uso, Port OUT hacia el adaptador, mapper a entidad JPA, Hibernate genera el SQL y PostgreSQL garantiza la FK; la respuesta vuelve traducida a DTO.",
+full:`<ol>
+<li>Postman envía <code>POST /api/membresias</code> con JSON y <code>Content-Type</code>.</li>
+<li>Spring MVC enruta a <code>MembresiaController</code> (<b>Adapter IN</b>).</li>
+<li><code>@RequestBody</code> construye el <b>Request DTO</b>; <code>@Valid</code> ejecuta Jakarta Validation.</li>
+<li><code>MembresiaWebMapper</code> traduce el DTO a dominio.</li>
+<li>El Controller llama al <b>Port IN</b>, <code>MembresiaUseCase.registrar()</code>.</li>
+<li><code>MembresiaService</code> valida por <code>SocioUseCase</code> que el socio exista.</li>
+<li>Llama al <b>Port OUT</b>, <code>MembresiaRepositoryPort.guardar()</code>.</li>
+<li><code>MembresiaPersistenceAdapter</code> (<b>Adapter OUT</b>) obtiene la referencia del socio y llama al mapper.</li>
+<li><code>save()</code> entra en <b>JPA</b>; <b>Hibernate</b> genera el INSERT con <code>socio_id</code>.</li>
+<li><b>PostgreSQL</b> valida la FK, inserta y devuelve el id.</li>
+<li>Vuelta: entidad → dominio → Response DTO → <b>201 Created</b>.</li>
+</ol>`,
+cod:`<pre>insert into fitclub.membresia
+  (fecha_fin, fecha_inicio, precio, socio_id, tipo)
+values (?, ?, ?, ?, ?)</pre>`},
+);
+</script>
+<script>
+Q.push(
+{n:41,cap:"C08",src:"Ruleta 50",t:"¿Por qué una API necesita un contrato de error consistente? ¿Qué aporta ApiError?",
+corta:"Porque sin él cada endpoint inventa su propia forma de fallar y el cliente tiene que programar un caso especial para cada uno.",
+full:`<p>Un formato fijo de error aporta tres cosas concretas:</p>
+<ul>
+<li><b>Para el frontend</b>: una sola función que muestra errores, en vez de un tratamiento por endpoint. Y con <code>fieldErrors</code> puede marcar exactamente el campo que falló en el formulario.</li>
+<li><b>Para las pruebas</b>: se puede verificar la estructura de la respuesta, no solo el código.</li>
+<li><b>Para el diagnóstico</b>: <code>timestamp</code> y <code>path</code> ubican el fallo sin abrir logs.</li>
+</ul>
+<p>Además protege: sin contrato, lo habitual es que se escape la traza de la excepción, que revela rutas de clases y estructura interna.</p>`,
+cod:`Tu <code>ApiError</code> es un <code>record</code> con <code>timestamp, status, error, message, path, fieldErrors</code>. Se nota hasta en el tamaño de la respuesta en Postman: el 404 pasó de ~130 B (cuerpo vacío) a ~330 B cuando empezó a devolver el contrato completo.`},
+
+{n:42,cap:"C08",src:"Ruleta 50",t:"Diferencie validación de formato, validación de negocio e integridad física.",
+corta:"Formato: que el dato esté bien escrito, en el DTO. Negocio: que la operación tenga sentido, en el caso de uso. Integridad: que la base nunca quede inválida, en las constraints.",
+full:`<ul>
+<li><b>Formato</b> — la ejecuta Jakarta Validation en el Request DTO, antes de entrar al caso de uso. Ejemplo: <code>email</code> sin arroba, <code>precio</code> negativo. Produce <b>400</b>.</li>
+<li><b>Negocio</b> — la ejecuta el caso de uso. Requiere conocer el estado del sistema. Ejemplo: "no existe un socio con ese id". Produce <b>404</b> o <b>409</b>.</li>
+<li><b>Integridad física</b> — la ejecuta PostgreSQL con <code>NOT NULL</code>, <code>UNIQUE</code>, <code>FK</code> y <code>CHECK</code>. Es incondicional. Produce <b>409</b> al traducirse.</li>
+</ul>
+<p>Coexisten a propósito: es <b>defensa en profundidad</b>. La primera rechaza basura barata, la segunda aplica criterio, la tercera garantiza que ni un bug pueda corromper los datos.</p>`,
+cod:`En tu proyecto: <code>@Email</code> en <code>SocioRequestDTO</code> (formato); <code>socioUseCase.buscarPorId(...).orElseThrow(...)</code> en <code>MembresiaService</code> (negocio); <code>email ... UNIQUE</code> en el DDL (integridad).`},
+
+{n:43,cap:"C08",src:"Ruleta 50",t:"¿Qué función cumple @RestControllerAdvice y por qué evita repetir try/catch?",
+corta:"Es un componente transversal que intercepta las excepciones de todos los Controllers y las traduce a respuestas HTTP en un solo lugar.",
+full:`<p>Sin él, cada método de cada Controller tendría que envolver su cuerpo en <code>try/catch</code> y construir su propia respuesta. Eso es código repetido en decenas de lugares, que se desincroniza apenas alguien olvida actualizar uno y ensucia los Controllers con una responsabilidad que no es suya.</p>
+<p><code>@RestControllerAdvice</code> es <code>@ControllerAdvice</code> + <code>@ResponseBody</code>: lo que devuelven sus métodos se serializa a JSON.</p>
+<p>El beneficio de fondo es de diseño: la traducción de problema de negocio a código HTTP ocurre en <b>un</b> punto, que es el único que conoce HTTP y excepciones a la vez.</p>`,
+cod:`<code>GlobalExceptionHandler</code>, en <code>com.fitclub.shared.infrastructure.web</code>. Está en <code>shared</code> porque el contrato de error es de toda la API, no de un módulo. Ninguno de tus Controllers tiene un <code>try/catch</code>.`},
+
+{n:44,cap:"C08",src:"Ruleta 50",t:"¿Qué hace @ExceptionHandler y cómo traduce una excepción interna en una respuesta HTTP?",
+corta:"Asocia un tipo de excepción con un método que construye la respuesta. Es el punto donde un concepto de negocio se convierte en un código HTTP.",
+full:`<p>Dentro de un advice, cada método anotado declara qué tipos atiende. Cuando una excepción sale de un Controller, Spring busca el manejador <b>más específico</b> que coincida y lo invoca con la excepción.</p>
+<p>El método recibe la excepción (y opcionalmente la petición), extrae lo que necesita y devuelve un <code>ResponseEntity</code> con el código y el cuerpo adecuados.</p>
+<p>Esa traducción es exactamente lo que permite que las excepciones de dominio <b>no sepan nada de HTTP</b>: alguien más, en la frontera, decide que "socio no encontrado" significa 404.</p>`,
+cod:`<code>@ExceptionHandler({SocioNoEncontradoException.class, MembresiaNoEncontradaException.class})</code> → 404. <code>MethodArgumentNotValidException</code> → 400 con <code>fieldErrors</code>. <code>DataIntegrityViolationException</code> → 409. <code>Exception</code> → 500.`},
+
+{n:45,cap:"C08",src:"Ruleta 50",t:"Compare 400, 404, 409 y 500. ¿Qué situación representa cada uno?",
+corta:"400 el cliente mandó algo mal formado; 404 el recurso no existe; 409 la petición choca con el estado actual; 500 falló el servidor.",
+full:`<ul>
+<li><b>400 Bad Request</b> — la petición no cumple el contrato. Reintentarla igual vuelve a fallar. El cliente tiene que corregir los datos.</li>
+<li><b>404 Not Found</b> — el recurso pedido no existe. La petición está bien formada; lo que no está es la cosa.</li>
+<li><b>409 Conflict</b> — la petición es válida y el recurso existe, pero choca con el estado actual: un duplicado, una transición no permitida.</li>
+<li><b>500 Internal Server Error</b> — falló el servidor. <b>Es culpa nuestra</b>: el cliente no puede hacer nada distinto.</li>
+</ul>
+<p>La distinción de fondo: <b>4xx es culpa del cliente, 5xx del servidor</b>. Devolver 500 cuando el cliente mandó datos inválidos le miente sobre quién debe arreglar algo.</p>`,
+cod:`Los cuatro están en tu colección: 400 en <code>validación falla</code>, 404 en <code>socioId inexistente</code>, 409 en <code>email duplicado</code>, y 500 reservado como red de seguridad. Los dos primeros eran 500 antes del Capítulo 08 — ahí está el valor del cambio.`},
+
+{n:46,cap:"C08",src:"Ruleta 50",t:"¿Por qué una excepción de negocio no debe contener ResponseEntity ni conocer HTTP?",
+corta:"Porque el dominio sabe que algo no existe, no que alguien preguntó por HTTP. Mezclar ambos ata el negocio a un canal.",
+full:`<p>Si <code>SocioNoEncontradoException</code> llevara un <code>ResponseEntity</code> dentro, el paquete <code>domain</code> importaría Spring Web y el núcleo dependería de infraestructura: exactamente lo que la arquitectura hexagonal evita.</p>
+<p>Y sería incorrecto conceptualmente: la misma regla ejecutada desde una tarea programada o un consumidor de mensajes no tiene ningún 404 que devolver.</p>
+<p>La separación correcta: el dominio <b>nombra el problema</b>; la capa web <b>decide el código</b>. Así la misma excepción puede traducirse distinto según el canal.</p>`,
+cod:`<code>SocioNoEncontradoException</code> extiende <code>RuntimeException</code> y su único import es implícito. No conoce <code>ResponseEntity</code>, <code>HttpStatus</code> ni nada de Spring. Quien decide que es 404 es <code>GlobalExceptionHandler</code>.`},
+
+{n:47,cap:"C08",src:"Ruleta 50",t:"¿Por qué capturar Exception genéricamente en todos los Controllers es mala práctica?",
+corta:"Porque se traga errores reales, esconde la causa y trata igual problemas que no lo son. Distinto es tener un único catch-all en el manejador global.",
+full:`<p>Un <code>catch (Exception e)</code> esparcido por el código:</p>
+<ul>
+<li><b>Oculta bugs.</b> Un <code>NullPointerException</code> queda enterrado bajo un mensaje genérico.</li>
+<li><b>Trata igual lo desigual.</b> Una violación de constraint y un fallo de red terminan con la misma respuesta.</li>
+<li><b>Se repite y se desincroniza</b> entre Controllers.</li>
+<li><b>Dificulta el diagnóstico</b>: sin traza en el log, no queda rastro.</li>
+</ul>
+<p>El matiz importante: <b>un</b> catch-all en el advice global sí es correcto. Es el borde del sistema, garantiza que nada se escape con formato distinto, y no se traga nada porque el error sigue registrándose.</p>`,
+cod:`Tu <code>@ExceptionHandler(Exception.class)</code> es el último del advice y es el único de todo el proyecto. Spring elige siempre el manejador más específico, así que solo actúa cuando ningún otro coincide.`},
+
+{n:48,cap:"C08",src:"Ruleta 50",t:"¿Qué es una transacción y qué propiedades se buscan cuando varias operaciones deben confirmarse juntas?",
+corta:"Un conjunto de operaciones tratadas como una sola unidad: o se confirman todas o no queda ninguna. Las propiedades son ACID.",
+full:`<p>Una <b>transacción</b> agrupa operaciones que deben comportarse como una. Termina en <i>commit</i> (todo confirmado) o <i>rollback</i> (nada aplicado).</p>
+<ul>
+<li><b>Atomicidad</b> — todo o nada. Nunca queda media operación.</li>
+<li><b>Consistencia</b> — la base pasa de un estado válido a otro válido: las restricciones se cumplen al terminar.</li>
+<li><b>Aislamiento</b> — las transacciones concurrentes no se ven a medio camino.</li>
+<li><b>Durabilidad</b> — lo confirmado sobrevive a una caída del servidor.</li>
+</ul>
+<p>Sin atomicidad, un fallo a mitad de camino deja datos inconsistentes que nadie sabe cómo reparar.</p>`,
+cod:`En FitClub el caso claro llegaría al registrar una membresía <b>y</b> su histórico: si el segundo INSERT falla, el primero no debe quedar. Hoy <code>registrar</code> hace una sola escritura, así que la transacción existe pero casi no se nota.`},
+
+{n:49,cap:"C08",src:"Ruleta 50",t:"¿Qué hace @Transactional y por qué el límite transaccional va en el caso de uso y no en el Controller?",
+corta:"Abre una transacción al entrar al método y la confirma al salir bien; si sale una excepción no comprobada, hace rollback. Va en el caso de uso porque la unidad atómica es la operación de negocio.",
+full:`<p>Spring envuelve el bean en un proxy: al invocar el método anotado abre la transacción, y al terminar decide commit o rollback.</p>
+<p>Va en el caso de uso porque <b>quien conoce la unidad atómica es el negocio</b>. "Registrar una membresía" es una cosa completa; que haya llegado por HTTP es accidental.</p>
+<p>En el Controller hay dos problemas prácticos: la transacción quedaría abierta durante la serialización de la respuesta, ocupando una conexión más tiempo del necesario; y si el caso de uso se invocara desde otro lugar, se quedaría sin transacción.</p>
+<p>Reconocer el límite suma: en <code>registrar</code> hay una sola escritura, así que hoy la anotación casi no cambia nada. Se pone porque marca la frontera correcta y porque en cuanto haya dos escrituras pasa a ser indispensable.</p>`,
+cod:`<code>@Transactional</code> está sobre <code>registrar()</code> en <code>SocioService</code> y <code>MembresiaService</code>. No está en ningún Controller ni en ningún adaptador.`},
+
+{n:50,cap:"C08",src:"Ruleta 50",t:"Explique el flujo completo de error, incluyendo qué ocurre si el fallo viene de una constraint de PostgreSQL.",
+corta:"La excepción nace donde se detecta el problema, sube sin ser capturada, y el advice global la traduce a ApiError con el código correcto. Si viene de la base, Spring la traduce primero a DataIntegrityViolationException.",
+full:`<p><b>Caso A — regla de negocio</b> (<code>socioId: 9999</code>):</p>
+<ol>
+<li>Spring MVC enruta y <code>@Valid</code> pasa: 9999 es un <code>Long</code> válido.</li>
+<li>El caso de uso consulta, no encuentra y lanza <code>SocioNoEncontradoException</code>.</li>
+<li>La excepción sube sin ser capturada.</li>
+<li><code>GlobalExceptionHandler</code> la intercepta y construye un <code>ApiError</code> con <b>404</b>.</li>
+</ol>
+<p><b>Caso B — constraint de la base</b> (email duplicado):</p>
+<ol>
+<li>Formato y negocio pasan: no hay nada mal escrito ni ninguna regla previa que lo atrape.</li>
+<li>Hibernate ejecuta el INSERT.</li>
+<li>PostgreSQL lo rechaza: <code>duplicate key value violates unique constraint "socio_email_key"</code>.</li>
+<li>Spring traduce la excepción del driver a <code>DataIntegrityViolationException</code>.</li>
+<li>El advice la convierte en <b>409</b> con un mensaje legible; el cliente nunca ve el nombre de la constraint ni la traza.</li>
+</ol>
+<p>Que el mismo tipo de problema salga como 400, 404 o 409 según <b>dónde se detecte</b> es lo que demuestra entender las tres capas de validación.</p>`,
+cod:`Los dos casos están medidos en tu colección de Postman: <code>Crear membresía - socioId inexistente</code> → 404, 332 B; <code>Crear socio - email duplicado</code> → 409, 391 B. Antes del Capítulo 08 los dos eran 500 de 260 B.`},
+);
+</script>
+<script>
+// Bancos adicionales encontrados en los documentos del curso.
+const EX = [
+// --- Teoría Necesaria Cap. 04-08, Parte XX ---
+["C04","Teoría 04-08","¿Qué hace REST y qué hace HTTP?","HTTP es el protocolo de transporte: define métodos, códigos y formato del mensaje. REST es un estilo arquitectónico que <i>usa</i> la semántica de HTTP para modelar recursos. HTTP es el vehículo; REST, la forma de conducirlo.","Tus endpoints usan POST para crear y GET para consultar el mismo recurso <code>/api/socios</code>: eso es REST aprovechando HTTP."],
+["C04","Teoría 04-08","¿Qué hace @Valid y qué NO hace?","Dispara las anotaciones de Jakarta Validation del objeto anotado. <b>No</b> valida reglas de negocio, no consulta la base, no sabe si un socio existe. Sin <code>@Valid</code>, las anotaciones del DTO están escritas pero nunca se ejecutan.","<code>@Valid @RequestBody SocioRequestDTO</code> comprueba formato. Que el <code>socioId</code> exista lo comprueba <code>MembresiaService</code>, no <code>@Valid</code>."],
+["C04","Teoría 04-08","¿Por qué un POST de creación devuelve 201 y no siempre 200?","Porque 201 comunica algo que 200 no: se creó un recurso nuevo. El cliente sabe que hay una entidad con identidad propia, y el cuerpo trae su representación con el id. Usar 200 para todo le quita semántica a la respuesta.","<code>ResponseEntity.status(HttpStatus.CREATED).body(...)</code> en el <code>crear()</code> de tus dos Controllers."],
+["C04","Teoría 04-08","¿Qué diferencia hay entre Spring Framework y Spring Boot?","Spring Framework es el conjunto de librerías: contenedor IoC, MVC, transacciones, acceso a datos. Spring Boot es una capa encima que autoconfigura, trae servidor embebido y starters con versiones compatibles. Boot no reemplaza a Framework: lo hace arrancable sin configuración manual.","Tu <code>pom.xml</code> no declara versiones de las dependencias de Spring: eso lo resuelve el <code>spring-boot-starter-parent</code>. Y el Tomcat que arranca viene embebido por Boot."],
+["C06","Teoría 04-08","¿Qué problema resuelve IoC/DI?","El acoplamiento por construcción. Si una clase hace <code>new</code> de sus colaboradores, queda atada a implementaciones concretas y no se puede sustituir ni probar aisladamente. Con IoC el contenedor construye e inyecta, así la clase depende de interfaces y no de instancias.","Ninguna clase tuya hace <code>new SocioPersistenceAdapter()</code>. <code>SocioService</code> recibe un <code>SocioRepositoryPort</code> y no sabe quién lo implementa."],
+["C06","Teoría 04-08","¿Qué patrón representa el PersistenceAdapter?","El patrón <b>Adapter</b>: traduce una interfaz esperada por el núcleo (<code>SocioRepositoryPort</code>) a la interfaz de una tecnología concreta (<code>JpaRepository</code>). También participa del patrón <b>Repository</b>, porque abstrae el acceso a datos del agregado.","<code>SocioPersistenceAdapter implements SocioRepositoryPort</code> y por dentro usa <code>SpringDataSocioRepository</code> más el mapper."],
+["C08","Teoría 04-08","¿Por qué @Transactional debe delimitar un caso de uso y no un Controller?","Porque la unidad atómica es la operación de negocio, no la petición HTTP. En el Controller la transacción quedaría abierta durante la serialización y se perdería si el caso de uso se invoca por otro canal.","<code>@Transactional</code> está sobre <code>registrar()</code> en tus dos Services; en ningún Controller."],
+
+// --- Flujo HTTP Cap. 04 (presentación del profesor) ---
+["C04","Flujo HTTP","¿Qué diferencia hay entre el cliente HTTP y la entidad de dominio?","El cliente HTTP es quien envía la petición: Postman, un navegador, una app móvil. La entidad de dominio es un concepto del negocio dentro del backend. Que en ParkFlow ambos se llamen 'Cliente' es una coincidencia desafortunada del ejemplo.","En FitClub no hay ambigüedad: el cliente HTTP es Postman, y <code>Socio</code> es la entidad de dominio."],
+["C04","Flujo HTTP","¿Qué hace exactamente @RequestBody?","Le dice a Spring que lea el cuerpo de la petición y lo convierta, con Jackson, en una instancia del tipo del parámetro. Sin él, Spring no sabría que ese argumento viene del body y no de otra parte de la petición.","<code>@RequestBody SocioRequestDTO request</code> en <code>SocioController.crear()</code>."],
+["C04","Flujo HTTP","¿Qué ocurre si el DTO tiene @NotBlank pero falta @Valid?","Nada: las anotaciones no se ejecutan. La petición pasa con el campo vacío, se guarda un dato inválido y la API devuelve 201 como si todo estuviera bien. Es un fallo silencioso, peor que un error ruidoso.","Pruébalo quitando <code>@Valid</code> del Controller y mandando <code>\"nombre\": \"\"</code>: obtienes 201 y un socio sin nombre en la tabla."],
+["C04","Flujo HTTP","¿Por qué el Response DTO no debería ser la entidad de dominio completa?","Porque no todo lo interno debe salir, y porque el contrato externo quedaría atado al modelo interno: cualquier cambio del dominio rompería a los consumidores de la API sin previo aviso.","<code>SocioResponseDTO</code> expone cinco campos elegidos. Si mañana <code>Socio</code> ganara un campo interno, la API no cambiaría sola."],
+["C04","Flujo HTTP","¿Qué responsabilidad tiene el Controller y qué NO debe hacer?","Recibir, delegar y responder: leer los parámetros, activar la validación, llamar al caso de uso y elegir el código de estado. No debe contener SQL, ni instanciar entidades JPA, ni resolver reglas de negocio, ni repetir try/catch.","<code>SocioController</code> tiene tres métodos de tres líneas. Toda la lógica está detrás de <code>SocioUseCase</code>."],
+["C04","Flujo HTTP","¿Qué parte del flujo se reemplaza al entrar a JPA y PostgreSQL?","La lista en memoria del Service. El Controller, los DTOs y la validación quedan intactos: por eso el cambio de Capítulo 05 no obligó a tocar ni una línea del Controller.","Fue exactamente lo que pasó: <code>SocioService</code> cambió su <code>ArrayList</code> por un repositorio y <code>SocioController</code> siguió igual."],
+
+// --- Estructura hexagonal (presentación del profesor) ---
+["C06","Estructura","¿Por qué la clase de dominio vive en domain y no en web/dto?","Porque representa un concepto del negocio, no un contrato de transporte. En <code>web/dto</code> quedaría atada al formato de la API y cambiaría cada vez que cambie el contrato HTTP.","<code>Socio</code> está en <code>socio/domain/model</code> y no importa nada de Spring. Los DTOs, en <code>infrastructure/adapter/in/web/dto</code>."],
+["C06","Estructura","¿Por qué ApiError está en shared y no en un módulo?","Porque el formato de error es parte del contrato general de la API: no pertenece a socios ni a membresías. Centralizarlo evita que cada Controller invente su propio formato.","<code>com.fitclub.shared.infrastructure.web.ApiError</code>, usado por el advice global para 400, 404, 409 y 500."],
+["C06","Estructura","¿Qué error ocurre si se mezclan dominio e infraestructura?","El núcleo deja de poder probarse sin levantar el framework y la base; cualquier cambio técnico obliga a tocar el negocio; y se pierde la posibilidad de sustituir una tecnología. El síntoma visible es un <code>import</code> de infraestructura dentro de <code>domain</code>.","Revisa los imports de <code>Socio</code> y <code>Membresia</code>: solo <code>java.time</code> y <code>java.math</code>."],
+
+// --- Capítulo 04, guía del estudiante ---
+["C04","Guía Cap.04","¿Por qué elegiste esa entidad como padre?","Porque <code>Socio</code> existe por sí mismo y <code>Membresia</code> no: una membresía sin socio no significa nada, mientras que un socio sin membresías es perfectamente válido. La dependencia de existencia define quién es el padre.","<code>socio_id</code> es <code>NOT NULL</code> en <code>membresia</code>; no hay ninguna columna equivalente en <code>socio</code>."],
+["C04","Guía Cap.04","¿Cuál es la URL base de tu recurso y por qué?","<code>/api/socios</code>: prefijo <code>/api</code> para separar la API de cualquier contenido web, sustantivo en plural porque identifica una colección de recursos, y nombre del dominio en vez de un verbo.","<code>@RequestMapping(\"/api/socios\")</code> y <code>@RequestMapping(\"/api/membresias\")</code>."],
+["C04","Guía Cap.04","¿Qué validaciones elegiste y qué regla protege cada una?","<code>@NotBlank</code> en nombre, email y teléfono: ninguno tiene sentido vacío. <code>@Email</code>: el correo es el canal de contacto y el identificador único. <code>@Pattern</code> en teléfono: acota a dígitos y separadores. En Membresia, <code>@Pattern</code> acota el tipo a los tres planes que existen y <code>@Positive</code> impide precios negativos.","Cada una está en el Request DTO correspondiente, con su <code>message</code> propio para que el <code>fieldErrors</code> sea legible."],
+["C04","Guía Cap.04","¿Qué ocurre con tus datos si reinicias la aplicación?","En el Capítulo 04 se perdían todos: vivían en un <code>ArrayList</code> dentro del Service, es decir, en la memoria del proceso. Desde el Capítulo 05 sobreviven, porque están en <code>fitclub.socio</code>.","Compruébalo: crea un socio, reinicia desde IntelliJ y haz <code>GET /api/socios</code>. Sigue ahí."],
+["C04","Guía Cap.04","¿Dónde está el adaptador de entrada de tu módulo?","En <code>com.fitclub.socio.infrastructure.adapter.in.web</code>. Es el Controller: la forma concreta —HTTP— de entrar al sistema. Está en infraestructura porque el canal es un detalle técnico.","<code>SocioController.java</code>, junto a la carpeta <code>dto</code> y a <code>mapper</code>."],
+
+// --- Base de datos y esquema ---
+["C05","BD y esquema","¿Cuál es la diferencia fundamental entre una base de datos y un esquema?","La base de datos es el contenedor aislado: desde una conexión a una base no se ven las tablas de otra. El esquema es un espacio de nombres <i>dentro</i> de una base, que agrupa tablas y permite que convivan objetos con el mismo nombre en grupos distintos.","Tu base es <code>pruebafitclub</code> y tu esquema <code>fitclub</code>. La URL de conexión nombra la base; <code>hibernate.default_schema</code> nombra el esquema."],
+["C05","BD y esquema","¿Qué es el esquema public?","El esquema por defecto que PostgreSQL crea en cada base nueva. Si no indicas otro, todo se crea ahí. No tiene nada de especial salvo que está en el <code>search_path</code> por defecto.","Tus tablas <b>no</b> están en <code>public</code>. Cuando faltaba <code>default_schema</code>, Hibernate las buscó ahí y el arranque falló con <code>missing table [fitclub.socio]</code>."],
+["C05","BD y esquema","¿Qué función cumple search_path?","Es la lista ordenada de esquemas donde PostgreSQL busca un nombre de tabla cuando no lo calificas. Si escribes <code>SELECT * FROM socio</code>, el motor recorre el search_path hasta encontrarla.","Por eso en las guías las consultas van siempre calificadas: <code>fitclub.socio</code>. Así no dependen de la configuración de la sesión."],
+["C05","BD y esquema","¿Cómo verificas en SQL qué base y esquema está usando tu consola?","<code>SELECT current_database(), current_schema();</code> Es la comprobación que evita la trampa de DataGrip: el selector de la consola es independiente del Data Source bajo el que la abriste.","Nos costó dos veces: el DDL se ejecutó contra <code>postgres</code> mientras la pestaña decía <code>pruebafitclub</code>."],
+["C05","BD y esquema","¿Cuándo conviene un esquema adicional en vez de otra base de datos?","Cuando los datos tienen que consultarse juntos. Entre esquemas de una misma base se puede hacer JOIN y compartir transacción; entre bases distintas, no. Otra base se justifica cuando el aislamiento debe ser total.","Socios y membresías se consultan con JOIN todo el tiempo, así que tenían que estar en la misma base."],
+
+// --- DataGrip / PostgreSQL ---
+["C05","DataGrip","¿Cuál es la diferencia entre PostgreSQL y DataGrip?","PostgreSQL es el motor de base de datos: el proceso que guarda los datos y ejecuta el SQL. DataGrip es un cliente: una herramienta gráfica para conectarse, escribir consultas e inspeccionar. Si cierras DataGrip, la base sigue corriendo.","Tu aplicación Spring nunca habla con DataGrip: habla con PostgreSQL por JDBC. DataGrip es solo tu ventana para mirar."],
+["C05","DataGrip","¿Qué diferencia hay entre un rol y una base de datos?","Un rol es una identidad (usuario o grupo) que se autentica y tiene permisos. Una base de datos es un contenedor de datos. Un rol puede ser dueño de varias bases; una base tiene un dueño.","<code>pruebafitclub_admin</code> es el rol; <code>pruebafitclub</code> la base, y ese rol es su <code>OWNER</code>."],
+["C05","DataGrip","¿Qué hace LOGIN en CREATE ROLE y qué permite CREATEDB?","<code>LOGIN</code> permite que el rol se conecte; sin él existe pero no puede autenticarse, y es el error más común al crear usuarios. <code>CREATEDB</code> le permite crear bases de datos.","Tu rol se creó con <code>WITH LOGIN PASSWORD 'fitclub123' CREATEDB</code>."],
+["C05","DataGrip","¿Por qué SUPERUSER no es recomendable para el backend de una aplicación?","Porque ignora todas las comprobaciones de permisos: puede leer, modificar y borrar cualquier cosa del servidor, incluidas otras bases. Si la aplicación se ve comprometida, el atacante hereda ese poder. El principio es el de mínimo privilegio.","<code>pruebafitclub_admin</code> no es superusuario. El superusuario <code>postgres</code> se usó solo para crear el rol y la base, y para reparar la contraseña."],
+["C05","DataGrip","¿Por qué conectarse primero a la base postgres para crear la tuya?","Porque para ejecutar <code>CREATE DATABASE</code> hay que estar conectado a alguna base, y la que quieres crear todavía no existe. <code>postgres</code> es la base administrativa que siempre está.","Es también la salida a la trampa circular de la contraseña: para reparar un acceso roto necesitas un camino de acceso que funcione."],
+["C05","DataGrip","¿Qué indica current_user y qué indica current_database()?","<code>current_user</code> devuelve el rol con el que estás autenticado en esa sesión; <code>current_database()</code>, la base a la que estás conectado. Son preguntas distintas y las dos importan antes de ejecutar DDL.","Junto con <code>current_schema()</code> forman la comprobación de tres líneas que evita ejecutar el DDL en el lugar equivocado."],
+
+// --- Clean Code / arquitectura ---
+["C06","Clean Code","¿Cuál es la diferencia entre inyección de dependencias e inversión de dependencias?","La inversión (DIP) es un principio de diseño: depender de abstracciones y no de implementaciones. La inyección (DI) es una técnica para entregar dependencias ya construidas. Se puede inyectar sin invertir —inyectar una clase concreta— y se puede invertir sin un contenedor.","Tú haces las dos: inyectas por constructor (DI) un <code>SocioRepositoryPort</code> que es una abstracción definida por el núcleo (DIP)."],
+["C06","Clean Code","¿Qué parte de la aplicación debería contener las reglas de negocio?","El dominio y la capa de aplicación. El dominio, las reglas propias de una entidad; la aplicación, las que involucran a varias o requieren consultar el estado del sistema. Nunca el Controller ni el adaptador de persistencia.","\"Una membresía debe pertenecer a un socio existente\" está en <code>MembresiaService</code>, no en el Controller."],
+["C06","Clean Code","¿Qué sucede si las entidades conocen detalles de base de datos?","El núcleo queda atado al almacenamiento: no se puede probar sin base, cualquier cambio de esquema obliga a tocar el negocio, y la tecnología de persistencia se vuelve imposible de sustituir.","Es exactamente por eso que <code>Socio</code> y <code>SocioJpaEntity</code> son clases distintas."],
+["C06","Clean Code","¿Qué es un límite arquitectónico y qué protege?","Una frontera donde se corta la dependencia entre dos partes que cambian por razones distintas. Protege al lado estable del inestable: lo que cruza es una abstracción definida por el lado que hay que proteger.","Tus límites son los puertos. <code>SocioRepositoryPort</code> separa la aplicación de la persistencia; <code>SocioUseCase</code> separa la web de la aplicación."],
+["C06","Clean Code","¿Cómo probarías un caso de uso sin base de datos real?","Escribiendo una implementación falsa del Port OUT que guarde en una lista en memoria, y pasándosela al Service por constructor. No hace falta Spring ni PostgreSQL: por eso el puerto se define desde el núcleo.","<code>SocioService</code> recibe un <code>SocioRepositoryPort</code>. Una clase de prueba que implemente esa interfaz con un <code>ArrayList</code> basta."],
+["C06","Clean Code","¿Por qué “usar muchas capas” no garantiza una buena arquitectura?","Porque lo que importa es la <b>dirección</b> de las dependencias, no la cantidad de carpetas. Se pueden tener cinco capas que dependan todas de JPA. El propio profesor lo marca como error: confundir arquitectura hexagonal con crear interfaces y carpetas sin una dependencia real que invertir.","La prueba en tu proyecto no es el árbol de paquetes: es la lista de imports de <code>SocioService</code>."],
+
+// --- Git ---
+["C04","Git","¿Qué diferencia existe entre git add y git commit?","<code>add</code> mueve cambios al área de preparación (staging): eliges qué entra en el próximo commit. <code>commit</code> registra ese conjunto en el historial con un mensaje y un autor. Preparar no es registrar.","Por eso los commits del proyecto son pequeños y por capítulo: <code>feat: add JPA persistence for socio</code>."],
+["C04","Git","¿Cuál es la diferencia entre commit y push?","<code>commit</code> registra en tu repositorio local; <code>push</code> envía esos commits al remoto. Puedes tener diez commits que nadie más ve hasta que haces push.","La guía del curso exige que el trabajo esté en el repositorio remoto: un commit local no es evidencia entregada."],
+["C04","Git","¿Por qué agregar .env a .gitignore no resuelve un secreto ya publicado?","Porque <code>.gitignore</code> solo evita que se añadan archivos <i>nuevos</i>. Un secreto ya versionado sigue en el historial y puede recuperarse de cualquier commit anterior. Hay que rotar la credencial, además de limpiar el historial.","Aplica a <code>spring.datasource.password</code>: si se versionara en un proyecto real, cambiar el archivo no bastaría."],
+
+// --- Ficha oficial PA-08 FitClub ---
+["C08","Ficha PA-08","¿Qué regla de negocio del proyecto considera más crítica y dónde está implementada?","En el alcance construido, que una membresía pertenezca a un socio existente: sin ella la base acumularía membresías huérfanas y todo reporte de ocupación sería falso. Está en <code>MembresiaService.registrar()</code>, con la FK como respaldo.","<code>socioUseCase.buscarPorId(...).orElseThrow(new SocioNoEncontradoException(...))</code>, más <code>REFERENCES fitclub.socio(id)</code> en el DDL."],
+["C08","Ficha PA-08","¿Qué restricción existe también en base de datos y por qué no basta validarla en el cliente?","El <code>UNIQUE</code> sobre <code>email</code>. No basta validarla en el frontend porque el cliente es código que corre en la máquina del usuario: se puede saltar, modificar o simplemente no usar. Cualquiera puede llamar a la API directamente con Postman.","El backend es la autoridad final, y la base la última barrera. Es lo que pide el requisito RF-03 de la ficha oficial."],
+["C08","Ficha PA-08","Muestre un endpoint con su DTO, caso de uso, puerto y adaptador de persistencia.","<code>POST /api/membresias</code> → <code>MembresiaRequestDTO</code> → <code>MembresiaWebMapper</code> → <code>MembresiaUseCase</code> → <code>MembresiaService</code> → <code>MembresiaRepositoryPort</code> → <code>MembresiaPersistenceAdapter</code> → <code>MembresiaPersistenceMapper</code> → <code>MembresiaJpaEntity</code> → <code>SpringDataMembresiaRepository</code>.","Ten esa cadena de diez nombres lista: es la respuesta a media docena de preguntas distintas."],
+["C08","Ficha PA-08","¿Qué decisión técnica cambiaría si el sistema creciera cien veces y cuál no?","Cambiarían: paginación obligatoria en los listados (hoy <code>findAll</code> trae todo), índices sobre las columnas de búsqueda, y caché para consultas repetidas. No cambiaría la arquitectura de puertos y adaptadores: justamente permite cambiar la implementación de persistencia sin tocar el negocio.","<code>listar()</code> hoy devuelve la tabla entera. Con cien mil socios, ese es el primer punto que rompe."],
+["C08","Ficha PA-08","Abra el historial de Git y explique una contribución propia y una de otro integrante.","Requiere preparación previa: revisa <code>git log</code> antes del examen, elige un commit tuyo que puedas explicar línea por línea y uno de un compañero cuyo propósito entiendas. La guía dice que desconocer lo hecho por otro <b>no es justificación válida</b>.","Es el punto 11 de la preparación oficial: \"explique al menos una decisión técnica que usted no haya tomado personalmente\"."],
+
+// --- Guía Formal, sección 12 ---
+["C06","Guía Formal","¿Qué problema resuelve este módulo y qué queda fuera de su responsabilidad?","El módulo <code>socio</code> resuelve el alta y la consulta de socios. Fuera quedan: los planes, la vigencia de la membresía, las reservas y la asistencia. No conoce reglas de membresías; si necesita algo de otro módulo, entra por su caso de uso público.","Los paquetes son la frontera: <code>com.fitclub.socio</code> y <code>com.fitclub.membresia</code> no comparten clases salvo por <code>SocioUseCase</code>."],
+["C05","Guía Formal","¿Qué constraint impide que la base llegue a un estado inválido?","Cuatro tipos, cada uno protege algo distinto: <code>NOT NULL</code> impide registros incompletos; <code>UNIQUE</code> impide duplicados prohibidos por el negocio; <code>FOREIGN KEY</code> impide referencias huérfanas; <code>CHECK</code> impide valores fuera del dominio permitido.","En tu esquema: <code>NOT NULL</code> en todas las columnas, <code>UNIQUE</code> en <code>socio.email</code> y <code>FOREIGN KEY</code> en <code>membresia.socio_id</code>."],
+["C05","Guía Formal","¿Qué diferencia existe entre una PK, una FK y una restricción UNIQUE?","La <b>PK</b> identifica la fila: única, no nula, una por tabla, y es a la que apuntan las FK. El <b>UNIQUE</b> también impide duplicados pero admite nulos (salvo que se declare <code>NOT NULL</code>) y puede haber varios por tabla. La <b>FK</b> no impide duplicados: obliga a que el valor exista en otra tabla.","<code>socio.id</code> es PK, <code>socio.email</code> es UNIQUE + NOT NULL, <code>membresia.socio_id</code> es FK."],
+["C05","Guía Formal","¿Qué consulta SQL usaría para obtener este dato y por qué?","Para ver las membresías con el nombre de su socio, un JOIN por la FK: <code>SELECT m.*, s.nombre FROM fitclub.membresia m JOIN fitclub.socio s ON s.id = m.socio_id;</code> La condición <code>ON</code> es exactamente la FK: une cada hija con su padre.","Si cambias <code>JOIN</code> por <code>LEFT JOIN</code> el resultado es idéntico, porque <code>socio_id</code> es <code>NOT NULL</code>: no hay membresías sin socio."],
+["C08","Guía Formal","¿Qué cambia si esta operación se ejecuta fuera de una transacción?","Con una sola escritura, nada visible: una sentencia ya es atómica. Con dos o más, el fallo de la segunda dejaría la primera confirmada, y la base quedaría en un estado que ninguna regla de negocio admite.","Hoy <code>registrar()</code> hace una escritura. La anotación está puesta para marcar la frontera antes de que haga falta."],
+["C06","Guía Formal","¿Qué dependencia evita un puerto en esta parte de la arquitectura?","<code>SocioRepositoryPort</code> evita que la capa de aplicación dependa de Spring Data JPA y, a través de ella, de Hibernate y del modelo de tablas. <code>SocioUseCase</code> evita que la capa web dependa de la clase concreta del servicio.","Cambiar PostgreSQL por otra cosa tocaría entidad, mapper, repositorio y adaptador. No tocaría dominio, puertos, Service, Web Mapper, DTOs ni Controller."],
+["C05","Guía Formal","¿Qué problema produciría una consulta N+1 en esta funcionalidad?","Listar N membresías dispararía 1 consulta para la lista más N para traer cada socio. Con 1.000 membresías son 1.001 viajes a la base: el tiempo de respuesta crece linealmente con los datos y la conexión se satura.","Se evita con <code>FetchType.LAZY</code> en <code>MembresiaJpaEntity.socio</code>, porque el mapeo solo lee <code>getSocio().getId()</code>, que el proxy resuelve sin consultar."],
+["C08","Guía Formal","¿Cómo se comunica un error de validación al cliente?","Spring lanza <code>MethodArgumentNotValidException</code>, el advice global la intercepta, recorre los <code>FieldError</code> y construye un <code>ApiError</code> con status 400 y la lista <code>fieldErrors</code>, con un mensaje por campo.","El resultado es un JSON con <code>\"fieldErrors\": [\"email: El email debe tener un formato válido\"]</code>: el frontend puede marcar el campo exacto."],
+["C08","Guía Formal","Si este compañero no estuviera presente, ¿podría ejecutar y explicar esta funcionalidad?","La respuesta tiene que ser sí, y prepararla exige hablar con el equipo antes. La guía dice que la falta de conocimiento de una parte desarrollada por otro integrante <b>no es una justificación válida</b> en una defensa individual.","Es el 25% del criterio \"comprensión del proyecto completo\": se evalúa sobre el proyecto real del equipo, no solo sobre lo que construiste tú."],
+];
+EX.forEach((e,i)=>Q.push({n:100+i,cap:e[0],src:e[1],t:e[2],corta:e[3],full:"",cod:e[4]}));
+</script>
+<script>
+const RUBRICA = [
+ ["Comprensión conceptual",25,20,"Define y relaciona correctamente los conceptos técnicos presentes en el avance."],
+ ["Comprensión del proyecto completo",25,20,"Recorre flujo, módulos, datos y decisiones aunque no haya implementado personalmente cada parte."],
+ ["Capacidad práctica",20,16,"Ejecuta, consulta, localiza, modifica o demuestra elementos concretos sin depender de otro integrante."],
+ ["Justificación de decisiones",15,12,"Explica por qué se eligió una solución y reconoce alternativas, límites y consecuencias."],
+ ["Diagnóstico y razonamiento",15,12,"Interpreta errores, propone causas, pruebas y correcciones razonables en lugar de adivinar."],
+];
+
+const TRAD = [
+ ["Cliente (entidad padre)","Socio"],["Vehiculo (dependiente)","Membresia"],["cliente_id","socio_id"],
+ ["POST /api/clientes","POST /api/socios"],["POST /api/vehiculos","POST /api/membresias"],
+ ["ClienteJpaEntity","SocioJpaEntity"],["ClienteRepositoryPort","SocioRepositoryPort"],
+ ["ClientePersistenceAdapter","SocioPersistenceAdapter"],["ConsultarClienteUseCase","SocioUseCase"],
+ ["“placa duplicada”","“email duplicado”"],["ClienteNoEncontradoException","SocioNoEncontradoException"],
+ ["ApiErrorResponse (shared/web)","ApiError (shared/infrastructure/web)"],
+ ["base parkflow360, schema parkflow","base pruebafitclub, schema fitclub"],
+];
+
+const FLUJO_OK = [
+ "Postman envía <b>POST http://localhost:8080/api/socios</b> con <code>Content-Type: application/json</code> y un body JSON.",
+ "Tomcat recibe la conexión; <b>Spring MVC</b> enruta hacia <code>SocioController</code> por <code>@RestController</code>, <code>@RequestMapping</code> y <code>@PostMapping</code>.",
+ "<code>@RequestBody</code> hace que <b>Jackson</b> deserialice el JSON en un <code>SocioRequestDTO</code>.",
+ "<code>@Valid</code> ejecuta <b>Jakarta Validation</b>: <code>@NotBlank</code>, <code>@Email</code>, <code>@Pattern</code>. Si algo falla, la petición no entra al caso de uso.",
+ "<code>SocioWebMapper.toDomain()</code> traduce el DTO al dominio <code>Socio</code>, poniendo <code>fechaRegistro = LocalDate.now()</code>.",
+ "El Controller invoca <code>socioUseCase.registrar(socio)</code> — depende del <b>Port IN</b>, no de la clase concreta.",
+ "<code>SocioService</code> implementa ese puerto y ejecuta las reglas de aplicación.",
+ "El Service llama a <code>socioRepositoryPort.guardar(socio)</code> — el <b>Port OUT</b>, una interfaz del dominio.",
+ "<code>SocioPersistenceAdapter</code> lo implementa: es el <b>Adapter OUT</b>.",
+ "<code>SocioPersistenceMapper.toEntity()</code> traduce el dominio a <code>SocioJpaEntity</code>.",
+ "<code>SpringDataSocioRepository.save()</code> entra en <b>JPA</b>; <b>Hibernate</b> genera el SQL.",
+ "Hibernate ejecuta por <b>JDBC</b>: <code>insert into fitclub.socio (email, fecha_registro, nombre, telefono) values (?, ?, ?, ?)</code>.",
+ "<b>PostgreSQL</b> valida <code>NOT NULL</code>, <code>UNIQUE</code> y la PK, inserta la fila y devuelve el <code>id</code> generado.",
+ "El camino se recorre al revés: entidad → <code>toDomain()</code> → dominio → <code>toResponseDTO()</code> → DTO de salida.",
+ "<code>ResponseEntity.status(201)</code> devuelve <b>201 Created</b> y Jackson serializa el DTO a JSON.",
+];
+
+const FLUJO_ERR = [
+ "Postman envía el POST con <code>\"socioId\": 9999</code>.",
+ "Spring MVC enruta hacia <code>MembresiaController</code>.",
+ "<code>@RequestBody</code> arma el DTO; <code>@Valid</code> lo valida y <b>pasa</b>: 9999 es un <code>Long</code> perfectamente válido. La validación de formato no puede detectar este problema.",
+ "El Controller traduce a dominio y llama al Port IN.",
+ "<code>MembresiaService</code> consulta <code>socioUseCase.buscarPorId(9999)</code> — al módulo Socio por su <b>caso de uso público</b>, no por su repositorio.",
+ "Devuelve <code>Optional.empty()</code>; el <code>orElseThrow</code> lanza <code>SocioNoEncontradoException</code>, que <b>no sabe nada de HTTP</b>.",
+ "La excepción sube por las capas sin que nadie la capture.",
+ "<code>GlobalExceptionHandler</code>, anotado con <code>@RestControllerAdvice</code>, la intercepta con su <code>@ExceptionHandler</code>.",
+ "Construye un <code>ApiError</code> con <code>status 404</code>, <code>message</code>, <code>path</code> y <code>timestamp</code>.",
+ "El cliente recibe <b>404</b> con JSON estructurado, no un volcado de excepción.",
+];
+
+const CODIGOS = [
+ ["201","ok","Se creó un recurso nuevo","POST /api/socios válido","Tu Controller: <code>ResponseEntity.status(CREATED)</code>"],
+ ["200","ok","Consulta exitosa con cuerpo","GET /api/socios","Spring, al devolver el objeto"],
+ ["400","warn","El cliente mandó algo mal formado","email sin arroba, tipo fuera de la lista","Spring por <code>@Valid</code> → tu advice lo formatea"],
+ ["404","warn","El recurso no existe","GET /api/socios/9999; socioId inexistente","Tu excepción de dominio → advice"],
+ ["409","warn","Conflicto con el estado actual","email ya registrado","PostgreSQL (UNIQUE) → Spring → advice"],
+ ["500","bad","Falló el servidor: culpa nuestra","cualquier cosa no prevista","El catch-all del advice"],
+];
+
+const DECISIONES = [
+ ["Schema propio fitclub en vez de public","C05",
+  "Dejar todo en public · un schema propio · una base por módulo",
+  "Alinea el proyecto con el ejemplo del profesor (base parkflow360, schema parkflow), separa las tablas de cualquier otra cosa en esa base y obliga a configurar default_schema, que es un concepto evaluable.",
+  "Una configuración más que puede olvidarse; cuando se olvida, el error dice “missing table” en vez de “te falta default_schema”. Nos costó tiempo real.",
+  "Para una aplicación única sin nada más en esa base, public habría sido defendible. Bases separadas por módulo sería excesivo: perderías el JOIN entre socios y membresías."],
+ ["ddl-auto=validate en vez de update","C05",
+  "create · create-drop · update · validate · none",
+  "El modelo relacional se diseñó primero y con criterio: la base es la fuente de verdad y el código se adapta a ella. validate respeta esa jerarquía y avisa al arrancar si ambos se desalinean.",
+  "Cada cambio de modelo exige dos pasos: el DDL y luego la entidad. No se puede “probar rápido” un campo nuevo desde Java.",
+  "update es el más peligroso porque parece inofensivo: modifica el esquema por su cuenta, nunca borra y acumula columnas huérfanas. En un prototipo desechable sí ahorraría tiempo."],
+ ["Dominio y entidad JPA como clases separadas","C05",
+  "Una sola clase con @Entity · dos clases con un mapper",
+  "El dominio expresa el negocio y la entidad una tabla: cambian por razones distintas. Además JPA impone constructor vacío, nada final y proxies, que contaminarían un modelo que debería ser Java puro.",
+  "Una clase más y un mapper por entidad, sincronizados a mano. En un CRUD de dos entidades el costo se siente más que el beneficio.",
+  "Se justifica de verdad cuando el dominio gana reglas propias o cuando tabla y concepto dejan de parecerse. Reconocer ese costo es mejor defensa que repetir el dogma."],
+ ["Un Port IN por entidad, no uno por caso de uso","C06",
+  "SocioUseCase con tres métodos · RegistrarSocioUseCase + ConsultarSocioUseCase por separado",
+  "Con tres operaciones CRUD, tres interfaces de un método es más ceremonia que diseño. La regla que importa —que el Controller dependa de una abstracción— se cumple igual.",
+  "Se pierde granularidad: un cliente que solo consulta recibe también la capacidad de registrar.",
+  "Con ocho o diez operaciones, o con actores que necesiten subconjuntos distintos, separar por caso de uso valdría la pena. Es la forma que muestra el profesor y escala mejor."],
+ ["getReferenceById en vez de findById en el adaptador","C07",
+  "findById(...).orElseThrow(...) · getReferenceById(...)",
+  "Para construir la FK solo hace falta la referencia, no los datos. getReferenceById devuelve un proxy sin ejecutar SELECT, y la existencia del socio ya la validó el Service.",
+  "Si el id no existiera, el fallo aparecería tarde, al hacer flush, como violación de FK y con peor mensaje. Depende de que la validación previa exista.",
+  "Es una optimización que crea una dependencia implícita entre capas: el adaptador asume algo que garantiza la aplicación. Consciente y documentada, pero implícita."],
+ ["Sin @OneToMany en SocioJpaEntity","C07",
+  "Relación unidireccional · bidireccional con colección en el padre",
+  "La relación ya queda representada desde el lado dependiente. Una colección bidireccional hay que sincronizarla a mano en los dos lados e invita a cargar todas las membresías al tocar un socio.",
+  "No se puede escribir socio.getMembresias(): hay que ir por membresiaRepository.findBySocioId(id).",
+  "La guía pide explícitamente no agregarla sin justificación. Se agregaría cuando exista un caso de uso real y repetido de “socio con sus membresías”."],
+ ["FetchType.LAZY en vez de EAGER","C07",
+  "EAGER (el valor por defecto de @ManyToOne) · LAZY",
+  "Casi ninguna operación sobre membresías necesita los datos del socio. Con EAGER, listar cien membresías dispara cien consultas extra: el problema N+1.",
+  "LazyInitializationException si accedes al socio fuera de la sesión. Obliga a resolver el mapeo dentro del adaptador.",
+  "Se sostiene junto con open-in-view=false: sin él, LAZY funcionaría pero por el motivo equivocado, con la sesión abierta hasta el final de la petición."],
+ ["DTOs como clases en vez de record","C04",
+  "record (lo que usa el profesor) · clase con constructor, getters y setters",
+  "Jackson deserializa una clase con constructor vacío y setters sin configuración adicional.",
+  "Verbosidad y mutabilidad innecesaria: un DTO de entrada no debería poder cambiar después de llegar.",
+  "El record es el argumento más fuerte: inmutable, sin setters, con equals y hashCode generados y un tercio de las líneas. Lo que no se puede es desconocerlo — el profesor le dedica una presentación entera."],
+ ["Excepciones de dominio propias en vez de NoSuchElementException","C08",
+  "NoSuchElementException del JDK · una excepción por entidad · una genérica RecursoNoEncontradoException",
+  "El nombre comunica el problema del dominio. Y sobre todo: NoSuchElementException puede venir de cualquier Optional.get() mal usado, así que mapearla a 404 convertiría un bug interno en un inocente “no encontrado”.",
+  "Una clase por entidad y una línea más en el @ExceptionHandler. Barato.",
+  "Una genérica evitaría clases, pero pierde precisión: no podrías tratar distinto un socio inexistente de una membresía inexistente si hiciera falta."],
+ ["Un solo @RestControllerAdvice global","C08",
+  "try/catch en cada Controller · un advice por módulo · uno global",
+  "El formato de error es parte del contrato general de la API, no de un módulo. Centralizarlo garantiza que todos los endpoints respondan igual.",
+  "Un punto único que conoce excepciones de todos los módulos. Con veinte módulos esa lista de imports se vuelve incómoda.",
+  "Escalaría con una excepción base común que las demás extiendan, y el advice manejando solo la base. Con dos módulos habría sido complejidad anticipada."],
+ ["@Transactional en el caso de uso, no en el Controller","C08",
+  "Controller · Service · adaptador · ninguna parte",
+  "La unidad atómica es la operación de negocio, y quien la conoce es el caso de uso. En el Controller la transacción quedaría abierta durante la serialización y se perdería si el caso de uso se invoca por otro canal.",
+  "Hoy registrar() hace una sola escritura, así que la anotación casi no cambia nada.",
+  "Decir “hoy es casi decorativa, la puse porque marca la frontera correcta” demuestra más comprensión que afirmar que es imprescindible."],
+ ["springdoc-openapi 3.1.1 y no 2.5.0","Extra",
+  "Copiar la versión del compañero (2.5.0) · verificar la compatible",
+  "springdoc tiene versionado propio: la línea 2.x es para Spring Boot 3.x y la 3.x para Spring Boot 4.x. Este proyecto usa Boot 4.1.1.",
+  "Nada: es la versión correcta. El costo fue el minuto de verificarlo.",
+  "La lección general vale más que el dato: una dependencia externa no se copia de otro proyecto sin comprobar contra qué versión del framework está construida."],
+ ["Proyecto de práctica aparte en vez del FitClub real","Extra",
+  "Implementar los capítulos 04-08 en el repositorio del equipo · un proyecto de práctica con dos entidades",
+  "Permite equivocarse sin romper el repositorio del equipo ni ensuciar su historial, y reduce el problema al mínimo que permite ver el patrón completo.",
+  "El proyecto real tiene diez entidades y partes hechas por otros. La rúbrica evalúa la comprensión del proyecto completo, incluido lo que no implementaste tú.",
+  "Practicar aparte prepara para explicar tu parte y el patrón general, pero no sustituye conocer el código del equipo. Vale reconocerlo antes de que lo note el docente."],
+];
+
+const METODO = [
+ "<b>Lee el mensaje completo.</b> No la primera línea: baja hasta el <code>Caused by:</code> final, y busca la línea que menciona una clase tuya.",
+ "<b>Ubica la capa.</b> ¿Al arrancar (configuración o esquema)? ¿Al recibir la petición (validación o mapeo)? ¿Al guardar (persistencia o constraints)?",
+ "<b>Formula una hipótesis concreta</b>, no un presentimiento. “Hibernate busca la tabla en public y está en fitclub” es una hipótesis; “algo está mal con la base” no.",
+ "<b>Diséñale una prueba barata.</b> <code>SELECT current_database()</code>, un <code>Ctrl+N</code> para contar clases, comentar una línea. Que confirme o descarte en un minuto.",
+ "<b>Corrige la causa, no el síntoma.</b> Si la tabla está en la base equivocada, la solución no es cambiar ddl-auto a update para que la cree.",
+];
+
+const DIAG = [
+ ["Schema-validation: missing table [fitclub.socio]","Arranque",
+  "Las tablas se crearon en otra base · falta <code>hibernate.default_schema</code> · el <code>@Table</code> tiene mal el schema · la URL apunta a otra base.",
+  "Busca en el log la línea <code>Default catalog/schema: pruebafitclub/public</code>. Si dice <code>public</code>, falta la propiedad. En DataGrip: <code>SELECT current_database(), table_schema FROM information_schema.tables WHERE table_name='socio';</code>",
+  "Agregar <code>default_schema</code>, recrear las tablas en la base correcta o corregir <code>@Table</code>. <b>Nunca</b> cambiar ddl-auto a update para que Hibernate la cree: eso esconde el problema y duplica tablas."],
+ ["El DDL se ejecutó en la base equivocada","DataGrip",
+  "El selector de base y schema de la consola (arriba a la derecha) es <b>independiente</b> del Data Source bajo el que la abriste. La pestaña puede decir <code>pruebafitclub</code> y el SQL correr contra <code>postgres</code>.",
+  "<code>SELECT current_database(), current_schema();</code> en la misma consola donde corriste el DDL.",
+  "Cambiar el selector, verificar otra vez y recrear. Limpiar lo que quedó en la base equivocada con <code>DROP SCHEMA fitclub CASCADE;</code>. Nos pasó dos veces."],
+ ["password authentication failed for user","Conexión",
+  "El instinto es correr <code>ALTER ROLE ... WITH PASSWORD</code>, pero si esa consola usa la conexión rota no puede ejecutarse: estás intentando autenticarte con las credenciales que quieres arreglar.",
+  "Mira desde qué conexión se ejecutó realmente el ALTER. Si fue desde la conexión rota, no cambió nada.",
+  "Crear un Data Source nuevo con el superusuario <code>postgres</code> sobre la base <code>postgres</code>, y desde ahí ejecutar el ALTER ROLE. Para arreglar un acceso roto hace falta un camino de acceso que funcione."],
+ ["Package name X does not correspond to the file path Y","IntelliJ",
+  "El archivo está físicamente en una carpeta distinta de la que declara su <code>package</code>. Pasa al crear una clase con la carpeta equivocada seleccionada, típicamente <code>dto</code>.",
+  "El mensaje da las dos rutas. Localiza el archivo en el panel Project y compara.",
+  "<code>Refactor → Move Class...</code> (F6) al paquete correcto. No arrastres el archivo ni edites la línea <code>package</code> a mano."],
+ ["Duplicate class / una clase que “desapareció”","IntelliJ",
+  "Pegaste el contenido de una clase encima de otra: el archivo se llama <code>A.java</code> pero contiene la clase <code>B</code>.",
+  "<b>Ctrl+N y cuenta los resultados.</b> Uno es normal; dos con el mismo paquete significa duplicada; <b>cero</b> significa que la clase ya no existe. Así encontramos que <code>PruebaFitclubApplication</code> daba 0 resultados.",
+  "Abrir por Ctrl+N el archivo correcto, <b>verificar el nombre de la pestaña antes de pegar</b>, y restaurar cada contenido en su archivo."],
+ ["no suitable constructor found / cannot find symbol getX()","Compilación",
+  "La clase no tiene la forma que crees: agregaste un campo y actualizaste el getter pero no el constructor, o actualizaste el archivo equivocado.",
+  "Abre la clase del error y cuenta los parámetros del constructor contra los de la firma esperada que muestra el mensaje.",
+  "Alinear la clase. Al agregar un campo revisa los cuatro lugares: campo, constructor, getter y setter."],
+ ["415 Unsupported Media Type en Postman","Petición",
+  "Falta el header <code>Content-Type: application/json</code>. Spring no sabe cómo interpretar el cuerpo y <code>@RequestBody</code> no puede construir el DTO.",
+  "Pestaña Headers de Postman: comprueba si el header está.",
+  "En Body elegir <b>raw</b> y luego <b>JSON</b>: Postman agrega el header solo."],
+ ["Un 404 correcto por la razón equivocada","Petición",
+  "La URL está mal escrita —<code>/api/socio/999</code> en singular— y Spring devuelve su página de error por defecto para una ruta inexistente. No es tu <code>buscarPorId</code> respondiendo.",
+  "Lee la URL entera, letra por letra. Compara el tamaño de la respuesta: un 404 de ruta inexistente no trae tu <code>ApiError</code>.",
+  "Corregir la URL. Una prueba que pasa por el motivo equivocado no prueba nada."],
+ ["rejected value [null] en un campo obligatorio","Validación",
+  "El JSON enviado no traía ese campo con ese nombre exacto. Jackson distingue mayúsculas: <code>socioId</code> ≠ <code>socioid</code> ≠ <code>socio_id</code>.",
+  "Compara el JSON de Postman carácter por carácter con el nombre del atributo del DTO.",
+  "Corregir el nombre en el JSON. Caso hermano: si las anotaciones no se ejecutan en absoluto, falta <code>@Valid</code> en el parámetro del Controller."],
+ ["duplicate key value violates unique constraint","Persistencia",
+  "Estás insertando un valor que ya existe en una columna UNIQUE. <b>No es un bug</b>: es la base protegiendo una regla de negocio.",
+  "Busca el valor en la tabla: <code>SELECT * FROM fitclub.socio WHERE email = '...';</code>",
+  "Si es una prueba repetible, usa datos variables. Si es el flujo real, tu API debe responder <b>409</b> — eso hace el <code>@ExceptionHandler(DataIntegrityViolationException.class)</code>."],
+ ["Faltan ids en la secuencia (1, 3, 4…)","Persistencia",
+  "<code>GENERATED ALWAYS AS IDENTITY</code> consume el número aunque el INSERT falle. Un intento rechazado por UNIQUE se queda con su id.",
+  "Ninguna: no es un error. La secuencia está fuera de la transacción a propósito, para que dos operaciones concurrentes no reciban el mismo número.",
+  "Nada que corregir. Pero conviene saberlo: el 500 de “crear membresía con socioId 2” tenía justo esta explicación — el socio 2 nunca existió."],
+ ["required a bean of type ... that could not be found","Arranque",
+  "La clase no tiene <code>@Service</code>, <code>@Component</code> o <code>@RestController</code> · está fuera de <code>com.fitclub</code> y el escaneo no la ve · declaraste una interfaz que nadie implementa.",
+  "El mensaje nombra el tipo exacto. Búscalo con Ctrl+N y comprueba su paquete y su anotación.",
+  "Anotar el bean o moverlo bajo <code>com.fitclub</code>. Caso inverso: <code>expected single matching bean but found 2</code> se resuelve con <code>@Primary</code> o <code>@Qualifier</code>."],
+];
+</script>
+<script>
+(function(){
+ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+ const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+           set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+ /* tema */
+ const tbtn=$("#theme-toggle");
+ const saved=LS.get("fc-theme",null);
+ if(saved)document.documentElement.setAttribute("data-theme",saved);
+ tbtn.addEventListener("click",()=>{
+   const cur=document.documentElement.getAttribute("data-theme");
+   const isDark=cur?cur==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+   const next=isDark?"light":"dark";
+   document.documentElement.setAttribute("data-theme",next);LS.set("fc-theme",next);
+ });
+
+ /* tabs */
+ $$(".tab").forEach(t=>t.addEventListener("click",()=>{
+   $$(".tab").forEach(x=>x.setAttribute("aria-selected",String(x===t)));
+   ["inicio","preguntas","decisiones","diagnostico"].forEach(id=>{$("#"+id).hidden=(id!==t.dataset.panel)});
+   window.scrollTo({top:0,behavior:"instant"});
+ }));
+
+ /* rúbrica */
+ $("#rubrica").innerHTML=RUBRICA.map(r=>
+  `<div class="wrow"><span class="nm">${r[0]}</span><span class="pct">${r[1]}% · ${r[2]}% final</span>
+   <span class="dsc">${r[3]}</span><span class="bar"><i style="width:${r[1]*4}%"></i></span></div>`).join("");
+
+ /* traductor */
+ $("#traductor").innerHTML=TRAD.map(t=>
+  `<tr><td class="mono" style="color:var(--muted)">${t[0]}</td><td class="mono"><b>${t[1]}</b></td></tr>`).join("");
+
+ /* flujos */
+ $("#flujo-ok").innerHTML=FLUJO_OK.map(s=>`<li><span>${s}</span></li>`).join("");
+ $("#flujo-err").innerHTML=FLUJO_ERR.map(s=>`<li><span>${s}</span></li>`).join("");
+ $("#metodo").innerHTML=METODO.map(s=>`<li><span>${s}</span></li>`).join("");
+
+ /* códigos */
+ $("#codigos").innerHTML=CODIGOS.map(c=>
+  `<tr><td><span class="st ${c[1]}">${c[0]}</span></td><td>${c[2]}</td><td>${c[3]}</td><td class="note">${c[4]}</td></tr>`).join("");
+
+ /* decisiones */
+ $("#declist").innerHTML=DECISIONES.map(d=>
+  `<div class="dec"><div class="dechead"><span>${d[0]}</span><span class="tag cap">${d[1]}</span></div>
+   <dl class="decgrid">
+     <dt>Alternativas</dt><dd>${d[2]}</dd>
+     <dt>Por qué</dt><dd>${d[3]}</dd>
+     <dt>Qué se paga</dt><dd>${d[4]}</dd>
+     <dt>Y además</dt><dd>${d[5]}</dd>
+   </dl></div>`).join("");
+
+ /* diagnóstico */
+ $("#diaglist").innerHTML=DIAG.map(d=>
+  `<div class="diag"><h4>${d[0]}</h4><span class="tag">${d[1]}</span>
+   <div><div class="k">Causa probable</div><div>${d[2]}</div></div>
+   <div><div class="k">Cómo confirmarlo</div><div>${d[3]}</div></div>
+   <div><div class="k">Solución</div><div>${d[4]}</div></div></div>`).join("");
+
+ /* preguntas */
+ const caps=["Todos","C04","C05","C06","C07","C08","Extra"];
+ const fuentes=["Todas",...[...new Set(Q.map(q=>q.src))]];
+ let fCap="Todos", fSrc="Todas", fTxt="";
+ let hechas=new Set(LS.get("fc-hechas",[]));
+
+ $("#filtro-cap").innerHTML=caps.map(c=>`<button class="chip" data-cap="${c}" aria-pressed="${c==='Todos'}">${c}</button>`).join("");
+ $("#filtro-fuente").innerHTML=fuentes.map(s=>`<button class="chip" data-src="${s}" aria-pressed="${s==='Todas'}">${s}</button>`).join("");
+
+ $("#filtro-cap").addEventListener("click",e=>{const b=e.target.closest("[data-cap]");if(!b)return;
+   fCap=b.dataset.cap;$$("#filtro-cap .chip").forEach(c=>c.setAttribute("aria-pressed",String(c===b)));render();});
+ $("#filtro-fuente").addEventListener("click",e=>{const b=e.target.closest("[data-src]");if(!b)return;
+   fSrc=b.dataset.src;$$("#filtro-fuente .chip").forEach(c=>c.setAttribute("aria-pressed",String(c===b)));render();});
+ $("#buscar").addEventListener("input",e=>{fTxt=e.target.value.toLowerCase();render();});
+
+ function visibles(){
+   return Q.filter(q=>(fCap==="Todos"||q.cap===fCap)&&(fSrc==="Todas"||q.src===fSrc)&&
+     (!fTxt||(q.t+" "+q.corta+" "+q.cod).toLowerCase().includes(fTxt)));
+ }
+
+ function render(){
+   const list=visibles();
+   $("#contador").textContent=`${list.length} de ${Q.length} preguntas · ${hechas.size} marcadas`;
+   $("#vacio").hidden=list.length>0;
+   $("#qlist").innerHTML=list.map(q=>{
+     const id="q"+q.n, open=false, done=hechas.has(q.n);
+     return `<article class="q${done?" done":""}" id="${id}">
+       <button class="qhead" type="button" data-n="${q.n}" aria-expanded="${open}">
+         <span class="qn">${q.src==="Ruleta 50"?String(q.n).padStart(2,"0"):"··"}</span>
+         <span><span class="qt">${q.t}</span>
+           <span class="qmeta"><span class="tag cap">${q.cap}</span><span class="tag">${q.src}</span></span></span>
+         <span class="qn">${open?"−":"+"}</span>
+       </button>
+       <div class="qbody" hidden>
+         <p class="ans-short">${q.corta}</p>
+         ${q.full?`<div class="ans-full">${q.full}</div>`:""}
+         <div class="incode"><div class="lbl">En tu código</div><div class="body">${q.cod}</div></div>
+         <div class="qfoot"><button class="mark${done?" on":""}" type="button" data-mark="${q.n}">
+           ${done?"✓ La sé":"Marcar como sabida"}</button></div>
+       </div></article>`;
+   }).join("");
+ }
+
+ $("#qlist").addEventListener("click",e=>{
+   const h=e.target.closest(".qhead");
+   if(h){const body=h.nextElementSibling;const open=body.hidden;body.hidden=!open;
+     h.setAttribute("aria-expanded",String(open));h.lastElementChild.textContent=open?"−":"+";return;}
+   const m=e.target.closest("[data-mark]");
+   if(m){const n=Number(m.dataset.mark);
+     if(hechas.has(n)){hechas.delete(n);m.classList.remove("on");m.textContent="Marcar como sabida";
+       m.closest(".q").classList.remove("done");}
+     else{hechas.add(n);m.classList.add("on");m.textContent="✓ La sé";m.closest(".q").classList.add("done");}
+     LS.set("fc-hechas",[...hechas]);
+     $("#contador").textContent=`${visibles().length} de ${Q.length} preguntas · ${hechas.size} marcadas`;}
+ });
+
+ render();
+})();
+</script>
+</html>
