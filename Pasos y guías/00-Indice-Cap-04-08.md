@@ -44,6 +44,7 @@ Las guías están numeradas en el orden en que realmente construimos el proyecto
 | `11-Decisiones-y-Alternativas.md` | Todos | Por qué se eligió cada cosa y qué alternativa se descartó |
 | `12-Defensa-Individual.md` | Todos | Cómo se califica, guion de defensa y simulacro |
 | `13-Actividad-Entrenador-Solucion.md` | — | Las soluciones de la actividad que atraviesa todas las guías |
+| `14-Guion-para-Explicarle-al-Equipo.md` | — | Guion para dar una sesión de repaso al equipo: glosario exacto, guion minuto a minuto y preguntas anticipadas |
 
 ## 2. La actividad que atraviesa todas las guías
 
