@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Las 50 preguntas explicadas — La Frutería-Club FitClub</title>
+<style>
+  :root{
+    --fondo:#F4F6F4;
+    --papel:#FFFFFF;
+    --tinta:#1C2A22;
+    --tinta-suave:#5F7065;
+    --borde:#DCE5DE;
+    --manzana:#C0392B;
+    --pera:#7E9B32;
+    --madera:#8A6A3A;
+    --a:#1E8A82; --b:#4C5FD6; --c:#8151C7; --d:#B0507A;
+    --e:#C6702F; --f:#B8901E; --g:#3F8C4A; --h:#BD4A45; --i:#2B7FC4;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--fondo);color:var(--tinta);
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    font-size:17px;line-height:1.65;
+  }
+  h1,h2,h3,.sans{font-family:"Segoe UI",-apple-system,Helvetica,Arial,sans-serif}
+
+  header{
+    background:linear-gradient(160deg,#1F3D2E 0%,#2C5340 100%);
+    color:#F1F6F2;padding:26px 18px 24px;
+  }
+  header .fruta{font-size:30px;letter-spacing:8px;margin-bottom:6px}
+  header h1{font-size:31px;line-height:1.12;margin:0 0 6px;font-weight:700}
+  header p.sub{margin:0;color:#B7CDBE;font-size:15px;line-height:1.5}
+
+  .ruleta{
+    margin-top:20px;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.18);border-radius:10px;
+    padding:15px;display:flex;align-items:center;gap:15px;
+  }
+  .canasta{
+    flex:0 0 88px;height:88px;border-radius:10px;
+    background:#16281F;border:3px solid #E4B53C;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Segoe UI",sans-serif;font-size:44px;font-weight:700;color:#E4B53C;
+  }
+  .ruleta .txt{flex:1}
+  .ruleta .txt span{display:block;color:#B7CDBE;font-size:14px;margin-bottom:10px;line-height:1.45}
+  button.girar{
+    font-family:"Segoe UI",sans-serif;font-size:17px;font-weight:600;
+    background:#E4B53C;color:#16281F;border:none;border-radius:6px;
+    padding:11px 18px;cursor:pointer;width:100%;
+  }
+  button.girar:active{transform:translateY(1px)}
+
+  .controles{
+    position:sticky;top:0;z-index:20;background:#E9EEEA;
+    padding:12px 14px 10px;border-bottom:1px solid #CBD8CE;
+  }
+  input[type=search]{
+    width:100%;padding:11px 13px;font-size:16px;font-family:inherit;
+    border:1px solid #B8C7BC;border-radius:6px;background:var(--papel);color:var(--tinta);
+  }
+  .chips{display:flex;gap:6px;overflow-x:auto;margin-top:10px;padding-bottom:3px}
+  .chip{
+    font-family:"Segoe UI",sans-serif;font-size:14px;font-weight:600;white-space:nowrap;
+    padding:6px 12px;border:1px solid #B8C7BC;border-radius:20px;
+    background:var(--papel);color:var(--tinta-suave);cursor:pointer;
+  }
+  .chip[aria-pressed="true"]{background:#2C5340;color:#fff;border-color:#2C5340}
+
+  .barra{height:6px;background:#D3DED6;margin-top:10px;border-radius:3px;overflow:hidden}
+  .barra i{display:block;height:100%;width:0;background:var(--pera);transition:width .25s}
+  .contador{font-family:"Segoe UI",sans-serif;font-size:13px;color:var(--tinta-suave);margin-top:5px}
+
+  main{padding:16px 14px 60px;max-width:860px;margin:0 auto}
+
+  .tarjeta{
+    background:var(--papel);border:1px solid var(--borde);border-radius:10px;
+    margin-bottom:11px;overflow:hidden;
+  }
+  .tarjeta.lista{border-color:var(--pera);box-shadow:inset 4px 0 0 var(--pera)}
+  .cabecera-t{
+    display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;
+    background:none;border:none;padding:14px;cursor:pointer;font:inherit;color:inherit;
+  }
+  .num{
+    flex:0 0 38px;height:38px;border-radius:8px;background:#EEF3EF;color:#2C5340;
+    font-family:"Segoe UI",sans-serif;font-weight:700;font-size:16px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .preg{flex:1;font-family:"Segoe UI",sans-serif;font-size:16px;font-weight:600;line-height:1.4}
+  .cap{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-bottom:5px;
+  }
+  .cuerpo{display:none;padding:0 14px 16px}
+  .tarjeta.abierta .cuerpo{display:block}
+  .frase{
+    background:#F1F6F2;border-left:4px solid var(--pera);border-radius:0 6px 6px 0;
+    padding:10px 13px;font-size:16.5px;margin-bottom:14px;
+  }
+  .fruteria{
+    background:#FFF8EC;border:1px solid #F0DEBC;border-radius:8px;
+    padding:11px 13px;margin-bottom:14px;font-size:16px;
+  }
+  .fruteria b.et{
+    display:block;font-family:"Segoe UI",sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--madera);margin-bottom:4px;
+  }
+  .rot{
+    font-family:"Segoe UI",sans-serif;font-size:12px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--tinta-suave);margin:16px 0 6px;
+    border-bottom:1px solid var(--borde);padding-bottom:4px;
+  }
+  .cuerpo p{margin:0 0 10px}
+  .cuerpo ul{margin:0 0 10px;padding-left:20px}
+  .cuerpo li{margin-bottom:5px}
+  code{
+    font-family:"Cascadia Mono",Consolas,monospace;font-size:14.5px;
+    background:#EEF3EF;padding:1px 5px;border-radius:4px;
+  }
+  .mapa{
+    background:#F2F7FC;border:1px solid #D7E4F0;border-radius:8px;
+    padding:10px 13px;font-size:15.5px;color:#28455F;
+  }
+  button.marcar{
+    margin-top:14px;font-family:"Segoe UI",sans-serif;font-size:14.5px;font-weight:600;
+    background:#EEF3EF;color:#2C5340;border:1px solid #C3D3C8;border-radius:6px;
+    padding:9px 15px;cursor:pointer;
+  }
+  .tarjeta.lista button.marcar{background:var(--pera);color:#fff;border-color:var(--pera)}
+  .gl-bloque{background:var(--papel);border:1px solid var(--borde);border-radius:10px;padding:4px 14px 12px;margin-bottom:11px}
+  .gl-tit{font-size:14px;letter-spacing:.04em;text-transform:uppercase;margin:12px 0 8px;
+    padding-bottom:5px;border-bottom:2px solid}
+  .gl-item{padding:6px 0;border-bottom:1px solid #EEF2EF;font-size:15.5px;line-height:1.5}
+  .gl-item:last-child{border-bottom:none}
+  .gl-item b{color:var(--tinta);font-family:"Segoe UI",sans-serif;font-size:15px}
+  .gl-item span{display:block;color:var(--tinta-suave);margin-top:1px}
+  .vacio{text-align:center;color:var(--tinta-suave);padding:30px 10px}
+  footer{
+    text-align:center;font-family:"Segoe UI",sans-serif;font-size:13px;
+    color:var(--tinta-suave);padding:0 16px 40px;max-width:860px;margin:0 auto;
+  }
+  @media(min-width:700px){
+    body{font-size:17.5px}
+    header h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="fruta">🍎 🍐</div>
+  <h1>Las 50 preguntas, explicadas en la Frutería-Club</h1>
+  <p class="sub">Banco oficial del examen teórico · Capítulos 04 al 08 · Cada respuesta trae su versión en la tienda, la explicación clara y su conexión con los bloques A–I del mapa conceptual.</p>
+
+  <div class="ruleta">
+    <div class="canasta" id="canasta">?</div>
+    <div class="txt">
+      <span>Simula la ruleta del docente: te toca una sola pregunta de las 50.</span>
+      <button class="girar" id="girar">Girar la ruleta</button>
+    </div>
+  </div>
+</header>
+
+<div class="controles">
+  <input type="search" id="buscar" placeholder="Buscar por palabra: idempotencia, LAZY, 409, mapper…" aria-label="Buscar">
+  <div class="chips" id="chips"></div>
+  <div class="barra"><i id="avance"></i></div>
+  <div class="contador" id="contador">0 de 50 dominadas</div>
+</div>
+
+<main id="lista"></main>
+
+<footer>
+  Programación Aplicada 2026-2 · Proyecto FitClub · Material de estudio para la defensa individual.<br>
+  El examen está redactado sobre ParkFlow 360 (Cliente 1:N Vehículo); donde ayuda, se indica el equivalente en FitClub (Socio 1:N Membresía).
+</footer>
+
+<script>
+const CAPS = {
+  4:{n:"Cap. 04 · HTTP, REST y DTOs", col:"#1E8A82", bg:"#E3F3F1"},
+  5:{n:"Cap. 05 · Persistencia", col:"#C6702F", bg:"#FCEFE2"},
+  6:{n:"Cap. 06 · Hexagonal", col:"#B8901E", bg:"#FBF3DC"},
+  7:{n:"Cap. 07 · Relación 1:N", col:"#3F8C4A", bg:"#E7F4E9"},
+  8:{n:"Cap. 08 · Errores y transacciones", col:"#BD4A45", bg:"#FBE8E7"}
+};
+
+const P = [
+{n:1,c:4,t:"¿Qué es una API y en qué se diferencia de un endpoint? Ejemplo en ParkFlow 360.",
+s:"La API es todo el mostrador con sus reglas; un endpoint es una ventanilla concreta de ese mostrador.",
+f:`La <b>API</b> es el mostrador completo de la frutería-club: el cartel que dice qué se puede pedir aquí, en qué formato y qué te van a responder. Un <b>endpoint</b> es una ventanilla específica dentro de ese mostrador: "aquí se inscriben socios nuevos", "aquí se consulta un socio". Mostrador hay uno; ventanillas hay muchas.`,
+e:`<p>Una <b>API</b> (Application Programming Interface) es el <b>contrato completo</b> que el servidor ofrece al mundo exterior: qué operaciones existen, qué datos hay que enviar, qué se devuelve, qué errores pueden ocurrir y en qué formato viaja todo. Es una interfaz, no una lista de URLs: incluye reglas de validación, formatos y semántica de respuestas.</p>
+<p>Un <b>endpoint</b> es una <b>unidad concreta dentro de esa API</b>: la combinación de un método HTTP y una ruta. Es el punto exacto al que se envía una petición.</p>
+<p>En ParkFlow 360, la API REST del sistema incluye endpoints como:</p>
+<ul>
+<li><code>POST /api/clientes</code> — registrar un cliente</li>
+<li><code>GET /api/clientes/{id}</code> — consultar un cliente concreto</li>
+<li><code>POST /api/vehiculos</code> — registrar un vehículo asociado a un cliente</li>
+</ul>
+<p>La relación es de todo a parte: la API es el conjunto de endpoints más las reglas que los gobiernan. Hablar de "la API" es hablar del contrato; hablar de "un endpoint" es hablar de una operación puntual. <i>(En FitClub sería lo mismo con <code>POST /api/socios</code> y <code>POST /api/membresias</code>.)</i></p>`,
+k:["API = contrato completo; endpoint = método + ruta concreta.","Un endpoint no es solo una URL: la URL sin método no identifica la operación.","La API incluye también formatos, validaciones y códigos de respuesta."],
+m:"Bloque A: los nodos <b>API REST</b> y <b>Endpoint</b>, conectados por “cada endpoint es un recurso + un método”."},
+
+{n:2,c:4,t:"¿Qué es HTTP y qué función cumple cada componente de una petición (método, URL, headers, parámetros, body)?",
+s:"HTTP es el idioma de pedidos y respuestas del mostrador; cada parte de la petición dice qué hacer, sobre qué, con qué indicaciones y con qué datos.",
+f:`Cada pedido en el mostrador es un sobre. El <b>método</b> es la intención ("quiero ver", "quiero inscribir"). La <b>URL</b> es la ventanilla exacta a la que te acercas. Los <b>headers</b> son la etiqueta pegada por fuera del sobre ("adentro va JSON", "yo soy este socio"). Los <b>parámetros</b> son notitas al margen ("solo los activos"). El <b>body</b> es el papelito de pedido que va adentro.`,
+e:`<p><b>HTTP</b> es el protocolo de comunicación entre cliente y servidor: funciona por turnos: el cliente pide, el servidor responde. En HTTP/1.1 el mensaje es texto plano —por eso puedes leerlo entero en Postman—; desde HTTP/2 el transporte es binario, aunque la semántica (método, URL, headers, body) es exactamente la misma.</p>
+<ul>
+<li><b>Método</b>: la intención de la operación — <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>.</li>
+<li><b>URL</b>: identifica sobre qué recurso actúas, por ejemplo <code>/api/vehiculos/7</code>.</li>
+<li><b>Headers</b>: metadatos de la petición, no del contenido de negocio. <code>Content-Type: application/json</code> dice en qué formato va el cuerpo; <code>Accept</code>, qué formato esperas de vuelta; <code>Authorization</code>, quién eres.</li>
+<li><b>Parámetros</b>: los de <b>ruta</b> identifican (<code>/clientes/7</code>); los de <b>consulta</b> filtran u ordenan (<code>?estado=activo</code>).</li>
+<li><b>Body</b>: el contenido real que se envía, normalmente JSON. Se usa en escrituras (<code>POST</code>, <code>PUT</code>); en un <code>GET</code> no corresponde.</li>
+</ul>
+<p>La <b>respuesta</b> tiene la misma estructura (headers y body) más un <b>código de estado</b>, que resume el resultado en un número.</p>
+<p><b>HTTPS</b> es exactamente el mismo protocolo, pero cifrado: la "S" es de <i>Secure</i>. Protege la conversación de quien pueda interceptarla en el camino.</p>`,
+k:["Método = intención · URL = recurso · headers = metadatos · parámetros = precisión · body = datos.","Los filtros viajan en la URL; los datos a guardar, en el body.","HTTPS no cambia la estructura: la cifra."],
+m:"Bloque A: <b>Petición HTTP</b> con sus cuatro ramas (URL, headers, parámetros, body) y el nodo <b>HTTPS</b> que la protege."},
+
+{n:3,c:4,t:"Defina REST como estilo arquitectónico. ¿Por qué no es simplemente “usar JSON” ni sinónimo de CRUD?",
+s:"REST es la disciplina de organizar el mostrador por recursos y usar siempre los mismos verbos; JSON es solo el papel y CRUD solo cuatro operaciones de tabla.",
+f:`REST es la forma en que está ordenada la tienda: hay una sección de manzanas y otra de peras, cada una con su letrero, y siempre se pide igual ("quiero ver", "quiero inscribir"). No sería REST tener una sola ventanilla que diga "haga usted lo que sea aquí". Y el hecho de escribir el pedido en papel bond (JSON) no ordena la tienda por sí solo.`,
+e:`<p><b>REST</b> (Representational State Transfer) es un <b>estilo arquitectónico</b>: un conjunto de restricciones de diseño. Sus ideas centrales son:</p>
+<ul>
+<li>Todo se modela como <b>recursos</b> identificados por una URI (<code>/api/clientes</code>).</li>
+<li>El cliente maneja <b>representaciones</b> de esos recursos, no los objetos internos.</li>
+<li><b>Interfaz uniforme</b>: los mismos verbos y los mismos códigos para toda la API.</li>
+<li>Comunicación <b>sin estado</b>, cliente–servidor y por capas.</li>
+<li><b>Cacheable</b>: cada respuesta indica si puede almacenarse en caché.</li>
+</ul>
+<p><b>No es “usar JSON”</b>: JSON es solo el formato de la representación. Una API que devuelve JSON por un único endpoint <code>/api/hacerTodo</code> no tiene nada de REST; y una API que devolviera XML podría ser perfectamente RESTful.</p>
+<p><b>No es CRUD</b>: CRUD son cuatro operaciones sobre datos, normalmente calcadas de las tablas. REST modela <b>recursos de negocio</b> y cambios de estado. En ParkFlow, registrar la salida de un vehículo es un cambio de estado del negocio, no un <code>UPDATE</code> suelto; exponer las tablas tal cual sería confundir la base de datos con la API.</p>`,
+k:["Recursos + representaciones + interfaz uniforme + sin estado.","JSON = formato; CRUD = operaciones; REST = estilo de diseño.","Si la URL lleva verbos (/crearCliente), casi seguro no es REST."],
+m:"Bloque A: nodo <b>REST</b> con sus dos ramas obligatorias — <b>Recursos</b> y <b>Sin estado</b>."},
+
+{n:4,c:4,t:"Explique el principio stateless de REST. ¿Qué implica para el servidor y para cada petición?",
+s:"El servidor no recuerda la visita anterior: cada pedido debe llegar completo y explicarse solo.",
+f:`Cada vez que Doña Carmen llega al mostrador, Ana la atiende como si fuera la primera vez: no da por sentado nada de la visita de ayer. Por eso Carmen trae siempre su carpeta completa. Si Ana tuviera que "acordarse" de cada cliente, cambiar de vendedora rompería la atención.`,
+e:`<p><b>Stateless</b> significa que el servidor no guarda estado de la conversación entre una petición y la siguiente. Cada petición llega autosuficiente: trae identificación, parámetros y datos suficientes para ser entendida por sí sola.</p>
+<p><b>Para el cliente</b>: no puede asumir que el servidor "recuerda" el paso anterior. Si hay autenticación, el token viaja en cada llamada. Si un flujo tiene varios pasos, el avance se envía explícitamente o se persiste.</p>
+<p><b>Para el servidor</b>: no mantiene sesiones en memoria. Esto le permite escalar en horizontal (cualquier instancia puede atender cualquier petición), reiniciarse sin romper a los usuarios, y hace mucho más simple razonar sobre errores: una petición fallida no deja "media conversación" colgada.</p>
+<p>Consecuencia importante: si el servidor no recuerda, la verdad tiene que vivir en algún lado — y ese lado es <b>PostgreSQL</b>, no la memoria del proceso.</p>`,
+k:["Cada petición es autosuficiente.","Estado de negocio → base de datos; estado de sesión → no en el servidor.","Habilita escalado horizontal y tolerancia a fallos."],
+m:"Bloque A (<b>Sin estado</b>) y Bloque E: por eso el dato real vive en PostgreSQL."},
+
+{n:5,c:4,t:"Compare GET, POST, PUT y DELETE en intención semántica e idempotencia. ¿Por qué POST no es idempotente?",
+s:"GET lee, POST crea, PUT reemplaza, DELETE elimina; repetir un POST crea un registro nuevo cada vez.",
+f:`Pedir ver la lista de socios cien veces no cambia nada en la tienda. Cancelar la misma membresía dos veces no la deja "más cancelada". Pero entregar dos veces la misma ficha de inscripción sí deja dos socios anotados en el libro — por eso POST es el único de los cuatro que multiplica cada vez que se repite.`,
+e:`<p><b>Intención semántica</b>:</p>
+<ul>
+<li><code>GET</code>: leer sin modificar. Es <b>seguro</b> (no cambia el estado) e idempotente.</li>
+<li><code>POST</code>: crear un recurso nuevo dentro de una colección.</li>
+<li><code>PUT</code>: crear o reemplazar por completo el recurso de una URI que el cliente ya conoce — por eso es idempotente aunque a veces cree. <code>PATCH</code> actualiza solo los campos enviados y, a diferencia de PUT, <b>no está garantizado como idempotente</b>: lo será solo si la operación se diseña para serlo.</li>
+<li><code>DELETE</code>: eliminar el recurso indicado.</li>
+</ul>
+<p><b>Idempotencia</b>: una operación es idempotente cuando ejecutarla una vez o muchas deja el sistema en el <b>mismo estado final</b>. <code>PUT /api/vehiculos/7</code> con los mismos datos deja el vehículo 7 idéntico, se envíe una o cinco veces. <code>DELETE /api/vehiculos/7</code> deja el vehículo eliminado; repetirlo no borra "más" (aunque la respuesta pase a ser 404).</p>
+<p><b>POST no es idempotente</b> porque cada llamada produce un recurso <b>distinto</b>: tres <code>POST /api/clientes</code> idénticos crean tres clientes con tres ids diferentes. Esto no es teoría: si el usuario pulsa dos veces "Guardar" o la red reintenta, aparecen duplicados. Justamente por eso existen las validaciones de negocio y las restricciones <code>UNIQUE</code>.</p>`,
+k:["Seguro = no modifica (GET). Idempotente = repetir no cambia el resultado final.","GET, PUT y DELETE son idempotentes; POST no lo es y PATCH no lo garantiza.","La no idempotencia de POST es la causa práctica de los duplicados."],
+m:"Bloque A: los métodos y el nodo <b>Idempotencia</b>, con la flecha roja punteada “NO es” saliendo de POST."},
+
+{n:6,c:4,t:"Diferencie 200 OK, 201 Created, 204 No Content, 400 Bad Request y 404 Not Found. ¿Cuándo corresponde utilizar cada uno en una API REST?",
+s:"200 salió bien y te devuelvo algo; 201 creé algo nuevo; 204 salió bien y no hay nada que devolver; 400 tu pedido está mal escrito; 404 eso que pides no existe.",
+f:`Ana siempre sella el recibo, nunca contesta solo de palabra: sello verde de "aquí tienes", sello verde de "quedó inscrito", sello verde mudo de "listo, sin nada que entregarte", sello amarillo de "tu papelito está mal llenado" y sello amarillo de "esa manzana no está en el registro".`,
+e:`<ul>
+<li><b>200 OK</b>: operación exitosa <b>con contenido</b> en la respuesta. Típico de <code>GET</code> y de actualizaciones que devuelven el recurso.</li>
+<li><b>201 Created</b>: se creó un recurso nuevo. Se acompaña de la cabecera <code>Location</code> con la URL del recurso creado y normalmente del recurso en el body. Es la respuesta natural de un <code>POST</code> de registro — no un 200 genérico.</li>
+<li><b>204 No Content</b>: éxito <b>sin cuerpo</b>. Típico de un <code>DELETE</code> o de una actualización que no devuelve nada. No es un "vacío por error": es un éxito silencioso.</li>
+<li><b>400 Bad Request</b>: el cliente envió algo inválido — JSON mal formado, campo obligatorio ausente, formato incorrecto. Reintentarlo igual fallará igual.</li>
+<li><b>404 Not Found</b>: la petición está bien formada, pero el recurso identificado no existe (consultar el cliente 999).</li>
+</ul>
+<p>La regla mental por familias: <b>2xx</b> el cliente pidió bien y el servidor cumplió; <b>4xx</b> el problema está del lado del cliente; <b>5xx</b> el problema es del servidor.</p>`,
+k:["201 es la respuesta natural de una creación síncrona; 200 no la reemplaza.","204 = éxito sin contenido, no un error silencioso.","400 = petición inválida; 404 = recurso inexistente. No se confunden."],
+m:"Bloque A: <b>Códigos HTTP</b> y sus tres familias; Bloque H los reparte por tipo de error."},
+
+{n:7,c:4,t:"¿Qué función cumple Spring MVC y cómo viaja una petición desde que llega al backend hasta el Controller?",
+s:"Spring MVC es el recepcionista: recibe toda petición, decide qué método debe atenderla y traduce entre HTTP y objetos Java.",
+f:`Spring MVC es quien, apenas entra alguien por la puerta, mira lo que trae y decide "esto le toca a Ana, en el mostrador de socios". Nadie elige a mano quién atiende: hay un recepcionista único que reparte.`,
+e:`<p><b>Spring MVC</b> es el módulo web de Spring. Implementa el patrón <i>Front Controller</i>: una única entrada centraliza todas las peticiones y las reparte. Spring Boot lo autoconfigura y levanta un Tomcat embebido, por eso no escribes esa infraestructura.</p>
+<p>Recorrido conceptual de una petición:</p>
+<ul>
+<li>La petición llega al servidor embebido y se entrega al <b>DispatcherServlet</b>, la puerta única.</li>
+<li>El <b>HandlerMapping</b> compara método y URL con las anotaciones de los Controllers y determina qué método debe atenderla.</li>
+<li>Los <b>convertidores</b> (Jackson) transforman el JSON del body en un objeto Java: el Request DTO. Si el parámetro lleva <code>@Valid</code>, se ejecuta la validación de formato.</li>
+<li>Se invoca el método del <b>Controller</b> con los argumentos ya resueltos: ruta, query y body.</li>
+<li>El valor devuelto se serializa de vuelta a JSON y se escribe la respuesta con su código de estado.</li>
+<li>Si algo lanzó una excepción, antes de responder interviene el <b>@RestControllerAdvice</b>.</li>
+</ul>
+<p>Punto clave: en todo este tramo <b>no hay reglas de negocio</b>. Spring MVC traduce entre HTTP y Java; el negocio empieza después, cuando el Controller llama al caso de uso.</p>`,
+k:["Front Controller: una sola puerta (DispatcherServlet) que reparte.","Traduce HTTP ↔ objetos Java; no contiene lógica de negocio.","La validación de formato y la serialización ocurren aquí, no en el dominio."],
+m:"Bloque B (<b>Spring MVC → SocioController</b>) y pasos 2–4 del Bloque I."},
+
+{n:8,c:4,t:"Diferencie @RestController, @RequestMapping, @GetMapping y @PostMapping.",
+s:"La primera dice qué tipo de clase es; la segunda, la ruta base; las otras dos atan un método concreto a un verbo HTTP.",
+f:`Son las etiquetas del uniforme de Ana: una dice "yo atiendo pedidos y respondo con datos", otra dice "mi mostrador es el de socios", y las otras dos dicen "esta ventanilla es para consultar" y "esta otra es para inscribir".`,
+e:`<ul>
+<li><b>@RestController</b>: marca la clase como componente web que devuelve <b>datos</b>, no vistas. Equivale a <code>@Controller</code> + <code>@ResponseBody</code>: lo retornado se serializa a JSON automáticamente. Además registra la clase como bean para la inyección de dependencias.</li>
+<li><b>@RequestMapping</b>: mapeo genérico de rutas. Se usa sobre la clase para declarar la ruta base (<code>@RequestMapping("/api/clientes")</code>), de la que cuelgan todos los métodos. También puede ponerse sobre un método, pero si no se le indica <code>method=</code> mapea <b>todos los verbos HTTP</b> — justamente por eso se prefieren los atajos por verbo.</li>
+<li><b>@GetMapping</b>: atajo de <code>@RequestMapping(method = GET)</code>. Expresa lectura.</li>
+<li><b>@PostMapping</b>: atajo para <code>POST</code>. Expresa creación.</li>
+</ul>
+<p>La diferencia de fondo es el <b>nivel de responsabilidad</b>: <code>@RestController</code> dice "esta clase es una puerta HTTP"; <code>@RequestMapping</code> dice "esta es la zona de la API"; los atajos por verbo dicen "esta operación tiene esta intención semántica". Usar los atajos hace explícita la semántica REST del endpoint.</p>`,
+k:["@RestController = adaptador web que responde datos.","@RequestMapping en la clase = ruta base común.","@GetMapping/@PostMapping = intención semántica por verbo."],
+m:"Bloque B: <b>Anotaciones de ruteo</b> colgando de SocioController. Son puramente tecnológicas: por eso viven en el adaptador, nunca en el Port IN."},
+
+{n:9,c:4,t:"Compare @PathVariable, @RequestParam y @RequestBody. ¿Qué parte de la petición representa cada uno?",
+s:"Uno lee la ruta, otro lo que va después del signo de interrogación, y el tercero el JSON del cuerpo.",
+f:`Tres formas de que Ana saque el dato del pedido: leerlo en la dirección misma de la ventanilla, leerlo en una notita pegada al margen, o abrir el sobre y sacar el papelito completo de adentro.`,
+e:`<ul>
+<li><b>@PathVariable</b> toma una parte variable de la <b>URL</b>: en <code>/api/vehiculos/{id}</code> captura el 7. Se usa cuando ese valor <b>identifica</b> el recurso; es obligatorio por naturaleza, sin él la ruta no existe.</li>
+<li><b>@RequestParam</b> toma un parámetro de la <b>query string</b>: <code>/api/vehiculos?placa=1234ABC&amp;page=0</code>. Se usa para filtrar, ordenar, paginar o para datos opcionales; admite valores por defecto.</li>
+<li><b>@RequestBody</b> toma el <b>cuerpo</b> de la petición y Jackson lo convierte en un objeto Java (el Request DTO). Se usa cuando se envía una estructura completa: crear o actualizar.</li>
+</ul>
+<p>Criterio práctico: si el dato dice <b>cuál</b> recurso, va en la ruta; si dice <b>cómo</b> lo quiero ver, va en la query; si es <b>el contenido</b> que quiero guardar, va en el body. Mandar un objeto completo por query string, o repetir el id en el body cuando ya está en la URL, rompe la coherencia del contrato.</p>`,
+k:["Ruta = identidad; query = filtros y opciones; body = datos a persistir.","El body de una escritura va acompañado de @Valid.","Un mismo endpoint puede combinar los tres."],
+m:"Bloque B: <b>Anotaciones de extracción de datos</b>, con sus tres flechas (“de la URL”, “de un parámetro”, “del cuerpo JSON”)."},
+
+{n:10,c:4,t:"¿Por qué una API separa Request DTO, modelo de dominio y Response DTO? Papel de Jackson, @Valid, Jakarta Validation, Postman e IntelliJ HTTP Client.",
+s:"Porque lo que el cliente envía, lo que el negocio necesita y lo que se muestra al exterior son tres cosas distintas que cambian por motivos distintos.",
+f:`El papelito de pedido que llena Carmen, la manzana real que existe en la canasta y la nota que se le devuelve al final son tres papeles distintos, aunque hablen de la misma persona. Si fueran uno solo, cambiar el formulario obligaría a cambiar la fruta.`,
+e:`<p><b>Request DTO</b>: define exactamente lo que el cliente <b>puede</b> enviar. Deja fuera lo que no le corresponde (id generado, fechas de auditoría, estado interno). Es la frontera donde se valida el formato.</p>
+<p><b>Modelo de dominio</b>: representa el concepto de negocio con sus reglas e invariantes. No debe cambiar porque cambie la forma de la API, ni cargar anotaciones web.</p>
+<p><b>Response DTO</b>: define qué se expone hacia afuera. Permite ocultar campos sensibles y mantener estable el contrato aunque el dominio evolucione.</p>
+<p>Si una sola clase cumpliera los tres papeles, cualquier cambio interno se filtraría al JSON público y cualquier campo del JSON quedaría escrito dentro del negocio: acoplamiento total.</p>
+<p><b>Las herramientas del flujo</b>:</p>
+<ul>
+<li><b>Jackson</b>: serializa y deserializa. JSON → Request DTO al entrar; Response DTO → JSON al salir.</li>
+<li><b>@Valid</b>: puesto en el parámetro del Controller, dispara la validación del DTO antes de ejecutar cualquier lógica.</li>
+<li><b>Jakarta Validation</b>: las reglas declarativas del DTO (<code>@NotBlank</code>, <code>@Email</code>, <code>@Size</code>, <code>@Pattern</code>). Validan <b>forma</b>, nunca negocio.</li>
+<li><b>Postman</b> e <b>IntelliJ HTTP Client</b>: prueban el contrato sin necesidad de frontend. El segundo guarda las peticiones como archivos <code>.http</code> versionables junto al código.</li>
+</ul>`,
+k:["Tres clases porque tienen tres motivos de cambio distintos.","@Valid + Jakarta Validation = formato en la frontera, nunca reglas de negocio.","Las herramientas cliente verifican el contrato, no la implementación."],
+m:"Bloque C completo, incluyendo el recuadro rojo “3 clases distintas que nunca se confunden entre sí”."},
+
+{n:11,c:5,t:"Explique la cadena JDBC → JPA → Hibernate → Spring Data JPA → PostgreSQL. ¿Por qué no son sinónimos?",
+s:"PostgreSQL guarda, JDBC habla con él, JPA es la norma de mapeo, Hibernate la cumple y Spring Data JPA te ahorra escribirla.",
+f:`El <b>libro de inventario</b> es PostgreSQL. El <b>lápiz</b> con que se escribe es JDBC. El <b>formulario oficial</b> que dice cómo anotar cada cosa es JPA. <b>Pepe</b>, el bodeguero que de verdad escribe siguiendo ese formulario, es Hibernate. Y <b>Marta</b>, que le deja el formulario prellenado para que no empiece de cero, es Spring Data JPA. Ninguno reemplaza al otro.`,
+e:`<ul>
+<li><b>JDBC</b>: la API estándar de bajo nivel de Java para conectarse a una base de datos mediante un driver. Envía SQL y devuelve <code>ResultSet</code>. Todo lo demás se apoya en él.</li>
+<li><b>JPA</b>: una <b>especificación</b> (Jakarta Persistence). Define cómo mapear objetos a tablas: <code>@Entity</code>, <code>EntityManager</code>, contexto de persistencia, JPQL. Define <i>qué</i> debe existir, no <i>cómo</i> se hace.</li>
+<li><b>Hibernate</b>: la <b>implementación</b> más usada de esa especificación. Genera el SQL real, gestiona el contexto de persistencia, el <i>dirty checking</i> y las cargas perezosas.</li>
+<li><b>Spring Data JPA</b>: una capa de <b>conveniencia</b> sobre JPA. Crea repositorios a partir de interfaces, deriva consultas del nombre del método y añade paginación e integración transaccional.</li>
+<li><b>PostgreSQL</b>: el motor relacional donde viven las tablas, constraints, índices y los datos reales.</li>
+</ul>
+<p>No son sinónimos porque cada eslabón está en un <b>nivel distinto</b>: protocolo de acceso, contrato, motor que lo cumple, azúcar de productividad y base de datos. Confundirlos produce errores típicos de razonamiento: creer que "JPA genera el SQL" (lo genera Hibernate) o que "Spring Data reemplaza a JPA" (se apoya en él).</p>`,
+k:["Especificación (JPA) ≠ implementación (Hibernate) ≠ conveniencia (Spring Data).","Debajo de todo sigue habiendo JDBC y SQL real.","Cambiar de motor toca abajo; cambiar de repositorio toca arriba."],
+m:"Bloque E entero. Es la “regla de oro” del bloque: cuatro nombres, cuatro papeles distintos."},
+
+{n:12,c:5,t:"¿Qué es un ORM y por qué usarlo no elimina la necesidad de saber SQL y diseño de bases de datos?",
+s:"El ORM traduce entre objetos y tablas, pero no diseña por ti la base ni piensa el rendimiento.",
+f:`El ORM es el método de trabajo que le permite a Pepe pensar en "manzanas y peras" en vez de en renglones y columnas. Pero Pepe sigue siendo responsable de saber leer el libro: si algo no cuadra, el traductor automático no se lo va a avisar.`,
+e:`<p>Un <b>ORM</b> (Object-Relational Mapping) traduce automáticamente entre el mundo de los objetos Java y el mundo relacional de tablas y filas. Resuelve el llamado <b>desajuste de impedancia</b>: los objetos tienen identidad, referencias, herencia y colecciones; las tablas tienen filas, columnas, claves y JOINs. Sin ORM, ese puente se escribe a mano una y otra vez.</p>
+<p><b>Lo que aporta</b>: menos código repetitivo, gestión de identidad y estados de las entidades, generación de SQL, y trabajar las relaciones como referencias entre objetos.</p>
+<p><b>Lo que no elimina</b>:</p>
+<ul>
+<li>El <b>diseño relacional</b>: normalización, claves, tipos, constraints e índices siguen siendo decisión tuya.</li>
+<li>La <b>lectura del SQL generado</b>: sin ella no detectas el problema N+1, los JOIN innecesarios o las consultas que traen columnas de más.</li>
+<li>El <b>rendimiento</b>: planes de ejecución, índices y consultas complejas se resuelven con SQL, no con anotaciones.</li>
+</ul>
+<p>El ORM automatiza la traducción; la responsabilidad del modelo sigue siendo del diseñador. Un mal diseño relacional no mejora por añadirle un ORM encima.</p>`,
+k:["Resuelve el desajuste entre objetos y tablas.","Genera SQL, pero tú debes poder leerlo y juzgarlo.","Un mal modelo no se arregla con anotaciones."],
+m:"Bloque E: nodo <b>ORM</b> y su flecha “resuelve el problema de: objetos Java vs. tablas relacionales”."},
+
+{n:13,c:5,t:"¿Qué es JPA y qué es Hibernate? ¿Cuál es la relación entre especificación e implementación?",
+s:"JPA es la norma escrita; Hibernate es el producto que la cumple.",
+f:`JPA es el formulario oficial impreso por la empresa central: dice exactamente cómo debe anotarse cada fruta. Hibernate es Pepe, la persona real que agarra ese formulario y escribe en el libro siguiendo cada instrucción. El formulario solo, sin nadie que lo use, no anota nada.`,
+e:`<p><b>JPA</b> es una especificación: un documento estándar con interfaces y anotaciones (<code>@Entity</code>, <code>@Id</code>, <code>EntityManager</code>, JPQL). Por sí sola no ejecuta nada; define el contrato que cualquier proveedor de persistencia debe cumplir.</p>
+<p><b>Hibernate</b> es una implementación concreta de ese contrato: el código que realmente traduce las anotaciones a SQL, abre el contexto de persistencia, detecta cambios y sincroniza con la base de datos.</p>
+<p>La relación es la misma que entre una <b>norma técnica</b> y un <b>producto certificado</b>: la norma del enchufe define medidas y voltaje, y varias marcas la fabrican. Si programas contra JPA (interfaces y anotaciones estándar), podrías cambiar Hibernate por EclipseLink sin reescribir tus entidades. Si usas funciones propias de Hibernate, te atas a ese proveedor.</p>
+<p>Detalle práctico útil en la defensa: los mensajes de error y los logs SQL que ves en consola los produce <b>Hibernate</b>, aunque tu código solo mencione JPA.</p>`,
+k:["JPA = contrato; Hibernate = quien lo cumple.","Programar contra la especificación mantiene la portabilidad.","El SQL y los errores concretos los produce la implementación."],
+m:"Bloque E: la flecha <b>JPA → “es implementada por” → Hibernate</b>."},
+
+{n:14,c:5,t:"¿Qué aporta Spring Data JPA sobre JPA/Hibernate y por qué un JpaRepository no debe confundirse con el modelo de dominio?",
+s:"Spring Data te da repositorios sin escribirlos; pero un repositorio es una herramienta de base de datos, no tu negocio.",
+f:`Marta le deja a Pepe el formulario prellenado con lo básico: guardar, buscar, listar. Eso le ahorra trabajo repetitivo. Pero Marta trabaja en la bodega — no es la dueña de las reglas del club. Confundirla con el negocio sería creer que las normas del club las decide quien archiva papeles.`,
+e:`<p><b>Spring Data JPA</b> aporta, sobre JPA e Hibernate:</p>
+<ul>
+<li>Repositorios <b>declarativos</b>: defines una interfaz y Spring genera la implementación en tiempo de ejecución.</li>
+<li>CRUD listo (<code>save</code>, <code>findById</code>, <code>findAll</code>, <code>delete</code>).</li>
+<li><b>Derivación de consultas</b> por el nombre del método: <code>findByPlaca(String placa)</code> se traduce a SQL sin escribirlo.</li>
+<li>Paginación, ordenamiento, <code>@Query</code> para casos complejos e integración transaccional.</li>
+</ul>
+<p>Ahora bien, un <code>JpaRepository</code> es <b>infraestructura</b>: sabe de entidades JPA, de tablas y del <code>EntityManager</code>. El <b>modelo de dominio</b> expresa reglas y conceptos del negocio: qué es un Cliente, qué lo hace válido, qué puede hacer.</p>
+<p>Confundirlos hace que el negocio quede escrito en términos de acceso a datos, que el dominio dependa de Spring y que no puedas probar tus reglas sin levantar una base de datos. El dominio define <b>qué necesita</b> (un Port OUT); el repositorio es solo <b>una forma</b> de satisfacerlo.</p>`,
+k:["Spring Data = productividad sobre JPA, no un modelo nuevo.","Repositorio = detalle técnico; dominio = reglas del negocio.","El dominio no debe importar tipos de Spring Data."],
+m:"Bloque E (<b>Spring Data JPA → extends JpaRepository</b>) y Bloque F, que explica por qué el Port OUT no lo extiende."},
+
+{n:15,c:5,t:"¿Qué significa hibernate.ddl-auto=validate cuando la base ya fue diseñada? ¿Por qué create o create-drop serían riesgosos?",
+s:"validate solo revisa que tu mapeo coincida con la base ya diseñada; create la borraría y la volvería a crear.",
+f:`La orden que le dieron a Pepe el primer día: “nunca inventes páginas nuevas en el libro — la empresa ya diseñó todas. Tu trabajo es revisar que lo que vas a anotar calce en las que existen”. La alternativa sería dejar que Pepe rehaga el libro entero cada mañana, perdiendo todo lo escrito.`,
+e:`<p>Con <b>validate</b>, al arrancar la aplicación Hibernate compara el mapeo de tus entidades con el esquema real de PostgreSQL: tablas, columnas y tipos. Si algo no coincide, la aplicación <b>no arranca</b> y falla con un mensaje claro. No modifica absolutamente nada.</p>
+<p><b>Significado arquitectónico</b>: declara que la base de datos es la fuente de verdad, diseñada y versionada con scripts o migraciones, y que el código debe adaptarse a ella, no al revés. El arranque se vuelve una verificación temprana del contrato.</p>
+<p><b>Significado operativo</b>: los errores de mapeo (una columna mal escrita, un tipo incorrecto, un schema equivocado) aparecen al iniciar y no en producción, en medio de una consulta.</p>
+<p><b>Matiz que conviene saber</b>: <code>validate</code> comprueba existencia de tablas, columnas y compatibilidad de tipos, pero <b>no</b> verifica FKs, CHECK, índices ni restricciones UNIQUE. Que la aplicación arranque no garantiza que el esquema sea idéntico al diseñado.</p>
+<p>Conviene distinguirlos: <b>create</b> borra y recrea el esquema <b>al arrancar</b>; <b>create-drop</b> hace lo mismo y además <b>elimina el esquema al cerrar</b> la aplicación (útil solo en tests, letal fuera de ellos). Ambos son riesgosos porque:</p>
+<ul>
+<li>Eliminan y recrean las tablas: se pierden todos los datos existentes.</li>
+<li>Se pierde lo que el ORM no reproduce fielmente: índices, CHECK, nombres de constraints, permisos, triggers.</li>
+<li>El esquema pasa a estar definido por el código Java, no por el diseño relacional acordado con el equipo.</li>
+<li>En un entorno compartido o productivo, el daño es inmediato e irreversible.</li>
+</ul>`,
+k:["validate = verificar, no modificar.","La base ya diseñada manda; el mapeo se ajusta a ella.","create/create-drop = pérdida de datos y de integridad diseñada."],
+m:"Bloque E: <b>ddl-auto=validate</b> con su flecha roja punteada “evita el riesgo de create / create-drop”."},
+
+{n:16,c:5,t:"¿Qué es un schema en PostgreSQL y por qué no basta con conectarse a la base correcta?",
+s:"El schema es una sección dentro de la base: puedes estar en el libro correcto y escribir en la sección equivocada.",
+f:`El libro de inventario de la empresa tiene secciones separadas por dentro. No basta con estar en el libro correcto: si Pepe anota en la sección equivocada, el dato existe… pero nadie lo encuentra donde lo busca.`,
+e:`<p>Un <b>schema</b> es un espacio de nombres dentro de una base de datos que agrupa tablas, vistas y secuencias. Permite separar módulos o entornos y tener dos tablas con el mismo nombre sin conflicto. Por defecto PostgreSQL usa <code>public</code>.</p>
+<p>Conectarse a la base correcta no basta porque la resolución del nombre de la tabla depende del schema o del <code>search_path</code>. Si tus tablas están en <code>parkflow</code> pero Hibernate apunta a <code>public</code>, ocurre alguna de estas dos cosas:</p>
+<ul>
+<li>Con <code>ddl-auto=validate</code>: la aplicación no arranca porque "no encuentra" tablas que sí existen.</li>
+<li>Con <code>update</code> o <code>create</code>: Hibernate crea tablas <b>duplicadas y vacías</b> en el schema equivocado. La aplicación parece funcionar, pero los datos no aparecen donde los buscas en DataGrip. Es el clásico "insertó, pero no veo nada".</li>
+</ul>
+<p>Se controla con <code>@Table(schema = "...")</code>, con la propiedad de schema por defecto en la configuración, o con el <code>search_path</code> de la conexión. Al diagnosticar, verifica siempre en este orden: <b>base → schema → tabla</b>.</p>`,
+k:["Base ≠ schema ≠ tabla: son tres niveles de dirección.","Un schema equivocado da “no encuentra tablas” o tablas duplicadas vacías.","Debe declararse explícitamente, nunca dejarse al azar."],
+m:"Bloque E: nodo <b>Schema</b> colgando de PostgreSQL (“se organiza en”)."},
+
+{n:17,c:5,t:"Explique la función de @Entity, @Table, @Id, @GeneratedValue y @Column. ¿Qué información física representa cada una?",
+s:"Le dicen a Hibernate qué clase corresponde a qué tabla, cuál es su clave, quién genera esa clave y cómo se llama cada columna.",
+f:`Son las instrucciones impresas en el formulario oficial: en qué página del libro va esto, cuál es el número que identifica cada ficha, quién asigna ese número y cómo se llama cada casilla.`,
+e:`<ul>
+<li><b>@Entity</b>: declara la clase como tipo gestionado por JPA. Sin ella, para el ORM la clase no existe. Ojo con la precisión: registra la <b>clase</b> en el metamodelo; son sus <b>instancias</b> las que entran al contexto de persistencia al persistirlas o recuperarlas.</li>
+<li><b>@Table</b>: indica la tabla física y, si hace falta, el schema — <code>@Table(name="vehiculo", schema="parkflow")</code>. Sin ella se asume el nombre de la clase, que rara vez coincide con la convención de la base.</li>
+<li><b>@Id</b>: señala el atributo que representa la <b>clave primaria</b>; es la identidad de la fila.</li>
+<li><b>@GeneratedValue</b>: define quién genera ese valor. <code>IDENTITY</code> delega en la columna autoincremental de PostgreSQL; <code>SEQUENCE</code> usa una secuencia explícita. Determina si el id existe antes o después del INSERT.</li>
+<li><b>@Column</b>: describe la columna real — <code>name</code>, <code>nullable</code>, <code>length</code>, <code>unique</code>. Es el puente entre el nombre en Java y el nombre en SQL.</li>
+</ul>
+<p>En conjunto son la <b>traducción</b> de la tabla física al lenguaje de los objetos. Nada de esto es negocio: es mapeo, es metadato técnico. Por eso vive en <code>ClienteJpaEntity</code> y no en el <code>Cliente</code> de dominio.</p>`,
+k:["Cada anotación describe un aspecto físico de la tabla.","@GeneratedValue define en qué momento aparece el id.","Son metadatos de infraestructura: no pertenecen al dominio."],
+m:"Bloque E: las tres burbujas de anotaciones colgando de JPA, y la flecha “define la forma de → SocioJpaEntity”."},
+
+{n:18,c:5,t:"¿Por qué ClienteJpaEntity y el Cliente de dominio deben ser clases distintas? ¿Qué cambios absorbe cada una?",
+s:"Una responde a la base de datos y la otra al negocio: si fueran la misma, cada cambio de tabla tocaría tus reglas.",
+f:`La manzana real que existe en la canasta y el renglón que Pepe escribe en el libro no son la misma cosa. Si lo fueran, cambiar el formato del libro obligaría a cambiar la fruta.`,
+e:`<p><b>ClienteJpaEntity</b> existe para satisfacer a Hibernate: necesita constructor vacío, atributos mutables, anotaciones de mapeo, relaciones navegables y una forma alineada con la tabla.</p>
+<p><b>Cliente de dominio</b> existe para expresar el negocio: qué datos definen a un cliente, qué combinaciones son válidas, qué comportamiento tiene. Puede ser inmutable, validar sus invariantes en el constructor y no depender de ningún framework.</p>
+<p>Cambios que <b>absorbe cada una</b> sin contaminar a la otra:</p>
+<ul>
+<li>La <b>entidad JPA</b> absorbe: renombrar una columna, cambiar el tipo del id, añadir un índice, cambiar la estrategia de fetch, incluso migrar de motor de base de datos.</li>
+<li>El <b>dominio</b> absorbe: una nueva regla de validez, un estado adicional del cliente, un comportamiento nuevo — sin tocar la tabla mientras no cambien los datos persistidos.</li>
+</ul>
+<p>Si fueran una sola clase, un cambio en la tabla obligaría a modificar el núcleo del negocio, y las anotaciones de persistencia terminarían decidiendo la forma de tus reglas. El costo de separarlas es escribir un mapper; el beneficio es que cada lado evoluciona por su cuenta.</p>`,
+k:["Motivos de cambio distintos → clases distintas.","El dominio queda libre de anotaciones y de frameworks.","El precio es un mapper; la ganancia es independencia."],
+m:"Bloque C (“3 clases distintas”) y Bloque F (<b>Domain Model</b> sin etiquetas técnicas)."},
+
+{n:19,c:5,t:"Compare unique=true en @Column con una restricción UNIQUE real en PostgreSQL. ¿Cuál es la última barrera de integridad?",
+s:"La barrera final es la de PostgreSQL; la anotación es solo una descripción del mapeo.",
+f:`Que Pepe se ponga a sí mismo una nota de “esto no debería repetirse” no es lo mismo que el libro tenga una cerradura física que impide escribir un duplicado. La nota ayuda a recordar; la cerradura es la que de verdad no falla, aunque Pepe se distraiga.`,
+e:`<p><code>@Column(unique = true)</code> es <b>metadato de mapeo</b>. Solo tiene efecto real si Hibernate genera el esquema (<code>create</code>/<code>update</code>). Con <code>validate</code> no crea nada — y, de hecho, Hibernate ni siquiera comprueba si la UNIQUE existe: la aplicación arrancará igual aunque la base no la tenga, y la unicidad simplemente no estará garantizada.</p>
+<p>La <b>restricción UNIQUE en PostgreSQL</b> es la última barrera de integridad porque:</p>
+<ul>
+<li>La aplica el motor, en cada transacción y con control de concurrencia: dos peticiones simultáneas no pueden insertar la misma placa.</li>
+<li>Vale para <b>todos</b> los accesos, no solo el de tu aplicación: otro servicio, un script de migración, una inserción manual desde DataGrip.</li>
+<li>Se apoya en un índice único: es una garantía física, no una intención declarada.</li>
+</ul>
+<p>Una validación en Java puede ser burlada por una <b>condición de carrera</b>: dos hilos consultan "¿existe la placa?", ambos reciben que no, ambos insertan. Solo la base impide el duplicado. Por eso la validación en código sirve para dar un mensaje claro y amable, y la constraint sirve para garantizar que el dato nunca se corrompa.</p>`,
+k:["La anotación describe; la constraint garantiza.","Con validate, la anotación no crea nada.","La concurrencia solo la resuelve el motor de base de datos."],
+m:"Bloque G (<b>Integridad referencial</b>) y Bloque H (<b>Defensa en profundidad</b>, tercera barrera)."},
+
+{n:20,c:5,t:"¿Cómo comprobar que un POST realmente persistió? Relacione respuesta HTTP, logs SQL de Hibernate, DataGrip y la fila física.",
+s:"Cuatro evidencias encadenadas: la API respondió, Hibernate ejecutó el INSERT, la transacción confirmó y la fila está en la tabla.",
+f:`Que Ana te entregue el recibo no prueba que Pepe alcanzó a escribir en el libro. Hay que mirar las cuatro cosas: el recibo sellado, el registro de que Pepe escribió, el libro abierto con la lupa, y la línea escrita ahí, completa.`,
+e:`<p>Ninguna evidencia aislada es concluyente; el conjunto sí:</p>
+<ul>
+<li><b>Respuesta HTTP</b>: un <code>201 Created</code> con cabecera <code>Location</code> y un body con el id generado. Prueba que el flujo llegó al final sin excepción; por sí solo no prueba que haya habido commit.</li>
+<li><b>Logs SQL de Hibernate</b>: activando <code>show-sql</code> se ve el <code>INSERT INTO ...</code> con sus parámetros. Prueba que el ORM tradujo el mapeo al SQL esperado, sobre la tabla y el schema correctos.</li>
+<li><b>DataGrip</b>: ejecutar un <code>SELECT</code> sobre la tabla correcta, en el schema correcto, en la misma base a la que apunta la aplicación. Es una comprobación externa, ajena a tu código.</li>
+<li><b>La fila física</b>: los valores están completos, el id fue generado y las FK apuntan a filas existentes.</li>
+</ul>
+<p>Por qué hay que encadenarlas: un 201 puede devolverse y la transacción revertirse después; un INSERT en los logs puede terminar en rollback; y una consulta en DataGrip que no ve nada suele indicar schema equivocado o transacción sin confirmar. Verificar los cuatro puntos es lo que distingue "la API respondió bien" de "el dato existe".</p>`,
+k:["201 = el flujo terminó; SELECT = el dato existe.","El log del INSERT no implica commit.","Verifica base, schema y tabla antes de concluir que “no guardó”."],
+m:"Bloque D (<b>DataGrip / pgAdmin</b> y el Debugger) más el paso 14 del Bloque I."},
+
+{n:21,c:6,t:"Explique el objetivo central de la arquitectura hexagonal y la regla de dirección de dependencias.",
+s:"Poner el negocio en el centro y la tecnología alrededor, de modo que la tecnología dependa del negocio y nunca al revés.",
+f:`Las reglas del club y las frutas mismas quedan protegidas en el centro de la tienda. El mostrador y la bodega están afuera y se conectan al centro por ventanillas fijas. Don Roberto nunca aprende a manejar el libro de inventario; Pepe sí sabe que existe Don Roberto.`,
+e:`<p>El objetivo central de la <b>arquitectura hexagonal</b> (puertos y adaptadores) es aislar el <b>núcleo</b> —dominio y casos de uso— de todo detalle tecnológico. La base de datos, el framework web, la mensajería o el formato JSON son <b>mecanismos intercambiables</b>, no el corazón del sistema.</p>
+<p>La <b>regla de dependencias</b> dice que estas apuntan siempre <b>hacia adentro</b>: la infraestructura conoce al núcleo, el núcleo no conoce a la infraestructura. En la práctica:</p>
+<ul>
+<li>El núcleo no importa clases de Spring Web, ni de Spring Data, ni de Jakarta Persistence.</li>
+<li>El núcleo <b>define interfaces</b> (puertos) que expresan lo que necesita, en su propio lenguaje.</li>
+<li>La infraestructura <b>implementa</b> esas interfaces (adaptadores).</li>
+</ul>
+<p>Analogía técnica: el motor de un auto no sabe si lo enciende una llave, un botón o una app; solo expone un contacto. Beneficios concretos: puedes cambiar PostgreSQL por otro almacenamiento, o REST por una CLI, sin tocar las reglas; y puedes probar el negocio con dobles de prueba, sin levantar servidor ni base de datos.</p>`,
+k:["El núcleo no depende de nada externo.","El núcleo define los contratos; la infraestructura los cumple.","La tecnología se enchufa y se desenchufa; el negocio permanece."],
+m:"Bloque F: nodo <b>Arquitectura Hexagonal</b> y el recuadro rojo <b>Regla de dirección</b>."},
+
+{n:22,c:6,t:"Diferencie dominio, capa de aplicación e infraestructura. ¿Qué responsabilidades viven en cada una?",
+s:"El dominio son las reglas, la aplicación es la coordinación de un caso de uso, y la infraestructura es todo lo que toca el mundo exterior.",
+f:`Tres zonas: las <b>frutas y sus reglas naturales</b> (dominio), <b>Don Roberto decidiendo</b> con esas reglas (aplicación), y <b>Ana y Pepe</b> con sus herramientas concretas — mostrador, libro, lápiz (infraestructura).`,
+e:`<ul>
+<li><b>Dominio</b>: el corazón. Entidades, objetos de valor, invariantes y comportamiento del negocio. Responde a "¿qué es válido en ParkFlow?". Sin frameworks, sin anotaciones, sin base de datos. Ejemplo: un Vehículo debe tener una placa con formato válido y pertenecer a un cliente.</li>
+<li><b>Aplicación</b>: orquesta. Los casos de uso coordinan el flujo completo de una operación: recibir datos, aplicar reglas, invocar puertos de salida, definir el límite transaccional. Responde a "¿qué pasos tiene registrar un vehículo?". Aquí viven también las definiciones de los puertos.</li>
+<li><b>Infraestructura</b>: conecta con el exterior. Controllers REST, adaptadores de persistencia, entidades JPA, configuración de Spring, mappers técnicos. Responde a "¿cómo entra y sale la información?".</li>
+</ul>
+<p>La distinción práctica más útil: si algo puede cambiar por una <b>decisión tecnológica</b> (cambiar de motor, de framework, de formato), es infraestructura. Si cambia porque <b>cambió una regla del negocio</b>, es dominio. Si cambia porque <b>cambió el flujo</b> de una operación, es aplicación.</p>`,
+k:["Dominio = reglas; aplicación = orquestación; infraestructura = mecanismos.","La transacción se decide en aplicación, no en el Controller.","Un mismo cambio debería tocar idealmente una sola capa."],
+m:"Bloque F: las tres burbujas <b>Dominio</b>, <b>Application Service</b> e <b>Infraestructura</b> colgando del nodo central."},
+
+{n:23,c:6,t:"¿Qué es un Port IN y por qué no debería mencionar HTTP, JSON, Controller ni Spring Data JPA?",
+s:"Es la lista de lo que el sistema sabe hacer, escrita en lenguaje de negocio y sin decir por dónde se pide.",
+f:`Es el menú oficial de lo que Don Roberto sabe hacer: “Inscribir socio nuevo”, “Consultar socio”. El menú no dice si el pedido llegó por el mostrador, por teléfono o por carta — solo dice qué se puede pedir.`,
+e:`<p>Un <b>Port IN</b> (puerto de entrada) es una interfaz definida en el núcleo que declara una <b>capacidad</b> del sistema: <code>RegistrarClienteUseCase</code>, <code>ConsultarClienteUseCase</code>. Representa el "qué puede pedírsele al sistema", expresado con tipos de dominio.</p>
+<p>No debe mencionar tecnología porque el puerto debe poder invocarse desde <b>cualquier canal</b>:</p>
+<ul>
+<li>Un Controller REST hoy.</li>
+<li>Una tarea programada o un proceso por lotes mañana.</li>
+<li>Un consumidor de mensajes, una CLI o un test unitario.</li>
+</ul>
+<p>Si el puerto recibiera un <code>HttpServletRequest</code> o un DTO web, el núcleo quedaría atado al canal HTTP y ese caso de uso solo podría existir dentro de una petición web. Además, la firma de los puertos IN es la <b>documentación viva</b> de las capacidades del sistema: leyéndolos se entiende qué hace ParkFlow, sin ruido técnico.</p>
+<p>El puerto <b>declara</b>; el Application Service <b>lo implementa</b>.</p>`,
+k:["Port IN = capacidad del sistema en lenguaje de negocio.","Debe ser invocable desde cualquier canal, no solo HTTP.","Declara la operación; no sabe cómo llegó la petición."],
+m:"Bloque F: <b>Port IN (RegistrarSocioUseCase)</b>, con el Adapter IN llamándolo desde abajo."},
+
+{n:24,c:6,t:"¿Qué es un Port OUT y por qué ClienteRepositoryPort no debería extender JpaRepository?",
+s:"Es lo que el núcleo necesita del exterior, dicho con sus propias palabras; extender JpaRepository metería la base de datos dentro del negocio.",
+f:`Es la orden de bodega: “guárdame esto”, “dime si ya existe alguien con este documento”. Está escrita en el idioma del gerente, no en el de Pepe. Si la orden viniera ya impresa con el formato interno de la bodega, la bodega estaría mandando sobre el gerente.`,
+e:`<p>Un <b>Port OUT</b> (puerto de salida) es una interfaz que el núcleo define para pedirle algo al mundo exterior: <code>guardar(Cliente cliente)</code>, <code>buscarPorId(Long id)</code>, <code>existePorDocumento(String doc)</code>. Trabaja con <b>tipos de dominio</b> y con el vocabulario del negocio.</p>
+<p><b>No debe extender JpaRepository</b> porque:</p>
+<ul>
+<li>Arrastraría tipos de Spring Data al núcleo, invirtiendo la dirección de dependencias.</li>
+<li>Obligaría a usar la entidad JPA como parámetro genérico, metiendo el modelo de persistencia dentro del dominio.</li>
+<li>Expondría decenas de métodos (<code>flush</code>, <code>saveAll</code>, paginación) que el negocio nunca pidió, ampliando la superficie del contrato.</li>
+<li>Ataría el núcleo a una tecnología de persistencia concreta para siempre.</li>
+</ul>
+<p>Este puerto es, con nombre propio, el <b>Repository Pattern</b>: tratar la persistencia como si fuera una colección de objetos de dominio, escondiendo por completo cómo se almacenan.</p>
+<p><b>Ventaja de definir el contrato desde el núcleo</b>: quien necesita el servicio decide su forma. El puerto expresa exactamente lo que el caso de uso requiere, ni más ni menos; puede implementarse con JPA, con una lista en memoria para pruebas o con otro almacenamiento; y las pruebas del negocio corren sin base de datos.</p>`,
+k:["Port OUT = lo que el núcleo necesita, en su propio idioma.","Extenderlo de JpaRepository invertiría la dirección de dependencias.","Quien necesita el servicio define el contrato, no quien lo implementa."],
+m:"Bloque F: <b>Port OUT</b> → “es implementado por” → Adapter OUT; y la regla nº 3 de la casa."},
+
+{n:25,c:6,t:"Diferencie un Controller de un Port IN. Ambos participan en la entrada: ¿qué responsabilidad tiene cada uno?",
+s:"El Port IN dice qué se puede pedir; el Controller traduce una petición HTTP concreta a esa forma de pedirlo.",
+f:`El menú del gerente (Port IN) dice qué se puede pedir. Ana en el mostrador (Controller) es quien escucha a Doña Carmen, entiende su pedido en lenguaje de cliente y se lo pasa a Don Roberto exactamente como dice el menú. Si Ana faltara, el menú seguiría existiendo.`,
+e:`<p><b>Port IN</b>: interfaz del núcleo. Declara una capacidad en lenguaje de negocio, con tipos de dominio. No sabe nada de protocolos. Es estable: no cambia porque cambie la API.</p>
+<p><b>Controller</b> (Adapter IN): clase de infraestructura. Sus responsabilidades son estrictamente de frontera:</p>
+<ul>
+<li>Recibir la petición HTTP y extraer sus datos (<code>@PathVariable</code>, <code>@RequestParam</code>, <code>@RequestBody</code>).</li>
+<li>Disparar la validación de formato con <code>@Valid</code>.</li>
+<li>Traducir el Request DTO a objetos de dominio mediante un mapper web.</li>
+<li>Invocar el Port IN correspondiente.</li>
+<li>Traducir el resultado a Response DTO y elegir el código HTTP con <code>ResponseEntity</code>.</li>
+</ul>
+<p>Lo que el Controller <b>no</b> debe hacer: aplicar reglas de negocio, decidir transacciones ni hablar con el repositorio. Si mañana ParkFlow se expone además por gRPC o por una CLI, habría un adaptador nuevo — pero el mismo Port IN, sin tocar una línea del negocio.</p>`,
+k:["Port IN = qué se puede pedir; Controller = cómo llegó ese pedido.","El Controller es reemplazable; el puerto es estable.","Ningún dato HTTP debe cruzar la frontera del puerto."],
+m:"Bloque F: <b>Port IN</b> y <b>Adapter IN (SocioController)</b>, unidos por “llama a”."},
+
+{n:26,c:6,t:"¿Qué función cumple un Application Service o caso de uso? ¿Por qué debe depender de abstracciones y no de SpringDataClienteRepository?",
+s:"Coordina los pasos de una operación completa; si dependiera del repositorio técnico, el negocio quedaría atado a la base de datos.",
+f:`Don Roberto es quien conoce las reglas del club y decide el orden de las cosas: primero revisa que no exista ya, después manda a guardar. Pero él nunca aprende cómo se escribe en el libro: para eso delega, siempre por la orden de bodega.`,
+e:`<p>Un <b>Application Service</b> (caso de uso) <b>orquesta</b> una operación de negocio de principio a fin: recibe objetos de dominio, aplica las reglas, invoca los puertos de salida que necesite y define la frontera transaccional con <code>@Transactional</code>. Es el "guion" de la operación.</p>
+<p>Lo que <b>no</b> es: no es un contenedor de SQL, ni un lugar para armar JSON, ni un sitio donde decidir códigos HTTP.</p>
+<p><b>Por qué debe depender de abstracciones</b> (el Port OUT) y no de <code>SpringDataClienteRepository</code>:</p>
+<ul>
+<li>Depender de la interfaz mantiene la dirección de dependencias hacia el núcleo; depender de Spring Data la invierte.</li>
+<li>Permite <b>probar el caso de uso sin base de datos</b>, sustituyendo el puerto por una implementación en memoria.</li>
+<li>Permite cambiar la tecnología de persistencia sin tocar una sola regla de negocio.</li>
+<li>Evita que métodos técnicos (<code>flush</code>, <code>getOne</code>, paginación de Spring) se filtren dentro de la lógica del negocio.</li>
+</ul>
+<p>En Spring esto se materializa con <b>inyección por constructor</b>: el servicio declara que necesita un <code>ClienteRepositoryPort</code>, y el contenedor le entrega en tiempo de ejecución el adaptador concreto.</p>`,
+k:["El caso de uso orquesta; el dominio decide qué es válido.","Depende del puerto (interfaz), nunca de Spring Data.","Es el lugar natural de la frontera transaccional."],
+m:"Bloque F: <b>Application Service</b> con sus tres flechas — usa el dominio, se expone por el Port IN, depende del Port OUT."},
+
+{n:27,c:6,t:"¿Qué es un Adapter IN y qué es un Adapter OUT? Use ClienteController y ClientePersistenceAdapter como ejemplo.",
+s:"El Adapter IN traduce el mundo exterior hacia el núcleo; el Adapter OUT traduce las necesidades del núcleo hacia una tecnología concreta.",
+f:`Ana en el mostrador traduce lo que dice el cliente al idioma del gerente: es el adaptador de entrada. Pepe en la bodega traduce la orden del gerente al idioma del libro y el lápiz: es el adaptador de salida. Ambos son traductores, en direcciones opuestas.`,
+e:`<p>Ambos son <b>infraestructura</b>: viven fuera del núcleo y conocen tecnología concreta. Se diferencian por la dirección en que traducen.</p>
+<p><b>Adapter IN — ClienteController</b>:</p>
+<ul>
+<li>Está del lado de quien <b>provoca</b> la operación. Conoce HTTP, JSON, anotaciones de Spring MVC y DTOs web.</li>
+<li>Convierte una petición HTTP en una llamada al Port IN y convierte el resultado en una respuesta HTTP.</li>
+<li>Podría haber otros: un listener de mensajes, una tarea programada, una CLI. Todos usarían el mismo Port IN.</li>
+</ul>
+<p><b>Adapter OUT — ClientePersistenceAdapter</b>:</p>
+<ul>
+<li>Está del lado de quien <b>satisface</b> una necesidad del núcleo. Implementa el Port OUT.</li>
+<li>Conoce Spring Data JPA, Hibernate y <code>ClienteJpaEntity</code>; usa un mapper de persistencia para traducir dominio ↔ entidad.</li>
+<li>Podría haber otro adaptador contra otro almacenamiento sin que el núcleo se entere.</li>
+</ul>
+<p>Con nombre propio, esto es el <b>Adapter Pattern</b>: una pieza que traduce entre dos interfaces que no encajan directamente — la que el núcleo pide y la que la tecnología ofrece.</p>
+<p>La simetría es lo importante: el núcleo queda en el medio, rodeado de traductores, sin conocer a ninguno de ellos.</p>`,
+k:["Adapter IN: del exterior hacia el núcleo. Adapter OUT: del núcleo hacia la tecnología.","Los dos son infraestructura y los dos son reemplazables.","El núcleo no importa ninguno de los dos."],
+m:"Bloque F: <b>Adapter IN</b> y <b>Adapter OUT</b>, ambos con la flecha “pertenece a la Infraestructura”."},
+
+{n:28,c:6,t:"Explique la Inversión de Dependencias aplicada a ParkFlow 360. ¿Cómo se relacionan IoC, DI e inyección por constructor con la arquitectura hexagonal?",
+s:"El negocio define lo que necesita y Spring le entrega quién lo cumple: así la flecha de dependencia apunta hacia adentro.",
+f:`Don Roberto escribe la orden de bodega, no la bodega. Y la franquicia (Spring) es la que le pone en la mano, el primer día de trabajo, a la persona que va a cumplir esa orden. Él no sale a buscarla ni sabe quién es exactamente.`,
+e:`<p>Son tres cosas distintas que trabajan juntas:</p>
+<ul>
+<li><b>Inversión de Dependencias (DIP)</b> — principio de diseño: los módulos de alto nivel (el negocio) no deben depender de los de bajo nivel (la tecnología); ambos deben depender de <b>abstracciones</b>. En ParkFlow, el <code>ClienteService</code> depende de <code>ClienteRepositoryPort</code>, una interfaz que él mismo define; <code>ClientePersistenceAdapter</code> también depende de ella, al implementarla. La flecha de dependencia queda apuntando al núcleo.</li>
+<li><b>IoC (Inversión de Control)</b> — mecanismo del framework: no es tu código el que crea sus colaboradores con <code>new</code>; el contenedor de Spring los crea y gestiona su ciclo de vida.</li>
+<li><b>DI (Inyección de Dependencias)</b> — la técnica concreta con que IoC entrega esos colaboradores.</li>
+<li><b>Inyección por constructor</b> — la forma preferida: la clase declara en su constructor lo que necesita. Ventajas: las dependencias son obligatorias y explícitas, el objeto nunca existe a medias, los campos pueden ser <code>final</code> y en un test puedes construirlo a mano pasándole un doble de prueba.</li>
+</ul>
+<p>La conexión con la hexagonal es directa: <b>DIP dice hacia dónde deben apuntar las flechas; IoC/DI son la herramienta que lo hace posible en tiempo de ejecución.</b> El servicio pide una interfaz del núcleo y Spring le entrega el adaptador concreto, sin que el servicio sepa cuál es.</p>`,
+k:["DIP = principio; IoC = quién controla la creación; DI = cómo se entrega.","La inyección por constructor hace las dependencias explícitas y testeables.","El servicio pide la interfaz; Spring decide la implementación."],
+m:"Bloque F (<b>Dependency Inversion</b>) apoyado en el Bloque B (IoC, DI, Component Scan y Beans)."},
+
+{n:29,c:6,t:"¿Qué papel cumplen los mappers en la arquitectura hexagonal? ¿Por qué hacen falta traducciones separadas Web DTO ↔ Domain y Domain ↔ JPA Entity?",
+s:"Son los traductores de frontera: cada frontera tiene su propio idioma y su propio motivo de cambio.",
+f:`Hay dos traductores distintos: uno convierte el papelito de pedido en la manzana real, y otro convierte esa manzana real en el renglón del libro. Si hubiera un solo traductor para todo, el formato del papelito terminaría decidiendo cómo se escribe el libro.`,
+e:`<p>Un <b>mapper</b> traduce un modelo en otro sin arrastrar dependencias entre ellos. En la hexagonal hay dos fronteras y, por tanto, dos mappers:</p>
+<ul>
+<li><b>Web mapper — Request/Response DTO ↔ Dominio</b>: vive en el adaptador de entrada. Traduce lo que el cliente envía en objetos de negocio, y el resultado del negocio en lo que se expone.</li>
+<li><b>Persistence mapper — Dominio ↔ JPA Entity</b>: vive en el adaptador de salida. Traduce el objeto de negocio a la forma que Hibernate necesita, y viceversa.</li>
+</ul>
+<p><b>Por qué separados</b>: cada frontera cambia por razones distintas. El contrato de la API cambia cuando lo pide el cliente o el frontend; la entidad JPA cambia cuando cambia la tabla. Si un único modelo sirviera para las tres cosas, un cambio de columna se filtraría hasta el JSON público y un campo nuevo del formulario obligaría a alterar la tabla.</p>
+<p>El precio de esta separación es escribir código de traducción; la ganancia es que <b>el dominio no tiene anotaciones de nadie</b> y que cada capa evoluciona sin arrastrar a las otras. Por eso los mappers viven en los adaptadores, nunca en el núcleo.</p>`,
+k:["Dos fronteras, dos mappers, dos motivos de cambio.","El dominio queda limpio de anotaciones web y de persistencia.","El mapper vive en el adaptador, no en el dominio."],
+m:"Bloque C (Mapper y las tres clases) y Bloque F (<b>Mapper Pattern</b>)."},
+
+{n:30,c:6,t:"Analice: “Si ClienteController inyecta directamente SpringDataClienteRepository, la aplicación funciona, pero el diseño es incorrecto”.",
+s:"Funciona porque técnicamente se puede; está mal porque salta dos capas y ata la puerta de entrada a la base de datos.",
+f:`Sería Ana yendo directo a la bodega a escribir en el libro, sin pasar por Don Roberto. Ese día el cliente se va contento — pero nadie revisó las reglas del club, nadie decidió si la operación se confirma completa, y el mostrador ahora sabe dónde está cada página del libro.`,
+e:`<p><b>Por qué “funciona”</b>: Spring inyecta cualquier bean disponible y el repositorio expone <code>save</code> y <code>findById</code>. La petición entra, la fila se guarda y se devuelve un 201. Nada explota.</p>
+<p><b>Por qué el diseño es incorrecto</b>:</p>
+<ul>
+<li><b>Esquiva el núcleo</b>: Controller y repositorio son ambos infraestructura, así que no se invierte la flecha hacia el dominio — lo que ocurre es un acoplamiento lateral entre dos adaptadores que se saltan los puertos. El núcleo no queda protegido: queda irrelevante.</li>
+<li><b>Desaparece la capa de aplicación</b>: nadie ejecuta las reglas de negocio ni las validaciones de dominio, y no hay un lugar natural para <code>@Transactional</code>. Si la operación necesita dos escrituras, no hay atomicidad.</li>
+<li><b>La entidad JPA se filtra hacia la web</b>: lo más probable es que el Controller termine serializando <code>ClienteJpaEntity</code>, exponiendo la estructura de la tabla y las relaciones perezosas en el JSON.</li>
+<li><b>Se pierde la testabilidad</b>: probar el endpoint exige levantar la base de datos; no hay forma de probar la regla de negocio aislada, porque ya no existe como pieza.</li>
+<li><b>Cambiar de persistencia obliga a tocar el Controller</b>, que no debería enterarse jamás de ese cambio.</li>
+</ul>
+<p>La conclusión que conviene decir en la defensa: <b>que algo compile y responda no significa que esté bien diseñado</b>. El diseño se juzga por cómo resiste el cambio y por si cada pieza tiene una sola responsabilidad.</p>`,
+k:["Funcionar y estar bien diseñado son dos criterios distintos.","Saltar el caso de uso deja sin lugar a las reglas y a la transacción.","El Controller acabaría exponiendo la entidad JPA."],
+m:"Bloque F: el recuadro rojo “✗ Controller inyectando SpringDataRepository directo = diseño incorrecto” y la regla nº 1 de la casa."},
+
+{n:31,c:7,t:"¿Qué significa una relación 1:N entre Cliente y Vehículo? Identifique entidad padre, dependiente y dónde vive físicamente la clave foránea.",
+s:"Un cliente puede tener varios vehículos, cada vehículo pertenece a un solo cliente, y la FK vive en la tabla del vehículo.",
+f:`Una canasta (el socio) puede tener varias peras adentro (sus membresías), pero cada pera pertenece a una sola canasta. Y el número de canasta va escrito <b>en la pera</b>, nunca en la canasta: la canasta no lleva una lista pegada de todo lo que contiene.`,
+e:`<p><b>Cardinalidad 1:N</b>: un registro de la entidad padre se relaciona con muchos registros de la dependiente, y cada registro dependiente se relaciona con uno solo del padre.</p>
+<ul>
+<li><b>Entidad padre (el “1”)</b>: <code>Cliente</code>. Existe por sí misma; no necesita vehículos para tener sentido.</li>
+<li><b>Entidad dependiente (el “N”)</b>: <code>Vehiculo</code>. Su existencia tiene sentido en relación con un cliente: todo vehículo debe pertenecer a alguien.</li>
+</ul>
+<p><b>La clave foránea vive siempre en el lado “N”</b>: la tabla <code>vehiculo</code> tiene una columna <code>cliente_id</code> que apunta a la PK de <code>cliente</code>. Es la única forma de representarlo sin repetir datos: si se guardara en el cliente, harían falta múltiples columnas o una lista, que el modelo relacional no admite en una celda.</p>
+<p>Regla mnemotécnica para la defensa: <b>la FK siempre está del lado de los “muchos”</b>. <i>(En FitClub es idéntico: Socio 1:N Membresía, con <code>socio_id</code> en la tabla de membresías.)</i></p>`,
+k:["Padre = 1 (Cliente); dependiente = N (Vehiculo).","La FK va siempre en la tabla del lado “muchos”.","El dependiente no puede existir huérfano si la FK es obligatoria."],
+m:"Bloque G: <b>Cardinalidad 1:N</b> con Socio (padre) y Membresia (dependiente)."},
+
+{n:32,c:7,t:"Diferencie PK y FK. ¿Qué problema de integridad resuelve una FOREIGN KEY en la relación Cliente-Vehículo?",
+s:"La PK identifica una fila dentro de su tabla; la FK apunta a la PK de otra e impide que apunte a algo inexistente.",
+f:`El número pegado en cada canasta es la PK: la identifica sin ambigüedad. El número que cada pera lleva escrito es la FK: dice a qué canasta pertenece. La norma de la tienda es que nunca puede existir una pera con el número de una canasta que no existe.`,
+e:`<p><b>PK (clave primaria)</b>: columna o conjunto de columnas que identifica de forma única cada fila de una tabla. Es única y no nula, y por convención de diseño se mantiene estable en el tiempo. En <code>cliente</code>, es <code>id</code>.</p>
+<p><b>FK (clave foránea)</b>: columna —o conjunto de columnas— que referencia la PK, o cualquier clave única, de otra tabla, estableciendo la relación. En <code>vehiculo</code>, es <code>cliente_id</code>.</p>
+<p><b>El problema que resuelve la FOREIGN KEY</b> es la <b>integridad referencial</b>: garantizar que toda referencia apunte a algo que existe realmente. Concretamente impide:</p>
+<ul>
+<li>Insertar un vehículo con un <code>cliente_id</code> que no corresponde a ningún cliente (registros <b>huérfanos</b>).</li>
+<li>Borrar un cliente que todavía tiene vehículos asociados. Por defecto rige <code>NO ACTION</code>/<code>RESTRICT</code>, que <b>bloquea el borrado</b>; para permitirlo hay que declararlo explícitamente con <code>ON DELETE CASCADE</code> (borra también los vehículos) o <code>ON DELETE SET NULL</code> (deja la FK en nulo).</li>
+<li>Actualizar la PK del padre dejando referencias apuntando al vacío.</li>
+</ul>
+<p>Lo esencial: la FK es una <b>garantía del motor</b>, no una convención del código. Vale para cualquier acceso — tu API, un script de migración o una inserción manual desde DataGrip. Ninguna validación en Java puede reemplazarla.</p>`,
+k:["PK identifica; FK referencia.","La FK impide huérfanos y borrados que romperían la relación.","Es una garantía física, válida para todos los accesos a la base."],
+m:"Bloque G: nodos <b>PK</b> y <b>FK</b>, con la flecha “apunta siempre hacia esa” y la <b>Integridad referencial</b> debajo."},
+
+{n:33,c:7,t:"¿Por qué la misma relación Cliente 1:N Vehículo se representa de forma diferente en dominio, persistencia JPA y PostgreSQL?",
+s:"Porque cada nivel tiene un propósito distinto: el dominio expresa la regla, JPA la mapea a objetos y PostgreSQL la garantiza físicamente.",
+f:`La misma relación vista en tres lugares: en la fruta real, la pera solo guarda el número de su canasta. En el formulario oficial, la pera aparece “conociendo” a la canasta como objeto completo. En el libro, es una simple columna con una cerradura que nadie puede forzar.`,
+e:`<p><b>Nivel 1 — Dominio (Java puro)</b>: <code>Vehiculo</code> guarda un <code>clienteId</code>, un dato simple. Expresa la regla de negocio ("todo vehículo pertenece a un cliente") sin arrastrar el objeto entero ni ninguna anotación. Mantiene el núcleo ligero, independiente y fácil de probar.</p>
+<p><b>Nivel 2 — Persistencia JPA</b>: <code>VehiculoJpaEntity</code> declara <code>@ManyToOne</code> y <code>@JoinColumn(name="cliente_id")</code>, con una referencia al objeto <code>ClienteJpaEntity</code>. Aquí la relación se modela como <b>navegación entre objetos</b>: es la forma idiomática en JPA, la que habilita la navegación y el control de carga (LAZY/EAGER). No es obligatoria — mapear <code>cliente_id</code> como un <code>Long</code> también sería JPA válido —, pero pierde esas capacidades.</p>
+<p><b>Nivel 3 — PostgreSQL</b>: es una columna <code>cliente_id</code> con una restricción <code>FOREIGN KEY</code>. No hay objetos ni navegación: hay un valor y una regla que el motor hace cumplir en cada operación.</p>
+<p><b>Por qué conviene que sean distintos</b>: cada nivel responde a una pregunta diferente — el dominio a "¿qué es válido?", JPA a "¿cómo se mapea a objetos?", PostgreSQL a "¿qué se garantiza pase lo que pase?". Ninguno reemplaza a los otros, y unificarlos obligaría al negocio a razonar en términos de tablas.</p>`,
+k:["Dominio = regla; JPA = mapeo navegable; PostgreSQL = garantía física.","Son tres representaciones de la misma relación, no tres relaciones.","Ninguna sustituye a las otras dos."],
+m:"Bloque G: el recuadro verde <b>“Los tres niveles de la misma relación (no son lo mismo)”</b>."},
+
+{n:34,c:7,t:"¿Por qué el dominio Vehiculo puede almacenar clienteId sin almacenar ClienteJpaEntity? ¿Qué principio lo protege?",
+s:"Porque el dominio solo necesita saber a quién pertenece, no cómo se guarda ese alguien; lo protege la inversión de dependencias.",
+f:`A la pera le basta con llevar escrito el número de su canasta. No necesita cargar la canasta entera encima, y mucho menos el renglón del libro donde está anotada esa canasta.`,
+e:`<p>Guardar <code>clienteId</code> —un valor simple— es suficiente para expresar la pertenencia, que es lo único que el negocio necesita saber. Guardar <code>ClienteJpaEntity</code> significaría meter en el núcleo una clase anotada con <code>@Entity</code>, es decir, <b>infraestructura de persistencia dentro del dominio</b>.</p>
+<p>El principio que protege esta decisión es la <b>Inversión de Dependencias</b>, materializada en la regla de dirección de la arquitectura hexagonal: el dominio no depende de nada externo. Sus consecuencias prácticas:</p>
+<ul>
+<li>El dominio se puede instanciar y probar <b>sin Hibernate y sin base de datos</b>.</li>
+<li>Cambiar el mapeo (renombrar la columna, cambiar el tipo del id) no toca ninguna regla de negocio.</li>
+<li>Se evita arrastrar <b>carga perezosa</b> hacia el núcleo: un objeto de dominio nunca debería lanzar una <code>LazyInitializationException</code>.</li>
+<li>El dominio permanece serializable y liviano, sin proxies del ORM.</li>
+</ul>
+<p>Si el caso de uso necesita datos completos del cliente, no navega desde el vehículo: los pide explícitamente a través de un puerto (por ejemplo, <code>ConsultarClienteUseCase</code>).</p>`,
+k:["El dominio guarda el id, no la entidad JPA.","Lo protege la inversión de dependencias: el núcleo no importa infraestructura.","Evita proxies, carga perezosa y dependencia de Hibernate en el negocio."],
+m:"Bloque G (Nivel 1) y Bloque F (regla de la casa nº 4: el dominio no lleva etiquetas de persistencia)."},
+
+{n:35,c:7,t:"¿Qué representan @ManyToOne y @JoinColumn(name=\"cliente_id\") en VehiculoJpaEntity? ¿Por qué no son la FK física?",
+s:"Son instrucciones de mapeo que le dicen a Hibernate cómo leer esa columna; la FK física la define y la hace cumplir PostgreSQL.",
+f:`Son las indicaciones del formulario: “esta pera pertenece a una canasta” y “ese número va escrito en esta casilla”. Pero la cerradura que impide anotar una canasta inexistente está en el libro, no en el formulario.`,
+e:`<p><b>@ManyToOne</b> declara la cardinalidad desde el lado dependiente: muchos vehículos apuntan a un cliente. Le dice al ORM que ese atributo no es un valor plano sino una <b>referencia a otra entidad</b>, y le permite resolver la navegación y generar los JOIN correspondientes.</p>
+<p><b>@JoinColumn(name="cliente_id")</b> indica <b>qué columna</b> de la tabla <code>vehiculo</code> contiene el valor de esa referencia. Sin ella, Hibernate asumiría un nombre por convención que puede no coincidir con la tabla real.</p>
+<p><b>Por qué no son la FK física</b>:</p>
+<ul>
+<li>Son <b>metadatos de mapeo</b>: existen en el código Java y solo le sirven a Hibernate para traducir entre objetos y SQL.</li>
+<li>Con <code>ddl-auto=validate</code> no crean absolutamente nada: la aplicación se limita a comprobar que la columna exista. (Con <code>create</code>/<code>update</code> Hibernate sí puede <b>generar</b> la FK en el DDL a partir de <code>@JoinColumn</code>; pero incluso entonces la anotación no <i>es</i> la restricción: la restricción vive y se aplica en PostgreSQL.)</li>
+<li>La <b>FOREIGN KEY real</b> es una restricción declarada en PostgreSQL. Es la que rechaza un <code>cliente_id</code> inexistente, y lo hace para cualquier acceso, venga de donde venga.</li>
+</ul>
+<p>Se puede tener <code>@ManyToOne</code> perfectamente escrito y <b>ninguna</b> FK en la base: el código compilaría y la relación "funcionaría" en Java, mientras la base permitiría datos huérfanos. Por eso ambas cosas deben existir, cada una en su nivel.</p>`,
+k:["@ManyToOne = cardinalidad; @JoinColumn = qué columna la almacena.","Son mapeo, no restricción: con validate no crean nada.","Sin FK en la base, la integridad no está garantizada aunque el mapeo sea correcto."],
+m:"Bloque G: <b>@ManyToOne</b> y <b>@JoinColumn</b> (Nivel 2), separados del nodo de integridad referencial (Nivel 3)."},
+
+{n:36,c:7,t:"Explique FetchType.LAZY y justifique por qué es adecuado para la relación muchos-a-uno de Vehículo hacia Cliente.",
+s:"LAZY significa traer el cliente solo si de verdad se usa; evita arrastrar datos que nadie pidió.",
+f:`Cuando alguien pregunta por una pera, Pepe no va corriendo a traer también la canasta completa con todo su contenido. Solo la trae si después se la piden de verdad.`,
+e:`<p><b>FetchType</b> define cuándo se cargan las asociaciones:</p>
+<ul>
+<li><b>EAGER</b>: al cargar la entidad, se carga también la asociada, siempre, aunque nunca se use.</li>
+<li><b>LAZY</b>: la asociación se carga solo cuando se accede a ella por primera vez. Hibernate coloca mientras tanto un <i>proxy</i>.</li>
+</ul>
+<p><b>Por qué LAZY conviene en <code>@ManyToOne</code> de Vehículo hacia Cliente</b>:</p>
+<ul>
+<li>Muchos casos de uso solo necesitan datos del vehículo (listar placas, filtrar por estado). Con EAGER, cada consulta traería además el cliente completo, sin que nadie lo pida.</li>
+<li>En listados el costo se multiplica: cargar 500 vehículos con EAGER significa traer también 500 clientes y, mal resuelto, dispara el problema <b>N+1</b>.</li>
+<li>Reduce memoria y tamaño del resultado, y mantiene las consultas predecibles.</li>
+</ul>
+<p>Detalle importante: <b>en JPA, <code>@ManyToOne</code> es EAGER por defecto</b>, así que hay que declarar <code>fetch = FetchType.LAZY</code> explícitamente. Y como contrapartida, el acceso perezoso debe ocurrir <b>dentro</b> de la transacción: tocar el proxy fuera del contexto de persistencia lanza la clásica <code>LazyInitializationException</code>. De ahí el <code>open-in-view=false</code> y la disciplina de resolver en el adaptador lo que el dominio necesite.</p>`,
+k:["LAZY = cargar solo si se usa; EAGER = cargar siempre.","@ManyToOne es EAGER por defecto: hay que declararlo LAZY.","Evita N+1 y datos innecesarios en listados."],
+m:"Bloque G: <b>FetchType.LAZY</b> colgando de @ManyToOne, y Bloque E con <b>open-in-view=false</b>."},
+
+{n:37,c:7,t:"¿Por qué VehiculoService debe validar que el cliente exista antes de persistir el vehículo, si PostgreSQL ya tiene una FOREIGN KEY?",
+s:"Porque la FK protege el dato, pero llega tarde y habla en idioma de base de datos; el service protege la experiencia y el mensaje.",
+f:`Don Roberto pregunta primero “¿existe esa canasta?” no porque el libro no vaya a protegerlo —sí lo hace—, sino para poder avisarle al cliente de forma clara antes de que el pedido se estrelle contra el libro al final del camino.`,
+e:`<p>Las dos validaciones existen a propósito, en capas distintas, y cumplen funciones distintas:</p>
+<ul>
+<li><b>La validación en el service</b> ocurre <b>antes</b> de intentar escribir. Permite responder un <code>404 Not Found</code> claro ("el cliente indicado no existe"), con un mensaje que el frontend puede mostrar y el usuario entender. El <code>409 Conflict</code> se reserva para conflictos de estado, como una placa duplicada, no para la ausencia de un recurso.</li>
+<li><b>La FOREIGN KEY</b> actúa <b>durante</b> el INSERT. Si se viola, lanza una excepción técnica de base de datos que, sin traducción, termina en un <code>500 Internal Server Error</code> con un mensaje ilegible para el usuario.</li>
+</ul>
+<p>Razones adicionales para validar en el service:</p>
+<ul>
+<li>La regla de negocio se hace <b>explícita y legible</b> en el código: se ve que registrar un vehículo exige un cliente existente.</li>
+<li>Permite <b>evitar trabajo inútil</b>: no se abre una escritura destinada a fallar.</li>
+<li>Es <b>testeable</b> sin base de datos.</li>
+<li>Puede haber reglas que la FK no puede expresar (por ejemplo, que el cliente esté activo).</li>
+</ul>
+<p>Y sin embargo la FK no sobra: entre la comprobación y el INSERT alguien podría borrar ese cliente (condición de carrera). El service da un buen mensaje; la base garantiza que el dato nunca se corrompa. <b>No es duplicar: es defensa en profundidad.</b></p>`,
+k:["El service da el mensaje claro; la FK da la garantía.","Sin validación previa, un caso normal se convertiría en un 500.","La FK sigue siendo necesaria por las condiciones de carrera."],
+m:"Bloque G: <b>Validar existencia del Socio EN EL SERVICE</b>, con su flecha punteada “aunque ya exista la integridad referencial”."},
+
+{n:38,c:7,t:"¿Por qué el módulo Vehicle debería consultar a Customer mediante ConsultarClienteUseCase y no mediante SpringDataClienteRepository? ¿Qué acoplamiento se evita?",
+s:"Porque un módulo debe hablar con otro por su puerta oficial, no metiendo la mano en su base de datos.",
+f:`Si Pepe necesita saber algo de una canasta, no se mete él solo al área de canastas a revisar: se lo pide al encargado por el canal oficial. Así cada área sigue siendo dueña de sus reglas.`,
+e:`<p>Usar <code>ConsultarClienteUseCase</code> significa entrar al módulo Customer <b>por su puerto de entrada</b>, es decir, por la interfaz pública que ese módulo decidió ofrecer. Usar <code>SpringDataClienteRepository</code> significa saltarse al dueño del módulo y leer directamente su almacenamiento.</p>
+<p><b>Acoplamientos que se evitan</b>:</p>
+<ul>
+<li><b>Acoplamiento a la persistencia ajena</b>: el módulo Vehicle quedaría atado a las entidades JPA y a las tablas de Customer. Cualquier cambio en el esquema de Customer rompería Vehicle.</li>
+<li><b>Salto de las reglas del otro módulo</b>: el repositorio devuelve filas crudas; el caso de uso aplica las reglas de Customer (cliente activo, no eliminado lógicamente, visibilidad). Leer la tabla directamente ignora todo eso.</li>
+<li><b>Pérdida de la frontera modular</b>: si cada módulo lee las tablas de los demás, el monolito modular degenera en un monolito enredado, y ya no se puede razonar sobre un módulo por separado ni extraerlo en el futuro.</li>
+<li><b>Contrato invisible</b>: por el puerto, la dependencia entre módulos es explícita y está documentada por su firma; por el repositorio, es una dependencia oculta que nadie declaró.</li>
+</ul>
+<p>La regla general: <b>un módulo se comunica con otro a través de sus casos de uso, nunca a través de sus datos.</b></p>`,
+k:["Módulo con módulo: por el puerto, nunca por la tabla.","Evita atarse a las entidades y al esquema del otro módulo.","El caso de uso aplica las reglas que el repositorio se saltaría."],
+m:"Bloque G: nodo <b>Colaboración entre módulos</b> (“consultar por UseCase, no por SpringDataRepository”)."},
+
+{n:39,c:7,t:"Diferencie la validación de negocio “la placa no debe estar duplicada” de una restricción UNIQUE en PostgreSQL. ¿Por qué mantener ambas?",
+s:"Una explica el problema al usuario; la otra impide que el dato se corrompa. Ninguna reemplaza a la otra.",
+f:`Que Don Roberto revise el registro antes de aceptar una inscripción es lo que permite decirle al cliente, con calma, “ese documento ya está registrado”. Que el libro tenga una cerradura es lo que garantiza que jamás queden dos anotaciones iguales, ni siquiera si dos personas llegan en el mismo segundo.`,
+e:`<p><b>Validación de negocio</b> (en el service): antes de guardar, se consulta si ya existe un vehículo con esa placa. Si existe, se lanza una excepción de negocio (<code>PlacaDuplicadaException</code>) que el manejador global traduce a un <code>409 Conflict</code> con un mensaje comprensible.</p>
+<p><b>Restricción UNIQUE</b> (en PostgreSQL): una regla física respaldada por un índice único. El motor rechaza cualquier intento de insertar un duplicado, venga de tu API, de otro servicio o de un script manual.</p>
+<p><b>Por qué es razonable mantener las dos</b>:</p>
+<ul>
+<li><b>Calidad del mensaje</b>: sola, la constraint produce una excepción técnica que sin traducción termina en un 500 ilegible. La validación previa da un error semántico y accionable.</li>
+<li><b>Concurrencia</b>: sola, la validación en Java es insuficiente. Dos peticiones simultáneas pueden consultar a la vez, ambas recibir "no existe" y ambas insertar. Solo el motor, con su índice único, corta ese caso.</li>
+<li><b>Alcance</b>: la validación protege el camino de tu aplicación; la constraint protege el dato frente a <b>todos</b> los caminos, incluidas migraciones y cargas masivas.</li>
+</ul>
+<p>Son <b>capas complementarias</b>, no redundantes: una cuida la experiencia, la otra cuida la verdad. Lo ideal es además capturar la violación de constraint y traducirla también a 409, por si la carrera ocurre.</p>`,
+k:["Negocio = mensaje claro; UNIQUE = garantía frente a la concurrencia.","Solo la base resuelve dos inserciones simultáneas.","La constraint protege también los accesos que no pasan por tu API."],
+m:"Bloque H: <b>Defensa en profundidad</b> — segunda barrera (negocio) y tercera barrera (integridad física)."},
+
+{n:40,c:7,t:"Explique el recorrido completo para registrar un vehículo, desde el cliente HTTP hasta la FK cliente_id en PostgreSQL y la respuesta.",
+s:"Entra por el Controller, se valida el formato, el caso de uso comprueba que el cliente exista, el adaptador lo mapea a entidad y PostgreSQL confirma la FK.",
+f:`Carmen pide agregar una pera a su canasta. Ana revisa que el papelito esté bien llenado, Don Roberto revisa que la canasta exista y que la regla se cumpla, Pepe traduce la pera al renglón del libro y la anota con el número de canasta, y el libro confirma que esa canasta sí existe. Ana entrega el recibo sellado.`,
+e:`<p>Capa por capa, señalando quién interviene en cada tramo:</p>
+<ul>
+<li><b>1. Cliente HTTP</b> envía <code>POST /api/vehiculos</code> con un JSON que incluye la placa y el <code>clienteId</code>.</li>
+<li><b>2. Spring MVC</b> (infraestructura de entrada) enruta la petición al método correspondiente de <code>VehiculoController</code>.</li>
+<li><b>3. Jackson</b> deserializa el JSON en el <b>Request DTO</b> (<code>CrearVehiculoRequest</code>), y <code>@Valid</code> ejecuta la <b>validación de formato</b>. Si falla, se corta aquí con un 400.</li>
+<li><b>4. Web mapper</b> traduce el Request DTO a un objeto de <b>dominio</b> <code>Vehiculo</code>, que lleva el <code>clienteId</code> como valor simple.</li>
+<li><b>5. El Controller invoca el <b>Port IN</b></b> (<code>RegistrarVehiculoUseCase</code>). Aquí termina la infraestructura de entrada.</li>
+<li><b>6. El caso de uso</b> (<code>VehiculoService</code>, capa de aplicación) abre la frontera transaccional con <code>@Transactional</code>, comprueba mediante el puerto correspondiente que el cliente exista y aplica las reglas de negocio (placa no duplicada, formato de dominio válido).</li>
+<li><b>7. El caso de uso llama al <b>Port OUT</b></b> (<code>VehiculoRepositoryPort</code>), una interfaz definida por el núcleo.</li>
+<li><b>8. El Adapter OUT</b> (<code>VehiculoPersistenceAdapter</code>) implementa ese puerto y, con el <b>persistence mapper</b>, convierte el dominio en <code>VehiculoJpaEntity</code>, donde <code>@ManyToOne</code> + <code>@JoinColumn(name="cliente_id")</code> definen el mapeo de la relación.</li>
+<li><b>9. Spring Data JPA e Hibernate</b> generan el SQL y lo ejecutan por <b>JDBC</b>.</li>
+<li><b>10. PostgreSQL</b> valida la <b>FOREIGN KEY cliente_id</b> y las demás constraints (UNIQUE de la placa, NOT NULL) y confirma el INSERT dentro de la transacción.</li>
+<li><b>11. La vuelta</b>: entidad → dominio → <b>Response DTO</b> → JSON, y el Controller responde <b>201 Created</b> con la cabecera <code>Location</code>.</li>
+<li><b>12. Si algo falla</b>: cuando el fallo ocurre <b>dentro</b> de la frontera <code>@Transactional</code>, se revierte la transacción; si ocurre antes (validación de formato, paso 3), no hay nada que revertir porque la transacción todavía no existía. En ambos casos el <code>@RestControllerAdvice</code> captura la excepción y responde un <code>ApiError</code> con el código semántico correcto.</li>
+</ul>`,
+k:["Entrada: Controller → DTO → validación de formato → mapper → Port IN.","Núcleo: caso de uso con reglas y transacción → Port OUT.","Salida: adapter → mapper → JPA/Hibernate → JDBC → PostgreSQL (FK)."],
+m:"Bloque I completo, con el detalle de la FK del Bloque G en el paso de PostgreSQL."},
+
+{n:41,c:8,t:"¿Por qué una API profesional necesita un contrato de error consistente? ¿Qué ventajas aporta un objeto como ApiError?",
+s:"Porque los errores también son parte del contrato: si cada fallo se ve distinto, nadie puede reaccionar a ellos de forma automática.",
+f:`Lucía siempre entrega la misma notita, con las mismas casillas: fecha, qué pasó, sobre qué pedido. Da igual si el problema fue el papelito mal llenado o una fruta inexistente — el formato de la disculpa nunca cambia, y por eso cualquiera sabe leerla.`,
+e:`<p>Un <b>contrato de error consistente</b> significa que todos los fallos de la API se devuelven con la misma estructura y con códigos HTTP coherentes. El error deja de ser una improvisación y pasa a ser parte documentada de la API.</p>
+<p><b>ApiError</b> es normalmente un <code>record</code> con campos fijos: marca de tiempo, código HTTP, tipo o título del error, mensaje legible, la ruta afectada y —cuando aplica— el detalle por campo en los errores de validación.</p>
+<p><b>Ventajas concretas</b>:</p>
+<ul>
+<li><b>Para el frontend</b>: puede programar una única función de manejo de errores; sabe siempre dónde leer el mensaje, y puede decidir por código si reintenta, si muestra un aviso o si resalta un campo del formulario.</li>
+<li><b>Para las pruebas</b>: se pueden escribir asserts estables sobre el cuerpo del error; los tests no se rompen porque un mensaje cambie de forma.</li>
+<li><b>Para el diagnóstico</b>: con timestamp y ruta, un error reportado por un usuario se puede correlacionar con los logs del servidor.</li>
+<li><b>Para la seguridad</b>: al construir la respuesta en un solo lugar, se evita filtrar trazas internas, nombres de tablas o mensajes del driver.</li>
+</ul>
+<p>Sin este contrato aparece el antipatrón clásico: devolver <code>200 OK</code> con un texto que dice "error", obligando al cliente a adivinar leyendo cadenas.</p>`,
+k:["El error es parte del contrato de la API, no un accidente.","Formato único = manejo genérico en el cliente y tests estables.","Un solo punto de construcción evita filtrar detalles internos."],
+m:"Bloque H: nodo <b>ApiError</b> con sus cuatro códigos colgando."},
+
+{n:42,c:8,t:"Diferencie validación de formato, validación de negocio e integridad física de base de datos, con un ejemplo de cada una.",
+s:"Formato: ¿está bien escrito? Negocio: ¿tiene sentido según las reglas? Integridad: ¿la base permite guardarlo?",
+f:`Tres barreras, una detrás de otra: Ana revisa que el papelito esté bien llenado, Don Roberto revisa que la regla del club se cumpla, y el libro mismo se niega a aceptar algo imposible. Aunque las dos primeras fallen, la tercera sigue ahí.`,
+e:`<ul>
+<li><b>Validación de formato</b> — en la frontera, sobre el Request DTO, con Jakarta Validation y <code>@Valid</code>. Comprueba la <b>forma</b> del dato, sin consultar nada. <i>Ejemplo en ParkFlow</i>: la placa no puede venir vacía y debe cumplir un patrón; el documento debe tener la longitud correcta. Falla → <b>400 Bad Request</b>.</li>
+<li><b>Validación de negocio</b> — en la capa de aplicación, dentro del caso de uso. Comprueba <b>reglas del dominio</b> y normalmente necesita consultar el estado del sistema. <i>Ejemplo</i>: que no exista ya un vehículo con esa placa, o que el cliente indicado exista y esté activo. Falla → <b>409 Conflict</b> o <b>404 Not Found</b> según el caso.</li>
+<li><b>Integridad física</b> — en PostgreSQL, mediante constraints: <code>PK</code>, <code>FK</code>, <code>UNIQUE</code>, <code>NOT NULL</code>, <code>CHECK</code>. Es la <b>última barrera</b> y la única válida para todos los accesos, incluidos los que no pasan por tu aplicación. <i>Ejemplo</i>: la FK <code>cliente_id</code> rechaza un vehículo huérfano.</li>
+</ul>
+<p><b>Por qué las tres</b>: cada una detiene lo que las otras no pueden. El formato corta lo mal escrito sin gastar recursos; el negocio corta lo que está bien escrito pero no tiene sentido, y da un mensaje claro; la base garantiza que, pase lo que pase —incluida una condición de carrera o un script externo—, el dato almacenado sigue siendo coherente.</p>`,
+k:["Formato = forma; negocio = sentido; integridad = garantía final.","Cada nivel tiene su capa y su código HTTP típico.","No son redundantes: fallan por motivos distintos."],
+m:"Bloque H: recuadro <b>Defensa en profundidad</b> con sus tres barreras numeradas."},
+
+{n:43,c:8,t:"¿Qué función cumple @RestControllerAdvice y por qué evita repetir bloques try/catch en cada Controller?",
+s:"Es el manejador global de errores: centraliza en un solo lugar la traducción de excepciones a respuestas HTTP.",
+f:`Lucía es la única encargada de recibir cualquier queja, sin importar en qué parte de la tienda ocurrió. Si cada vendedora improvisara su propia forma de responder, la tienda contestaría distinto según quién atendiera ese día.`,
+e:`<p><b>@RestControllerAdvice</b> marca una clase como manejador global de excepciones para todos los Controllers de la aplicación. Cuando un método de un Controller —o cualquier capa por debajo— lanza una excepción que no se captura, Spring la intercepta antes de responder y busca en esa clase un método capaz de tratarla.</p>
+<p><b>Por qué evita los try/catch repetidos</b>:</p>
+<ul>
+<li><b>Un solo lugar, una sola política</b>: la traducción "excepción → código HTTP + ApiError" se escribe una vez y aplica a toda la API. Sin él, cada método de cada Controller necesitaría su propio bloque, y con el tiempo cada uno respondería de forma ligeramente distinta.</li>
+<li><b>Controllers limpios</b>: el Controller queda dedicado a su responsabilidad real (traducir HTTP ↔ dominio) en lugar de mezclarla con manejo de errores.</li>
+<li><b>Consistencia garantizada</b>: añadir una excepción nueva es añadir un método aquí; nadie puede olvidarse de manejarla en un endpoint concreto.</li>
+<li><b>Menos riesgo de fugas</b>: al construir todas las respuestas de error en un punto, no se escapan trazas ni mensajes internos por descuido.</li>
+</ul>
+<p>Es, además, lo que permite que las excepciones de negocio no sepan nada de HTTP: ellas expresan qué regla se rompió y el advice decide cómo se ve eso en la respuesta.</p>`,
+k:["Manejador global: una política de errores para toda la API.","Deja los Controllers dedicados a traducir, no a capturar.","Añadir un error nuevo = un método nuevo, no tocar N endpoints."],
+m:"Bloque H: <b>@RestControllerAdvice</b> con su flecha punteada roja hacia “✗ capturar Exception genérica en cada Controller”."},
+
+{n:44,c:8,t:"¿Qué función cumple @ExceptionHandler y cómo permite traducir una excepción interna a una respuesta HTTP con semántica adecuada?",
+s:"Es la ficha concreta que atiende un tipo de excepción y decide qué código y qué cuerpo devolver.",
+f:`Dentro del escritorio de Lucía hay una ficha distinta para cada tipo de queja: una para “no se encontró”, otra para “ya existe”, otra para “el papelito está mal”. Ella elige la ficha según lo que llegó.`,
+e:`<p><b>@ExceptionHandler</b> se coloca sobre un método dentro del <code>@RestControllerAdvice</code> e indica <b>qué tipo de excepción</b> atiende ese método. Cuando ocurre una excepción, Spring busca el manejador cuyo tipo coincida (o el más específico entre los compatibles) y lo invoca.</p>
+<p><b>Cómo ocurre la traducción</b>, paso a paso:</p>
+<ul>
+<li>El dominio o el caso de uso lanza una excepción que habla el idioma del negocio: <code>ClienteNoEncontradoException</code>, <code>PlacaDuplicadaException</code>. No sabe nada de HTTP.</li>
+<li>El manejador correspondiente <b>decide la semántica</b>: "no encontrado" → <code>404</code>; "duplicado" → <code>409</code>; error de validación (<code>MethodArgumentNotValidException</code>) → <code>400</code> con el detalle por campo; cualquier otra no prevista → <code>500</code> con mensaje genérico y traza solo en el log.</li>
+<li>Construye el <code>ApiError</code> con el mensaje ya orientado al consumidor y lo devuelve en un <code>ResponseEntity</code> con ese código.</li>
+</ul>
+<p>El valor arquitectónico es la <b>separación de responsabilidades</b>: el negocio expresa <i>qué regla se rompió</i>; el manejador decide <i>cómo se comunica eso por HTTP</i>. Cada uno cambia por su cuenta: puedes ajustar los códigos de la API sin tocar una sola regla del dominio.</p>`,
+k:["Un handler por tipo de excepción, con su código HTTP.","El negocio dice qué falló; el handler dice cómo se comunica.","Un handler genérico final evita que se escapen 500 sin formato."],
+m:"Bloque H: <b>@ExceptionHandler</b> (“una ficha por tipo de error”) construyendo el ApiError."},
+
+{n:45,c:8,t:"Compare 400 Bad Request, 404 Not Found, 409 Conflict y 500 Internal Server Error. ¿Qué situación representa cada uno?",
+s:"400 lo escribiste mal, 404 no existe, 409 existe pero choca con una regla, 500 me equivoqué yo.",
+f:`Las cuatro notitas de Lucía: “tu papelito está mal escrito”, “esa manzana no está en el registro”, “ya hay una manzana con ese documento”, y “se rompió algo aquí adentro, no fue tu culpa”.`,
+e:`<ul>
+<li><b>400 Bad Request</b> — la petición es <b>inválida en su forma</b>: JSON mal formado, campo obligatorio ausente, tipo incorrecto, patrón no cumplido. Lo detecta la validación de formato. Reintentar lo mismo volverá a fallar: el cliente debe corregir.</li>
+<li><b>404 Not Found</b> — la petición es correcta, pero el <b>recurso identificado no existe</b>: <code>GET /api/clientes/999</code>, o registrar un vehículo para un cliente inexistente. Es una respuesta normal, no un fallo del sistema.</li>
+<li><b>409 Conflict</b> — la petición es correcta y el recurso existe o podría existir, pero <b>choca con una regla o con el estado actual</b>: placa duplicada, documento ya registrado, intentar reservar un espacio ya ocupado, una transición de estado no permitida. Es el código propio de las <b>violaciones de reglas de negocio</b>.</li>
+<li><b>500 Internal Server Error</b> — el cliente hizo todo bien y <b>el servidor falló</b>: un <code>NullPointerException</code>, la conexión con PostgreSQL caída, un bug. Nunca debe usarse para errores previsibles: un 500 que aparece por una regla de negocio no manejada es un defecto de diseño.</li>
+</ul>
+<p>La distinción clave para la defensa: <b>4xx es responsabilidad del cliente, 5xx es responsabilidad del servidor</b>. Y dentro de 4xx: 400 es "mal escrito", 404 es "no está", 409 es "está bien escrito y sí existe el contexto, pero no se puede por una regla".</p>`,
+k:["400 forma · 404 existencia · 409 regla o estado · 500 fallo interno.","409 es el código natural de las excepciones de negocio.","Un 500 evitable indica una excepción no manejada."],
+m:"Bloque H: los cuatro códigos y sus flechas “si falla, produce” desde cada tipo de validación."},
+
+{n:46,c:8,t:"¿Por qué una excepción de negocio como PlacaDuplicadaException no debería contener ResponseEntity ni conocer conceptos HTTP?",
+s:"Porque la regla de negocio existe con independencia del canal por el que llegó la petición.",
+f:`La queja interna dice “esta manzana ya está registrada”. No dice “devuélvele al cliente un sello amarillo número 409” — eso lo decide Lucía, que es quien atiende al público. La regla del club vale igual aunque el pedido hubiera llegado por teléfono.`,
+e:`<p>Una excepción de negocio pertenece al <b>núcleo</b>: expresa que se rompió una regla del dominio. Si llevara dentro un <code>ResponseEntity</code>, un código de estado o cabeceras HTTP, estaría importando tipos de Spring Web dentro del negocio.</p>
+<p><b>Consecuencias de hacerlo mal</b>:</p>
+<ul>
+<li><b>Rompe la regla de dependencias</b>: el núcleo pasaría a depender de la infraestructura web, justo lo que la arquitectura hexagonal evita.</li>
+<li><b>Ata la regla a un canal</b>: si mañana ese caso de uso se invoca desde un proceso por lotes o una CLI, ¿qué sentido tendría un 409 ahí? La regla es la misma; la representación no.</li>
+<li><b>Duplica la política de errores</b>: el código HTTP quedaría decidido en decenas de sitios en lugar de en el manejador global, y sería imposible cambiarlo de forma coherente.</li>
+<li><b>Dificulta las pruebas</b>: probar la regla exigiría tipos web en el classpath del test.</li>
+</ul>
+<p><b>La forma correcta</b>: la excepción lleva solo información de negocio — qué regla se rompió y con qué dato (la placa concreta, por ejemplo). El <code>@ExceptionHandler</code> es quien decide que eso se comunica como <code>409 Conflict</code> y arma el <code>ApiError</code>. Así la traducción vive en un único lugar, del lado de la infraestructura.</p>`,
+k:["La excepción de negocio no importa tipos de Spring Web.","La misma regla debe servir por HTTP, por lotes o por CLI.","El código HTTP lo decide el handler, no el dominio."],
+m:"Bloque H: <b>Excepción de negocio</b> con su nota “No conoce HTTP ni ResponseEntity”."},
+
+{n:47,c:8,t:"¿Por qué capturar Exception de forma genérica en todos los Controllers es una mala práctica de diseño y mantenimiento?",
+s:"Porque oculta lo que realmente pasó, iguala errores distintos y esparce por toda la aplicación una política que debería estar en un solo sitio.",
+f:`Sería que cada vendedora, ante cualquier problema, dijera siempre lo mismo: “algo salió mal”. El cliente no sabría si escribió mal el papelito o si la tienda se quedó sin sistema — y nadie podría saber después qué pasó realmente.`,
+e:`<p>Capturar <code>Exception</code> —la clase más general— en cada Controller parece defensivo, pero causa varios problemas serios:</p>
+<ul>
+<li><b>Pierde la semántica</b>: un dato inválido (400), un recurso inexistente (404) y una regla rota (409) terminan devolviendo lo mismo. El cliente pierde toda capacidad de reaccionar de forma distinta.</li>
+<li><b>Oculta defectos reales</b>: un <code>NullPointerException</code>, que es un bug, queda enmascarado como si fuera un error esperado. Si además se traga la traza, el fallo se vuelve invisible en producción.</li>
+<li><b>Duplica y desincroniza la política</b>: la misma lógica repetida en cada Controller termina divergiendo. Cambiar el formato del error obliga a tocar decenas de archivos, y siempre queda uno olvidado.</li>
+<li><b>Ensucia la responsabilidad</b>: el Controller deja de ser un traductor HTTP y se vuelve, además, un gestor de errores.</li>
+<li><b>Riesgo de filtrar información</b>: es frecuente que ese <code>catch</code> genérico devuelva <code>e.getMessage()</code>, que puede exponer nombres de tablas, SQL o rutas internas.</li>
+</ul>
+<p><b>La alternativa correcta</b>: no capturar nada en el Controller y dejar que las excepciones suban hasta el <code>@RestControllerAdvice</code>, donde hay un <code>@ExceptionHandler</code> específico por tipo y <b>uno solo</b> genérico como red de seguridad final, que registra la traza completa en el log y devuelve al cliente un 500 sobrio y sin detalles internos.</p>`,
+k:["Un catch genérico iguala errores que deben distinguirse.","Repetir la política en cada Controller la vuelve inconsistente.","Lo genérico va en el advice, una sola vez, y con log de la traza."],
+m:"Bloque H: el recuadro rojo “✗ capturar Exception genérica en cada Controller”, reemplazado por el advice."},
+
+{n:48,c:8,t:"Defina una transacción y explique las propiedades conceptuales que se buscan cuando varias operaciones deben confirmarse o revertirse juntas.",
+s:"Es una unidad de trabajo indivisible: o se cumplen todas las operaciones, o no se cumple ninguna.",
+f:`Si Don Roberto arma una canasta combinada con varias frutas y a la mitad falla una, la canasta entera se cancela en el libro. Nunca queda anotada a medias, con una fruta sí y otra no.`,
+e:`<p>Una <b>transacción</b> es un conjunto de operaciones sobre la base de datos que se tratan como una sola unidad de trabajo: al final se confirman todas (<b>commit</b>) o se deshacen todas (<b>rollback</b>). Sirve para que el sistema nunca quede en un estado intermedio incoherente.</p>
+<p>Las propiedades que se buscan son las conocidas como <b>ACID</b>:</p>
+<ul>
+<li><b>Atomicidad</b>: todo o nada. Si el segundo INSERT falla, el primero se deshace. Es la propiedad central de la pregunta.</li>
+<li><b>Consistencia</b>: la transacción lleva la base de un estado válido a otro estado válido; todas las constraints se siguen cumpliendo al terminar.</li>
+<li><b>Aislamiento</b>: las transacciones concurrentes no se pisan; los cambios a medio hacer de una no son visibles para otra.</li>
+<li><b>Durabilidad</b>: una vez confirmada, la información persiste aunque el servidor se caiga inmediatamente después.</li>
+</ul>
+<p><b>Por qué importa en ParkFlow</b>: registrar un cliente junto con su primer vehículo son dos escrituras. Sin transacción, un fallo en la segunda dejaría un cliente registrado a medias, con datos incoherentes que ninguna pantalla sabría interpretar. Con transacción, o quedan los dos o no queda ninguno, y el usuario puede reintentar limpiamente.</p>`,
+k:["Transacción = unidad de trabajo indivisible (commit o rollback).","Atomicidad es la propiedad que responde a “juntas o ninguna”.","Sin ella quedan estados intermedios imposibles de interpretar."],
+m:"Bloque H: <b>@Transactional</b> con su nodo “Todo se confirma o todo se revierte”."},
+
+{n:49,c:8,t:"¿Qué función cumple @Transactional y por qué la frontera transaccional se ubica en el caso de uso y no en el Controller?",
+s:"Marca dónde empieza y termina la unidad de trabajo, y ese límite coincide con la operación de negocio, no con la petición HTTP.",
+f:`Quien decide que la canasta se guarda completa o se cancela completa es Don Roberto, que conoce las reglas — no Ana, que solo recibe el pedido en el mostrador. La operación se agrupa donde se decide el negocio.`,
+e:`<p><b>@Transactional</b> delimita una transacción de forma declarativa: Spring abre la transacción al entrar al método, hace <b>commit</b> si termina bien y <b>rollback</b> si se propaga una excepción no controlada. No hay que escribir <code>begin</code> ni <code>commit</code> a mano.</p>
+<p><b>Por qué la frontera va en el Application Service (caso de uso)</b>:</p>
+<ul>
+<li><b>El caso de uso es la operación de negocio completa</b>: "registrar un vehículo" es lo que debe ser atómico. La transacción debe cubrir exactamente ese alcance, ni más ni menos.</li>
+<li><b>El Controller es un detalle de entrada</b>: si la transacción viviera ahí, el mismo caso de uso invocado desde un proceso por lotes o una CLI se quedaría sin transacción. La atomicidad no puede depender del canal.</li>
+<li><b>Alcance controlado</b>: una transacción abierta en el Controller permanecería abierta durante la serialización de la respuesta, reteniendo la conexión más tiempo del necesario. Ojo con no confundirlo: <code>open-in-view=false</code> resuelve un problema emparentado pero distinto — cierra el <b>contexto de persistencia</b> al salir de la capa de aplicación, obligando a resolver el LAZY dentro del caso de uso; no controla la frontera transaccional.</li>
+<li><b>Coherencia con las capas</b>: decidir cuándo algo se confirma es una decisión de negocio, no de protocolo.</li>
+</ul>
+<p>Buenas prácticas asociadas: usar <code>@Transactional(readOnly = true)</code> en consultas, mantener las transacciones cortas —sin llamadas a servicios externos lentos dentro—, y recordar que, por defecto, Spring hace rollback ante excepciones no verificadas.</p>`,
+k:["Delimita la unidad de trabajo: commit al salir bien, rollback ante excepción.","El límite es la operación de negocio, no la petición HTTP.","En el Controller alargaría la transacción y la ataría al canal."],
+m:"Bloque H: <b>Frontera natural: el Application Service (NO el Controller)</b>; Bloque F la ubica en la capa de aplicación."},
+
+{n:50,c:8,t:"Explique el flujo completo de error: desde una petición inválida o un conflicto de negocio hasta GlobalExceptionHandler, ApiError y el código HTTP final. ¿Y si el fallo viene de una constraint de PostgreSQL?",
+s:"El error nace donde se detecta, sube sin traducir, y solo el manejador global lo convierte en un ApiError con su código.",
+f:`Da igual dónde surja el problema —en el mostrador, en la oficina del gerente o en la bodega—: la queja siempre termina en el escritorio de Lucía, que la convierte en una notita clara con el sello correcto. Nunca sale del local un error críptico ni un silencio.`,
+e:`<p><b>Caso 1 — petición inválida (formato)</b>: <code>@Valid</code> falla sobre el Request DTO y Spring lanza <code>MethodArgumentNotValidException</code>. La lógica de negocio <b>nunca llega a ejecutarse</b>. El handler correspondiente arma un <code>ApiError</code> con el detalle por campo y responde <b>400</b>.</p>
+<p><b>Caso 2 — conflicto de negocio</b>: el formato es correcto, así que el flujo entra al caso de uso. Allí se detecta que la placa ya existe y se lanza <code>PlacaDuplicadaException</code>, una excepción de dominio que no sabe nada de HTTP. Al propagarse fuera del método <code>@Transactional</code>, Spring hace <b>rollback</b> de lo que hubiera empezado. El <code>@ExceptionHandler</code> de ese tipo responde <b>409</b> con su <code>ApiError</code>.</p>
+<p><b>Caso 3 — recurso inexistente</b>: el caso de uso no encuentra el cliente y lanza <code>ClienteNoEncontradoException</code> → <b>404</b>.</p>
+<p><b>Caso 4 — fallo desde una constraint de PostgreSQL</b>: la operación pasa todas las validaciones previas, pero al hacer el INSERT el motor rechaza la fila (UNIQUE duplicado por una condición de carrera, FK inexistente, NOT NULL). Hibernate propaga el error y Spring lo envuelve como <code>DataIntegrityViolationException</code>. Aquí hay dos caminos:</p>
+<ul>
+<li><b>Sin manejo específico</b>: cae en el handler genérico y se responde <b>500</b>, un error técnico poco informativo para el usuario.</li>
+<li><b>Con manejo adecuado</b> (lo correcto): un <code>@ExceptionHandler(DataIntegrityViolationException.class)</code> la interpreta y responde <b>409</b> —o 400 según el caso— con un mensaje comprensible, registrando la causa técnica solo en el log.</li>
+</ul>
+<p><b>Detalle de temporalidad</b> que suele preguntarse: con JPA el INSERT normalmente no se envía al llamar a <code>save</code>, sino en el <b>flush del commit</b>. Por eso la violación de constraint se manifiesta al cerrar la transacción —ya fuera del método <code>@Transactional</code>— y no puede capturarse cómodamente dentro del caso de uso, salvo forzando un <code>flush()</code> explícito. Cuando el handler la recibe, el rollback ya ocurrió.</p>
+<p><b>El principio que unifica los cuatro casos</b>: la excepción se lanza donde se detecta el problema, viaja hacia arriba sin traducirse, la transacción se revierte, y <b>un único lugar</b> —el <code>@RestControllerAdvice</code>— decide el código HTTP y construye la respuesta. Así el cliente siempre recibe un error con la misma forma, y el detalle interno nunca sale del servidor.</p>`,
+k:["400 se corta antes del negocio; 409 y 404 nacen en el caso de uso.","Una violación de constraint debe traducirse a 409, no quedar en 500.","Rollback primero, traducción después, y siempre en un solo lugar."],
+m:"Bloque I: las tres ramas rojas punteadas confluyendo en GlobalExceptionHandler → ApiError; Bloque H aporta el detalle de cada código."}
+];
+
+
+const GLOSARIO = [
+{b:"A · Fundamentos web, HTTP y REST", col:"#1E8A82", t:[
+["Cliente","El software que inicia la petición (la app web, la app móvil, Postman). No es la persona."],
+["Servidor","El backend que recibe la petición, la procesa y responde. Único que toca la base de datos."],
+["HTTP","El protocolo de pedidos y respuestas entre cliente y servidor."],
+["HTTPS","El mismo HTTP pero cifrado. La S es de <i>Secure</i>."],
+["REST","Estilo de diseño: organizar todo por recursos y usar siempre los mismos verbos HTTP."],
+["Recurso","La \"cosa\" del negocio sobre la que se opera: clientes, vehículos, socios, membresías."],
+["URI / URL","La dirección única que identifica un recurso: <code>/api/clientes/7</code>."],
+["API REST","El contrato completo: qué operaciones existen, qué se envía, qué se devuelve y qué errores hay."],
+["Endpoint","Una operación concreta de esa API: un método HTTP + una ruta."],
+["Stateless","El servidor no recuerda peticiones anteriores; cada una llega completa y autosuficiente."],
+["GET","Consultar sin modificar. Seguro e idempotente."],
+["POST","Crear un recurso nuevo. NO es idempotente: repetirlo crea duplicados."],
+["PUT","Crear o reemplazar por completo el recurso de una URI conocida. Idempotente."],
+["PATCH","Modificar solo algunos campos. No garantiza idempotencia."],
+["DELETE","Eliminar el recurso indicado. Idempotente."],
+["Idempotencia","Repetir la misma petición deja el sistema en el mismo estado final."],
+["Códigos HTTP","Número de tres dígitos que resume el resultado: 2xx bien, 4xx culpa del cliente, 5xx culpa del servidor."],
+["200 / 201 / 204","OK con datos · recurso creado · éxito sin contenido que devolver."],
+["400 / 404 / 409 / 500","Petición mal formada · recurso inexistente · choca con una regla · fallo interno del servidor."],
+["JSON","Formato de texto en que viajan los datos: pares clave-valor entre llaves."],
+["Headers","Metadatos del sobre: <code>Content-Type</code>, <code>Accept</code>, <code>Authorization</code>."],
+["Body","El contenido real de la petición o respuesta, normalmente JSON."],
+["Parámetros","De ruta (identifican) o de consulta (filtran, ordenan, paginan)."]
+]},
+{b:"B · Spring, IoC/DI y Spring MVC", col:"#4C5FD6", t:[
+["Spring Framework","El contenedor que crea y entrega los objetos de la aplicación."],
+["Spring Boot","Spring ya preconfigurado y con servidor embebido: arranca sin montar infraestructura a mano."],
+["Spring MVC","El módulo web que recibe cada petición y decide qué método del Controller la atiende."],
+["DispatcherServlet","La puerta única por la que entra toda petición antes de repartirse."],
+["IoC","Inversión de Control: el framework crea los objetos, no tu código con <code>new</code>."],
+["DI","Inyección de Dependencias: el contenedor entrega a cada clase lo que necesita."],
+["Inyección por constructor","La forma preferida de DI: dependencias obligatorias, explícitas y testeables."],
+["Component Scan","El barrido que busca las clases anotadas y las registra en el contenedor."],
+["Bean","Cualquier objeto creado y gestionado por el contenedor de Spring."],
+["@RestController","Marca la clase como puerta HTTP que devuelve datos (JSON), no vistas."],
+["@RequestMapping","Ruta base de la clase. En un método, sin <code>method=</code>, mapea todos los verbos."],
+["@GetMapping / @PostMapping","Atajos que atan un método a un verbo concreto y hacen explícita la intención."],
+["@PathVariable","Lee un valor de la ruta: identifica cuál recurso."],
+["@RequestParam","Lee un parámetro de la query string: filtra, ordena, pagina."],
+["@RequestBody","Lee el cuerpo JSON y lo convierte en el Request DTO."],
+["ResponseEntity","Permite decidir con precisión el código HTTP, los headers y el cuerpo de la respuesta."]
+]},
+{b:"C · DTOs, validación y contrato", col:"#8151C7", t:[
+["DTO","Objeto de transferencia: define exactamente qué datos entran o salen por la API."],
+["Request DTO","Lo que el cliente puede enviar. Deja fuera id, fechas de auditoría y estado interno."],
+["Response DTO","Lo que se expone hacia afuera. Permite ocultar campos y estabilizar el contrato."],
+["record","Tipo de Java inmutable: se llena una vez y no se modifica. Ideal para DTOs y ApiError."],
+["Jackson","La librería que convierte JSON ↔ objetos Java (deserializa al entrar, serializa al salir)."],
+["Jakarta Validation","Las reglas declarativas del DTO: <code>@NotBlank</code>, <code>@Email</code>, <code>@Size</code>, <code>@Pattern</code>."],
+["@Valid","Dispara esa validación en el parámetro del Controller, antes de ejecutar la lógica."],
+["Validación de formato","¿Está bien escrito? La hace el Controller. Si falla → 400."],
+["Validación de negocio","¿Tiene sentido según las reglas? La hace el service. Si falla → 409 o 404."],
+["Mapper","El traductor entre DTO, dominio y entidad JPA. Vive en el adaptador, nunca en el dominio."]
+]},
+{b:"D · Herramientas de desarrollo", col:"#B0507A", t:[
+["Postman","Cliente externo para probar la API enviando peticiones reales sin frontend."],
+["IntelliJ HTTP Client","Lo mismo pero dentro del IDE, en archivos <code>.http</code> que se versionan con el código."],
+["IntelliJ IDEA","El entorno de desarrollo donde se escribe y depura el proyecto Java."],
+["Maven","Gestor de dependencias y construcción: descarga las librerías declaradas en el <code>pom.xml</code>."],
+["Git","Control de versiones: registra cada cambio, quién lo hizo y cuándo."],
+["DataGrip / pgAdmin","Cliente de base de datos para comprobar con un SELECT que la fila realmente existe."],
+["Debugger","Permite pausar la ejecución y ver el estado real de cada variable en ese instante."],
+["Breakpoint","El punto donde el debugger detiene la ejecución."],
+["Stack trace","El informe de la cadena de llamadas que llevó al error. Va al log, nunca al cliente."],
+["Logs SQL","Con <code>show-sql</code>, muestran el SQL que Hibernate realmente ejecutó."]
+]},
+{b:"E · Persistencia: de Java a PostgreSQL", col:"#C6702F", t:[
+["PostgreSQL","El motor relacional donde viven las tablas, las constraints y los datos reales."],
+["Schema","Una <b>sección con nombre dentro</b> de la base que agrupa tablas. No es lo mismo que la base: puedes conectarte a la base correcta y apuntar al schema equivocado."],
+["JDBC","La API de bajo nivel de Java que realmente envía el SQL a la base."],
+["ORM","La técnica de traducir automáticamente entre objetos Java y filas de tablas."],
+["JPA","La <b>especificación</b>: define las anotaciones y el contrato. Por sí sola no ejecuta nada."],
+["Hibernate","La <b>implementación</b> de JPA: genera y ejecuta el SQL de verdad."],
+["Spring Data JPA","Capa de conveniencia sobre JPA: crea los repositorios a partir de interfaces."],
+["JpaRepository","La interfaz de Spring Data con el CRUD listo. Es infraestructura, no modelo de dominio."],
+["@Entity / @Table","Declaran la clase como tipo gestionado por JPA y a qué tabla (y schema) corresponde."],
+["@Id / @GeneratedValue","Cuál es la clave primaria y quién genera su valor."],
+["@Column","El puente entre el nombre del atributo en Java y el de la columna en SQL."],
+["ddl-auto=validate","Al arrancar, Hibernate solo verifica que el mapeo calce con la base. No modifica nada."],
+["create / create-drop","Recrean el esquema (y create-drop lo borra al cerrar). Destruyen datos: nunca fuera de tests."],
+["open-in-view=false","Cierra el contexto de persistencia al salir de la capa de aplicación."],
+["Contexto de persistencia","La \"sesión\" donde Hibernate mantiene las entidades gestionadas durante la transacción."],
+["INSERT","La sentencia SQL que agrega la fila. Con JPA suele enviarse en el flush del commit."]
+]},
+{b:"F · Arquitectura hexagonal y patrones", col:"#B8901E", t:[
+["Arquitectura hexagonal","Núcleo de negocio aislado; la tecnología se conecta por puertos y adaptadores."],
+["Regla de dependencias","Las flechas apuntan siempre hacia adentro: la infraestructura conoce al núcleo, nunca al revés."],
+["Dominio","El corazón: entidades y reglas del negocio. Sin frameworks ni anotaciones."],
+["Capa de aplicación","Los casos de uso: orquestan los pasos y marcan la frontera transaccional."],
+["Infraestructura","Todo lo que toca el exterior: Controllers, adaptadores, entidades JPA, configuración."],
+["Port IN","Interfaz que declara una capacidad del sistema (<code>RegistrarClienteUseCase</code>), en lenguaje de negocio."],
+["Port OUT","Interfaz que declara lo que el núcleo necesita del exterior (<code>ClienteRepositoryPort</code>)."],
+["Adapter IN","Traduce del mundo exterior al núcleo. Ejemplo: el Controller."],
+["Adapter OUT","Implementa el Port OUT contra una tecnología concreta. Ejemplo: el PersistenceAdapter."],
+["Application Service","El caso de uso que orquesta la operación completa y aplica las reglas."],
+["Inversión de dependencias","El que necesita el servicio define la interfaz; quien la cumple, la implementa."],
+["Repository Pattern","Tratar la persistencia como una colección de objetos de dominio, ocultando el almacenamiento."],
+["Adapter Pattern","Pieza que traduce entre dos interfaces que no encajan: la que el núcleo pide y la que la tecnología ofrece."],
+["Mapper Pattern","Traducir un modelo en otro entre capas, sin acoplarlos."]
+]},
+{b:"G · Relación 1:N y modelado", col:"#3F8C4A", t:[
+["Cardinalidad","Cuántos registros de una entidad se relacionan con cuántos de la otra (1:1, 1:N, N:M)."],
+["PK (clave primaria)","Identifica de forma única cada fila. Única, no nula y estable en el tiempo."],
+["FK (clave foránea)","Columna que referencia la clave de otra tabla. Vive siempre en el lado \"muchos\"."],
+["Integridad referencial","La garantía del motor de que ninguna FK apunte a una fila inexistente."],
+["UNIQUE","Restricción que impide valores repetidos en una columna. Es la barrera final ante duplicados."],
+["@ManyToOne","Declara que muchos registros apuntan a uno. Es mapeo, no la FK física."],
+["@JoinColumn","Indica qué columna guarda esa referencia: <code>@JoinColumn(name=\"cliente_id\")</code>."],
+["FetchType.LAZY","Cargar la asociación solo si se usa. En @ManyToOne hay que declararlo: por defecto es EAGER."],
+["LazyInitializationException","El error al tocar un dato perezoso fuera del contexto de persistencia."],
+["Colaboración entre módulos","Un módulo consulta a otro por su caso de uso, nunca leyendo sus tablas."]
+]},
+{b:"H · Errores, negocio y transacciones", col:"#BD4A45", t:[
+["Excepción de negocio","Expresa qué regla del dominio se rompió. No conoce HTTP ni ResponseEntity."],
+["@RestControllerAdvice","Manejador global: un único lugar donde se traducen todas las excepciones a respuestas."],
+["@ExceptionHandler","El método que atiende un tipo concreto de excepción y elige su código HTTP."],
+["ApiError","El formato fijo de toda respuesta de error: fecha, código, tipo, mensaje y ruta."],
+["Transacción","Unidad de trabajo indivisible: o se confirma todo (commit) o no se confirma nada (rollback)."],
+["Atomicidad","La propiedad de \"todo o nada\". Junto con consistencia, aislamiento y durabilidad forma ACID."],
+["@Transactional","Delimita esa unidad de trabajo de forma declarativa."],
+["Frontera transaccional","Dónde empieza y termina la transacción: en el caso de uso, nunca en el Controller."],
+["DataIntegrityViolationException","La excepción de Spring cuando la base rechaza la fila. Debe traducirse a 409, no quedar en 500."],
+["Defensa en profundidad","Tres barreras encadenadas: formato, negocio e integridad física de la base."]
+]}
+];
+
+const lista = document.getElementById('lista');
+const buscar = document.getElementById('buscar');
+const chips = document.getElementById('chips');
+const avance = document.getElementById('avance');
+const contador = document.getElementById('contador');
+const canasta = document.getElementById('canasta');
+
+let capActivo = 'todos';
+const dominadas = new Set();
+
+[['todos','Todas las 50'],[4,'Cap. 04'],[5,'Cap. 05'],[6,'Cap. 06'],[7,'Cap. 07'],[8,'Cap. 08'],['glosario','📖 Glosario rápido']]
+.forEach(([v,txt],i)=>{
+  const b=document.createElement('button');
+  b.className='chip'; b.textContent=txt;
+  b.setAttribute('aria-pressed', i===0 ? 'true' : 'false');
+  b.onclick=()=>{
+    capActivo=v;
+    [...chips.children].forEach(c=>c.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    render();
+  };
+  chips.appendChild(b);
+});
+
+function texto(p){
+  return (p.n+' '+p.t+' '+p.s+' '+p.f+' '+p.e+' '+p.k.join(' ')+' '+p.m).toLowerCase();
+}
+
+function renderGlosario(){
+  const q = buscar.value.trim().toLowerCase();
+  lista.innerHTML='';
+  let total=0;
+  GLOSARIO.forEach(g=>{
+    const items = g.t.filter(([term,def]) =>
+      q==='' || (term+' '+def).toLowerCase().includes(q));
+    if(!items.length) return;
+    total += items.length;
+    const sec=document.createElement('section');
+    sec.className='gl-bloque';
+    sec.innerHTML = `<h3 class="gl-tit" style="border-color:${g.col};color:${g.col}">${g.b}</h3>` +
+      items.map(([term,def]) =>
+        `<div class="gl-item"><b>${term}</b><span>${def}</span></div>`).join('');
+    lista.appendChild(sec);
+  });
+  if(!total){
+    lista.innerHTML='<p class="vacio">Ningún término del glosario coincide con esa búsqueda.</p>';
+  }
+}
+
+function render(){
+  if(capActivo==='glosario'){ renderGlosario(); return; }
+  const q = buscar.value.trim().toLowerCase();
+  const vis = P.filter(p => (capActivo==='todos'||p.c===capActivo) && (q===''||texto(p).includes(q)));
+  lista.innerHTML='';
+  if(!vis.length){
+    lista.innerHTML='<p class="vacio">Ninguna pregunta coincide con esa búsqueda. Prueba otra palabra o vuelve a “Todas las 50”.</p>';
+    return;
+  }
+  vis.forEach(p=>{
+    const cap=CAPS[p.c];
+    const d=document.createElement('article');
+    d.className='tarjeta'+(dominadas.has(p.n)?' lista':'');
+    d.id='p'+p.n;
+    d.innerHTML=`
+      <button class="cabecera-t" aria-expanded="false">
+        <div class="num">${p.n}</div>
+        <div class="preg">
+          <span class="cap" style="background:${cap.bg};color:${cap.col}">${cap.n}</span>
+          ${p.t}
+        </div>
+      </button>
+      <div class="cuerpo">
+        <div class="frase">${p.s}</div>
+        <div class="fruteria"><b class="et">🍎 En la frutería-club</b>${p.f}</div>
+        <div class="rot">La explicación</div>
+        ${p.e}
+        <div class="rot">Para no olvidar</div>
+        <ul>${p.k.map(x=>'<li>'+x+'</li>').join('')}</ul>
+        <div class="rot">Dónde está esto en tu mapa</div>
+        <div class="mapa">${p.m}</div>
+        <button class="marcar">${dominadas.has(p.n)?'✓ Ya la domino':'Marcar como dominada'}</button>
+      </div>`;
+    const cab=d.querySelector('.cabecera-t');
+    cab.onclick=()=>{
+      const ab=d.classList.toggle('abierta');
+      cab.setAttribute('aria-expanded',ab);
+    };
+    d.querySelector('.marcar').onclick=(ev)=>{
+      ev.stopPropagation();
+      if(dominadas.has(p.n)) dominadas.delete(p.n); else dominadas.add(p.n);
+      const abierta=d.classList.contains('abierta');
+      render(); progreso();
+      if(abierta){
+        const nueva=document.getElementById('p'+p.n);
+        if(nueva){
+          nueva.classList.add('abierta');
+          nueva.querySelector('.cabecera-t').setAttribute('aria-expanded','true');
+        }
+      }
+    };
+    lista.appendChild(d);
+  });
+}
+
+function progreso(){
+  const n=dominadas.size;
+  avance.style.width=(n/P.length*100)+'%';
+  contador.textContent=n+' de 50 dominadas';
+}
+
+document.getElementById('girar').onclick=()=>{
+  const n=Math.floor(Math.random()*50)+1;
+  canasta.textContent=n;
+  capActivo='todos'; buscar.value='';
+  [...chips.children].forEach((c,i)=>c.setAttribute('aria-pressed', i===0 ? 'true':'false'));
+  render();
+  const card=document.getElementById('p'+n);
+  card.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>{
+    card.classList.add('abierta');
+    card.querySelector('.cabecera-t').setAttribute('aria-expanded','true');
+  },400);
+};
+
+buscar.oninput=render;
+render();
+progreso();
+</script>
+</body>
+</html>
